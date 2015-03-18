@@ -1,0 +1,37 @@
+		<div class="row-fluid">
+				<div class="span6">
+					<div class="priority high"><span>Ind</span></div>
+					<h1>Hot</h1>	
+
+					<div class="task high" ng-repeat="item in news" >
+						<div class="desc">
+							<div class="title" ><a id="link-3" ng-href="#/news/{{item.idNews}}">{{item.title}}</a> </div>
+							<div>{{item.news}}</div>
+						</div>
+						<div class="time">
+							<div class="date">{{item.createDate | date:"MM/dd/yyyy"}}</div> 
+						</div>
+					</div>
+				</div> 
+				<div class="span6 noMarginLeft">	
+						<div class="dark">
+						
+							<div class="priority high"><span>Ind</span></div>
+							<h1>Hot</h1>	
+
+							<div class="task high" ng-repeat="item in news" >
+								<div class="desc">
+									<div class="title">{{item.title}}</div>
+									<div>{{item.news}}</div>
+								</div>
+								<div class="time">
+									<div class="date">{{item.createDate | date:"MM/dd/yyyy"}}</div> 
+								</div>
+							</div>
+					   </div>
+					
+				</div>	
+				
+			<div class="clearfix"></div>			
+	    </div>
+

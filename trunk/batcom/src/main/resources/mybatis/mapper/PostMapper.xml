@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.horas.mapper.Post">
+
+	<sql id="postColumns">
+		ID,
+               NEWS
+	</sql>
+        <sql id="insertPostColumns">
+		ID,
+		NEWS
+	</sql>
+	
+	<resultMap type="com.horas.dto.Post" id="postResult">
+		<id column="ID" javaType="Integer" property="id" />
+		<result column="NEWS" property="news" jdbcType="VARCHAR" />
+		
+	</resultMap>
+
+	<select id="getPost" resultMap="postResult">
+		select
+			<include refid="postColumns" />
+		from post
+	</select>
+        <insert id="addPost" parameterType="com.horas.dto.Post">
+		insert into post (
+			<include refid="insertPostColumns" />
+		) values (
+			#{id, jdbcType=INTEGER},
+			#{news, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+</mapper>

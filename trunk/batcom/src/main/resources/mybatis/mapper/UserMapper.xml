@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.horas.mapper.user">
+
+	<sql id="userDetailsColumns">
+        username,firstname,middlename,lastname
+	</sql>
+
+	 
+	<resultMap type="com.horas.dto.UserDetail" id="userDetailsResult">
+		 
+		<result column="username" property="userName" jdbcType="VARCHAR" />
+		 <result column="firstname" property="firstName" jdbcType="VARCHAR" />
+                 <result column="middlename" property="middleName" jdbcType="VARCHAR" />
+                 <result column="lastname" property="lastName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getUserDetail" resultMap="userDetailsResult">
+		select
+			<include refid="userDetailsColumns" />
+		from userdetails where username=#{username}
+	</select>
+        
+    
+</mapper>
