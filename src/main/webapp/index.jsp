@@ -195,55 +195,13 @@
                 </div>
             </div>
         </div>
-         <a ng-click="signUp()" class="btn btn-primary">Belum  punya akun? sign up</a>
+         <a ng-href="#/signup" class="btn btn-primary">Belum  punya akun? sign up</a>
         <div class="modal-footer">
             <a ng-click="login()" class="btn btn-primary">Login</a>
             <a data-dismiss="modal" class="btn">Cancel</a>
         </div>
     </div>
-     <div class="modal" style="display: none" id="signup">
-        <div class="modal-header">
-            <a class="close" data-dismiss="modal">x</a>
-
-            <h3>sign up</h3>
-        </div>
-        <div class="modal-body">
-            <label>Sign Up</label>
-            <div class="control-group">
-                <label class="control-label" for="username">Username</label>
-
-                <div class="controls">
-                    <input id="username" ng-model="username"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="email">Email</label>
-
-                <div class="controls">
-                    <input type="email" id="email" ng-model="email"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="Re-password">Password</label>
-
-                <div class="controls">
-                    <input type="password" id="password" ng-model="password"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="password">Re-Type Password</label>
-
-                <div class="controls">
-                    <input type="password" id="re-password" ng-model="re-password"/>
-                </div>
-            </div>
-        </div>
-        
-        <div class="modal-footer">
-            <a ng-click="processSignUp()" class="btn btn-primary">SignUp</a>
-            <a data-dismiss="modal" class="btn">Cancel</a>
-        </div>
-    </div>                        
+     
     <ng-view></ng-view>
 			
        

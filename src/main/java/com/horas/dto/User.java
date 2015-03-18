@@ -7,15 +7,19 @@ public class User {
     
     private String name;
     private String password;
+    private boolean enabled;
     private String email;
+    private String role;
     
 //    private UserDetail userDetail;
 //    
-    public User(String name,String password,String email) {
+    public User(){}
+    public User(String name,String password,String email,boolean enabled,String role) {
         this.name = name;
         this.password=password;
         this.email=email;
- 
+        this.enabled=enabled;
+        this.role=role;
     }
 
     public String getName() {
@@ -50,5 +54,20 @@ public class User {
         this.email = email;
     }
     
-     
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
 }

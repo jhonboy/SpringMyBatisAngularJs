@@ -327,8 +327,17 @@ as.factory('serv', function ($http, $q) {
      as.controller('SessionController', function ($scope, $http,$cookieStore) {
         $scope.sess=$cookieStore.get("JSESSIONID");
     });
-     as.controller('FamilyController', function ($scope, $http,$cookieStore) {
+     as.controller('FamilyController', function ($scope, $http) {
        
+    });
+    
+     as.controller('SignUpController', function ($scope, $http) {
+        var actionUrl='action/signup/';
+        $scope.processSignUp = function () {
+            $http.post(actionUrl, $scope.user).success(function () {
+                
+            });
+        };
     });
 }());
 
