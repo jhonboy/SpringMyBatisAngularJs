@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.horas.mapper.Unit">
+
+	<sql id="unitColumns">
+		id,name,detail,amount,price,category
+	</sql>
+
+	<sql id="insertUnitColumns">
+		id,name,detail,amount,price,category
+	</sql>
+	<resultMap type="com.horas.dto.Unit" id="unitResult">
+		<id column="id" javaType="Integer" property="id" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="detail" property="detail" jdbcType="VARCHAR" />
+                <result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+                <result column="category" property="category" javaType="Integer" />
+	</resultMap>
+    
+	<select id="findAll" resultMap="unitResult">
+		select
+			<include refid="unitColumns" />
+		from unit
+	</select>
+        
+        <select id="getUnitById" resultMap="unitResult">
+		select
+			<include refid="unitColumns" />
+		from unit
+                       where id =#{id,jdbcType=INTEGER}
+                  
+	</select>
+
+	<insert id="addUnit" parameterType="com.horas.dto.Unit">
+<!--		insert into unit (
+			<include refid="insertUnitColumns" />
+		) values (
+			#{id, jdbcType=INTEGER},
+			#{firstName, jdbcType=VARCHAR},
+			#{lastName, jdbcType=VARCHAR}
+		)-->
+	</insert>
+</mapper>

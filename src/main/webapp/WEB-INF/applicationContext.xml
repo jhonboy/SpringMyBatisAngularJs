@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <context:annotation-config />
+	
+	<context:property-placeholder location="classpath:config/jdbc.properties"/>
+	
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+<!--		<property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />-->
+                <property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />
+		<property name="configLocation" value="classpath:config/mybatis-config.xml" />
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+    <context:component-scan base-package="com.horas.service.impl"/>
+
+    <sec:http pattern="/login/**" create-session="never">
+        <sec:http-basic entry-point-ref="restAuthenticationEntryPoint"/>
+        <sec:intercept-url pattern="/**" access="ROLE_USER"/>
+    </sec:http>
+     <sec:http pattern="/admin/**" create-session="never">
+        <sec:http-basic entry-point-ref="restAuthenticationEntryPoint"/>
+        <sec:intercept-url pattern="/**" access="ROLE_USER"/>
+    </sec:http>
+    <sec:http pattern="/action/user" create-session="never">
+        <sec:http-basic entry-point-ref="restAuthenticationEntryPoint"/>
+        <sec:intercept-url pattern="/**" access="ROLE_USER"/>
+    </sec:http>
+    <sec:http pattern="/action/addcomments" create-session="never">
+        <sec:http-basic entry-point-ref="restAuthenticationEntryPoint"/>
+        <sec:intercept-url pattern="/**" access="ROLE_USER"/>
+    </sec:http>
+    <sec:http pattern="/**" security="none"/>
+		
+
+    <bean id="restAuthenticationEntryPoint" class="com.horas.web.RestAuthenticationEntryPoint"/>
+    <bean id="personDAO" class="com.horas.dao.PersonDAOImpl"/>
+    <bean id="postDAO" class="com.horas.dao.PostDAOImpl"/>
+    <bean id="unitDAO" class="com.horas.dao.UnitDAOImpl"/>
+    <bean id="customerDAO" class="com.horas.dao.CustomerDAOImpl"/>
+    <bean id="newsDAO" class="com.horas.dao.NewsDAOImpl"/>
+    <bean id="commentDAO" class="com.horas.dao.CommentDAOImpl"/>
+    <bean id="userDAO" class="com.horas.dao.UserDAOImpl"/>
+    <bean id="familyDAO" class="com.horas.dao.FamilyDAOImpl"/>
+<!--   <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider>
+            <sec:user-service>
+                <sec:user name="jimi" password="jimi" authorities="ROLE_USER, ROLE_ADMIN"/>
+                <sec:user name="bob" password="bob" authorities="ROLE_USER"/>
+            </sec:user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>-->
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider>
+                <sec:jdbc-user-service data-source-ref="dataSource"  
+                        users-by-username-query="SELECT username, password, true as enabled FROM users WHERE username=?"
+                        authorities-by-username-query="SELECT u.username, r.role as authorities FROM ROLE r, users u WHERE r.username=u.username and u.username=?" />  
+                    <sec:password-encoder hash="plaintext"/>
+      </sec:authentication-provider>
+    </sec:authentication-manager>
+ 
+</beans>

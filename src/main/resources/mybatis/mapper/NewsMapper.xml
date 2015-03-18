@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.horas.mapper.news">
+
+	<sql id="newsColumns">
+        idNews,
+        title,
+        author,
+        cat,
+        news,
+        source,
+        images,
+        createDate,
+        updateDate,
+        fileAttach,
+        ipCreate,
+        ipUpdate
+	</sql>
+
+	<sql id="insertNewsColumns">
+        idNews,
+        title,
+        author,
+        cat,
+        news,
+        source,
+        images,
+        createDate,
+        updateDate,
+        fileAttach,
+        ipCreate,
+        ipUpdate
+	</sql>
+	<resultMap type="com.horas.dto.News" id="newsResult">
+		<id column="idNews" property="idNews"  typeHandler="UUIDTypeHandler" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="author" property="author" jdbcType="VARCHAR" />
+                <result column="cat" property="cat" jdbcType="VARCHAR" />
+                <result column="news" property="news" jdbcType="VARCHAR" />
+                <result column="source" property="source" jdbcType="VARCHAR" />
+                <result column="images" property="images" jdbcType="VARCHAR" />
+                <result column="createDate" property="createDate" jdbcType="DATE" />
+                <result column="updateDate" property="updateDate" jdbcType="DATE" />
+                <result column="fileAttach" property="fileAttach" jdbcType="VARCHAR" />
+                <result column="ipCreate" property="ipCreate" jdbcType="VARCHAR" />
+                <result column="ipUpdate" property="ipUpdate" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getAllNews" resultMap="newsResult">
+		select
+			<include refid="newsColumns" />
+		from news
+	</select>
+        
+        <select id="getNewsById" resultMap="newsResult">
+		select
+			<include refid="newsColumns" />
+		from news 
+                         where idNews =#{id}
+                        
+	</select>
+        
+        
+
+<!--	<insert id="insertNews" parameterType="com.horas.dto.News">
+		insert into person (
+			<include refid="insertNewsColumns" />
+		) values (
+			#{id, jdbcType=INTEGER},
+			#{firstName, jdbcType=VARCHAR},
+			#{lastName, jdbcType=VARCHAR}
+		)
+	</insert>-->
+</mapper>

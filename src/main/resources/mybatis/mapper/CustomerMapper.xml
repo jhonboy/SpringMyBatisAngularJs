@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.horas.mapper.Customer">
+	 
+        <sql id="insertCustomerColumns">
+		firstname,lastname,middlename,phone,email,address,status
+		 
+	</sql>
+	
+	 
+
+	 
+        <insert id="addCustomer" parameterType="com.horas.dto.Customer">
+		insert into post (
+			<include refid="insertCustomerColumns" />
+		) values (
+			#{firstName, jdbcType=VARCHAR},
+			#{lastName, jdbcType=VARCHAR},
+                        #{middleName, jdbcType=VARCHAR},
+                        #{phone, jdbcType=VARCHAR},
+                        #{email, jdbcType=VARCHAR},
+                        #{address, jdbcType=VARCHAR},
+                        #{status, jdbcType=INTEGER},
+		)
+	</insert>
+	
+</mapper>
