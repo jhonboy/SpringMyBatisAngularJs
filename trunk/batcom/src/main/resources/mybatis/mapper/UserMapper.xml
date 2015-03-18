@@ -5,7 +5,16 @@
 	<sql id="userDetailsColumns">
         username,firstname,middlename,lastname
 	</sql>
-
+        <sql id="insertUserColumns">
+		username,
+		password,
+                enabled,
+                email
+	</sql>
+         <sql id="insertRoleColumns">
+		username,
+		ROLE
+	</sql>
 	 
 	<resultMap type="com.horas.dto.UserDetail" id="userDetailsResult">
 		 
@@ -20,6 +29,23 @@
 			<include refid="userDetailsColumns" />
 		from userdetails where username=#{username}
 	</select>
-        
+        <insert id="signup" parameterType="com.horas.dto.User">
+		insert into users (
+			<include refid="insertUserColumns" />
+		) values (
+			#{name, jdbcType=VARCHAR},
+			#{password, jdbcType=VARCHAR},
+                        #{enabled,jdbcType=VARCHAR},
+                        #{email,jdbcType=VARCHAR}
+		)
+	</insert>
+         <insert id="insertRole" parameterType="com.horas.dto.User">
+		insert into role (
+			<include refid="insertRoleColumns" />
+		) values (
+			#{name, jdbcType=VARCHAR},
+			#{role, jdbcType=VARCHAR}
+		)
+	</insert>
     
 </mapper>

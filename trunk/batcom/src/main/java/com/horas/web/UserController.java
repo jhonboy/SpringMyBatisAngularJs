@@ -1,6 +1,7 @@
 package com.horas.web;
 
 
+import com.horas.dto.ResponseMessage;
 import com.horas.dto.User;
 import com.horas.dto.UserDetail;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 /**
@@ -40,4 +42,13 @@ public class UserController {
         return userService.getUserDetail(username);
     }
 
+    
+    @RequestMapping(value="/signup",method=RequestMethod.POST)
+    @ResponseBody
+    public ResponseMessage signup(@RequestBody User user){
+        user.setEnabled(true);
+        user.setRole("ROLE_USER");
+        userService.signUp(user);
+        return new ResponseMessage(ResponseMessage.Type.success, "sign up success");   
+    }
 }

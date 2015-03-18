@@ -26,11 +26,11 @@ public class SpringUserService implements UserService {
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
-            return new User("","","");
+            return new User("","","",true,"");
         }
         System.out.println("USER===="+((UserDetails) authentication.getPrincipal()).getUsername());
         username=((UserDetails) authentication.getPrincipal()).getUsername();
-        return new User(((UserDetails) authentication.getPrincipal()).getUsername(),"","");
+        return new User(((UserDetails) authentication.getPrincipal()).getUsername(),"","",true,"");
     }
 
     public UserDetail getUserDetail(String username) {
