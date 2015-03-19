@@ -70,6 +70,7 @@
     <bean id="commentDAO" class="com.horas.dao.CommentDAOImpl"/>
     <bean id="userDAO" class="com.horas.dao.UserDAOImpl"/>
     <bean id="familyDAO" class="com.horas.dao.FamilyDAOImpl"/>
+    <bean id="userDetail" class="com.horas.dto.UserDetail"/>
 <!--   <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider>
             <sec:user-service>

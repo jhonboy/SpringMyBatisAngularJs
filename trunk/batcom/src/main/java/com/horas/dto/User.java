@@ -6,6 +6,7 @@ package com.horas.dto;
 public class User {
     
     private String name;
+    private String marga;
     private String password;
     private boolean enabled;
     private String email;
@@ -14,9 +15,11 @@ public class User {
 //    private UserDetail userDetail;
 //    
     public User(){}
-    public User(String name,String password,String email,boolean enabled,String role) {
+    public User(String name,String marga,String password,String email,boolean enabled,String role) {
         this.name = name;
+        this.marga=marga;
         this.password=password;
+        
         this.email=email;
         this.enabled=enabled;
         this.role=role;
@@ -68,6 +71,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getMarga() {
+        return marga;
+    }
+
+    public void setMarga(String marga) {
+        this.marga = marga;
     }
     
 }
