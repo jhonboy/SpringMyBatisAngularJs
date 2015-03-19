@@ -15,12 +15,12 @@
     as.config(function ($routeProvider, $httpProvider,$locationProvider) {
         //configure the rounting of ng-view
         $routeProvider.when('/person', { controller: 'PersonController', templateUrl: 'partials/person.html'});
-        $routeProvider.when('/login', { controller: 'LoginController', templateUrl: 'partials/person.html'});
+        $routeProvider.when('/login', { controller: 'LoginController', templateUrl: 'partials/login.html'});
         $routeProvider.when('/admin', { controller: 'AdminController', templateUrl: 'admin/admin.html'});
         $routeProvider.when('/post', { controller: 'PostController', templateUrl: 'partials/post.html'});
         $routeProvider.when('/news', { controller: 'NewsController', templateUrl: 'partials/news.html'});
         $routeProvider.when('/news/:idNews', {controller: 'NewsDetail' , templateUrl: 'partials/newsDetail.jsp'});
-        $routeProvider.when('/userDetail/:username', {controller: 'UserDetailController' , templateUrl: 'partials/userDetails.html'});
+        $routeProvider.when('/userDetail/:username', {controller: 'UserDetailController' , templateUrl: 'partials/userDetails.jsp'});
         $routeProvider.when('/sess', { controller: 'SessionController', templateUrl: 'sess.jsp'});
         $routeProvider.when('/family', { controller: 'FamilyController', templateUrl: 'partials/family.jsp'});
         $routeProvider.when('/signup',{controller:'SignUpController',templateUrl:'partials/signup.html'});
