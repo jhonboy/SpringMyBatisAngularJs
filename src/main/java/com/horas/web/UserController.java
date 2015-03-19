@@ -6,6 +6,7 @@ import com.horas.dto.User;
 import com.horas.dto.UserDetail;
 
 import com.horas.service.UserService;
+import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,4 +56,14 @@ public class UserController {
         userService.signUp(user);
         return new ResponseMessage(ResponseMessage.Type.success, "signupSuccess");   
     }
+    @RequestMapping(value = "/user/logout", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseMessage logoutUser(HttpServletRequest request, HttpServletResponse response) throws IOException { 
+     HttpSession sess= request.getSession(true);
+     sess.invalidate();
+     //response.sendRedirect("login.html");
+     return new ResponseMessage(ResponseMessage.Type.success, "LogoutSuccess");
+      
+    }
+    
 }

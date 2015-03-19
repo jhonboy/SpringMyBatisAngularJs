@@ -19,20 +19,21 @@
         $scope.login = function () {
             $scope.$emit('event:loginRequest', $scope.username, $scope.password);
             $('#login').modal('hide');
-            
- 
+          
         };
+        
+         $scope.logout=function(){
+                var actionUrl='action/user/logout/'; 
+                $http.get(actionUrl).success(function (data) {
+                    location.reload();
+                });
+				 
+         }
          $scope.signUp = function () {
             $scope.$emit( $scope.username, $scope.password);
             $('#signup').modal('show');
             
  
-        };
-        $scope.logout = function () {
-            $rootScope.user = null;
-            $scope.username = $scope.password = null;
-            $scope.$emit('event:logoutRequest');
-            $location.url('/person');
         };
         
         $scope.userDetail = function () {
@@ -352,7 +353,6 @@ as.factory('serv', function ($http, $q) {
             });
         };
     });
-  
     
 }());
 
