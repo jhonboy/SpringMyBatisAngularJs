@@ -64,48 +64,45 @@
                                         %>
                                         <c:set var="user" scope="session" value="<%=username%>"/>
 										
-										<c:choose>
-											  <c:when test="${user==null}">
-														<li>
-														<a href="" ng-click='login()' >Login</a>
-														</li>
-											  </c:when>
+                                                <c:choose>
+                                                          <c:when test="${user==null}">
+                                                                                <li>
+                                                                                <a href="" ng-click='login()' >Login</a>
+                                                                                </li>
+                                                          </c:when>
 
-											  <c:otherwise>
-											 
-												<!-- start: User Dropdown -->
-												<li class="dropdown">
-													<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-														<i class="halflings-icon white user"></i><%=username%>
-														<span class="caret"></span>
-													</a>
-																			
-													<ul class="dropdown-menu">
-														<li class="dropdown-menu-title">
-															<span>Account Settings</span>
-														</li>
-														<li>  <a href="#/userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
-														<li> <a ng-click="logout()"><i class="halflings-icon off"></i> Logout</a></li>
-													</ul>
-												</li>
-						<!-- end: User Dropdown -->
-                                              
-											  </c:otherwise>
-										</c:choose>
-                                
-					
-                        
+                                                          <c:otherwise>
+
+                                                                <!-- start: User Dropdown -->
+                                                                <li class="dropdown">
+                                                                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                                                                <i class="halflings-icon white user"></i><%=username%>
+                                                                                <span class="caret"></span>
+                                                                        </a>
+
+                                                                        <ul class="dropdown-menu">
+                                                                                <li class="dropdown-menu-title">
+                                                                                        <span>Account Settings</span>
+                                                                                </li>
+                                                                                <li>  <a href="#/userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
+                                                                                <li> <a ng-click="logout()"><i class="halflings-icon off"></i> Logout</a></li>
+                                                                        </ul>
+                                                                </li>
+                <!-- end: User Dropdown -->
+
+                                                          </c:otherwise>
+                                                </c:choose>           
 						 
 					</ul>
-					  <ul class="nav nav-pills pull-right">
-                            <li ng-class="activeWhen(language()=='in')">
-                                <a ng-click="setLanguage('in')">Indonesia</a>
-                            </li>
-                            <li ng-class="activeWhen(language()=='en')">
-                                <a ng-click="setLanguage('en')">English</a>
-                            </li>
-                        </ul>
-				</div>
+                    <ul class="nav nav-pills pull-right">
+                          <li ng-class="activeWhen(language()=='in')">
+                              <a ng-click="setLanguage('in')">Indonesia</a>
+                          </li>
+                          <li ng-class="activeWhen(language()=='en')">
+                              <a ng-click="setLanguage('en')">English</a>
+                          </li>
+                   </ul>
+            </div>
 				<!-- end: Header Menu -->
 				
 			</div>
@@ -175,7 +172,10 @@
     <div class="modal" style="display: none" id="login">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">x</a>
-
+             <div ng-class="'alert alert-'+message().type" ng-show="message().show">
+                <button type="button" class="close" ng-click="message().show=false">×</button>
+                <msg key-expr="message().text"></msg>
+            </div>   
             <h3>Login</h3>
         </div>
         <div class="modal-body">
