@@ -24,6 +24,7 @@
         $routeProvider.when('/sess', { controller: 'SessionController', templateUrl: 'sess.jsp'});
         $routeProvider.when('/family', { controller: 'FamilyController', templateUrl: 'partials/family.jsp'});
         $routeProvider.when('/signup',{controller:'SignUpController',templateUrl:'partials/signup.html'});
+        $routeProvider.when('/profil/:username',{controller:'ProfilController',templateUrl:'partials/profilEdit.jsp'});
  // $locationProvider.html5Mode(true);
         //configure $http to catch message responses and show them
         $httpProvider.responseInterceptors.push(function ($q) {
