@@ -55,6 +55,19 @@ as.controller('UserDetailController', function ($scope, $http, $routeParams) {
         
         });
         
+        as.controller('ProfilController', function ($scope, $http, $routeParams) {
+        var actionUrl = 'action/userDetail/'+$routeParams.username;
+            load = function () {
+                $http.get(actionUrl).success(function (data) {
+                    
+                    $scope.userDetails = data;
+                  
+                });
+            };
+        load();
+        
+        });
+        
     as.controller('PersonController', function ($scope, $http, i18n) {
         var actionUrl = 'action/person/',
             load = function () {
