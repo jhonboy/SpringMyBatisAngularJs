@@ -3,8 +3,10 @@
 <mapper namespace="com.horas.mapper.user">
 
 	<sql id="userDetailsColumns">
-        username,firstname,middlename,lastname
+        username,firstname,middlename,lastname,marga,alamat,gender,status
 	</sql>
+        
+	 
         <sql id="insertUserColumns">
 		username,
 		password,
@@ -29,6 +31,7 @@
 			<include refid="userDetailsColumns" />
 		from userdetails where username=#{username}
 	</select>
+        
         <insert id="signup" parameterType="com.horas.dto.User">
 		insert into users (
 			<include refid="insertUserColumns" />
@@ -47,5 +50,20 @@
 			#{role, jdbcType=VARCHAR}
 		)
 	</insert>
+        <insert id="insertUserDetails" parameterType="com.horas.dto.UserDetail">
+            insert into users (
+			<include refid="userDetailsColumns" />
+		) values (
+                        username,firstname,middlename,lastname,marga,alamat,gender,status
+			#{username, jdbcType=VARCHAR},
+			#{firstname, jdbcType=VARCHAR},
+                        #{middlename,jdbcType=VARCHAR},
+                        #{lastname,jdbcType=VARCHAR},
+                        #{marga, jdbcType=VARCHAR},
+			#{alamat, jdbcType=VARCHAR},
+                        #{gender,jdbcType=VARCHAR},
+                        #{status,jdbcType=VARCHAR}
+		)
+        </insert>
     
 </mapper>
