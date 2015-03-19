@@ -46,9 +46,13 @@ public class UserController {
     @RequestMapping(value="/signup",method=RequestMethod.POST)
     @ResponseBody
     public ResponseMessage signup(@RequestBody User user){
+       if (user.getName().length() <= 3) {
+            throw new IllegalArgumentException("moreThan3Chars");
+        }
         user.setEnabled(true);
         user.setRole("ROLE_USER");
+        
         userService.signUp(user);
-        return new ResponseMessage(ResponseMessage.Type.success, "sign up success");   
+        return new ResponseMessage(ResponseMessage.Type.success, "signupSuccess");   
     }
 }

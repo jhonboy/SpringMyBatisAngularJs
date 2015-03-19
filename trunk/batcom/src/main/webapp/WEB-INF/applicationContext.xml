@@ -48,11 +48,11 @@
     </sec:http>
      <sec:http pattern="/admin/**" create-session="never">
         <sec:http-basic entry-point-ref="restAuthenticationEntryPoint"/>
-        <sec:intercept-url pattern="/**" access="ROLE_USER"/>
+        <sec:intercept-url pattern="/**" access="ROLE_ADMIN"/>
     </sec:http>
     <sec:http pattern="/action/user" create-session="never">
         <sec:http-basic entry-point-ref="restAuthenticationEntryPoint"/>
-        <sec:intercept-url pattern="/**" access="ROLE_USER"/>
+        <sec:intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN"/>
     </sec:http>
     <sec:http pattern="/action/addcomments" create-session="never">
         <sec:http-basic entry-point-ref="restAuthenticationEntryPoint"/>

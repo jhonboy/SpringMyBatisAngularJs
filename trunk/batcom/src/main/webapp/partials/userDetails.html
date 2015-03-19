@@ -1,6 +1,24 @@
  
-<div class="page-header">
-        <h1>{{userDetails.firstName}}</h1>
-</div>     
                         
- 
+ <div class="box black span4" onTablet="span11s" onDesktop="span4">
+                <div class="box-header">
+                        <h2><i class="halflings-icon white user"></i><span class="break"></span>Last Users Metro Style</h2>
+                        <div class="box-icon">
+                                <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                                <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+                        </div>
+                </div>
+                <div class="box-content">
+                        <ul class="dashboard-list metro">
+                                <li class="green">
+                                        <a href="#">
+                                                <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg">
+                                        </a>
+                                        <strong>Name:</strong>{{userDetails.firstName}}<br>
+                                        <strong>MiddleName:</strong>{{userDetails.middleName}}<br>
+                                        <strong>LastName:</strong>{{userDetails.lastName}}<br>       
+                                </li>
+                                
+                        </ul>
+                </div>
+</div><!--/span-->
