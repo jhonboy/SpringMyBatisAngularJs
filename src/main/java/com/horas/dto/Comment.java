@@ -16,12 +16,12 @@ public class Comment {
     private UUID idComment;
     private UUID idNews;
     private String comment;
-    private UUID userComment;
+    private String userComment;
     private Date dateComment;
     private String ipComment;
     
     public Comment(){}
-    public Comment(UUID idComment,UUID idNews,String comment,UUID userComment,Date dateComment,String ipComment){
+    public Comment(UUID idComment,UUID idNews,String comment,String userComment,Date dateComment,String ipComment){
         this.idComment=idComment;
         this.idNews=idNews;
         this.comment=comment;
@@ -38,7 +38,7 @@ public class Comment {
     public void setComment(String comment){
         this.comment=comment;
     }
-    public void setUserComment(UUID userComment){
+    public void setUserComment(String userComment){
         this.userComment=userComment;
     }
     
@@ -58,7 +58,7 @@ public class Comment {
     public String getComment(){
        return comment;
     }
-    public UUID getUserComment(){
+    public String getUserComment(){
         return userComment;
     }
     
