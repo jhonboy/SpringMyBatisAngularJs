@@ -5,11 +5,13 @@
 package com.horas.dao;
 
 import com.horas.dto.Moment;
+import java.util.List;
 
 /**
  *
  * @author jhon
  */
 public interface MomentDAO {
+    public List<Moment> getMoment();
     public void insertMoment(Moment moment);
 }

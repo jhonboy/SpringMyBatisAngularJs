@@ -89,5 +89,8 @@
                     <sec:password-encoder hash="plaintext"/>
       </sec:authentication-provider>
     </sec:authentication-manager>
- 
+ <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1000000" />
+    </bean>
 </beans>

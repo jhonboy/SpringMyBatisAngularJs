@@ -1,58 +1,33 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="row-fluid">
+<div class="row-fluid" ng-controller="MomentController">
     <div class="box span9" onTablet="span9" onDesktop="span9">
-<%
-String username = (String)session.getAttribute("username"); 
-%>
-<c:set var="user" scope="session" value="<%=username%>"/>
+ 
     
         <div class="box-content">
                 <div class="chat-form">
-                       <input type="text" ng-model="moment.username" ng-init="moment.username='${user}'" value="${user}">
                         <textarea ng-model="moment.moment"></textarea>
+                        <form ng-submit="uploadFile()" class="form-horizontal" enctype="multipart/form-data">
+                        <input type="file" name="file" ng-model="document.fileInput" id="file" onchange="angular.element(this).scope().setTitle(this)" />
+                        <input type="text" class="col-sm-4" ng-model="document.title" id="title" />
+                        <button class="btn btn-primary" type="submit">
+                              Submit
+                         </button>
+                        </form>
+                        
                         <button class="btn btn-info" ng-click="addMoment()">Send Moment</button>
                 </div>	
                 <ul class="chat">
-                        <li class="left">
-                                <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg">
+                        <li class="left" ng-repeat="item in moments">
+                                <img class="avatar" alt="{{item.username}}" src="img/avatar.jpg">
                                 <span class="message"><span class="arrow"></span>
-                                        <span class="from">Dennis Ji</span>
-                                        <span class="time">Jul 25, 2012 11:09</span>
+                                        <span class="from">{{item.username}}</span>
+                                        <span class="time">{{item.createDate}}</span>
                                         <span class="text">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                                {{item.moment}}
                                         </span>
                                 </span>	                                  
                         </li>
-                        <li class="right">
-                                <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg">
-                                <span class="message"><span class="arrow"></span>
-                                        <span class="from">Dennis Ji</span>
-                                        <span class="time">Jul 25, 2012 11:08</span>
-                                        <span class="text">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                        </span>
-                                </span>                                  
-                        </li>
-                        <li class="left">
-                                <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg">
-                                <span class="message"><span class="arrow"></span>
-                                        <span class="from">Dennis Ji</span>
-                                        <span class="time">Jul 25, 2012 11:07</span>
-                                        <span class="text">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                        </span>
-                                </span>	                                  
-                        </li>
-                        <li class="right">
-                                <img class="avatar" alt="Dennis Ji" src="img/avatar.jpg">
-                                <span class="message"><span class="arrow"></span>
-                                        <span class="from">Dennis Ji</span>
-                                        <span class="time">Jul 25, 2012 11:06</span>
-                                        <span class="text">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                        </span>
-                                </span>	                                  
-                        </li>
+                        
+                         
                 </ul>
                 
         </div>

@@ -84,7 +84,7 @@ public class Moment {
         return place;
     }
 
-    public void setWhere(String place) {
+    public void setPlace(String place) {
         this.place = place;
     }
 

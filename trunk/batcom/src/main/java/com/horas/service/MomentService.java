@@ -5,6 +5,7 @@
 package com.horas.service;
 
 import com.horas.dto.Moment;
+import java.util.List;
 
 /**
  *
@@ -12,4 +13,5 @@ import com.horas.dto.Moment;
  */
 public interface MomentService {
     public void insertMoment(Moment moment);
+    public List<Moment> getMoment();
 }
