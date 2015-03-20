@@ -12,6 +12,8 @@ import com.horas.util.RandomUUID;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,10 +42,13 @@ public class CommentController extends RandomUUID {
      */
     @RequestMapping(value="/addcomments",method=RequestMethod.POST)
     @ResponseBody
-    public ResponseMessage addCommentNews(@RequestBody Comment comment){
+    public ResponseMessage addCommentNews(@RequestBody Comment comment, HttpServletRequest request){
+        String username;
+        HttpSession sess=request.getSession();
+        username= (String) sess.getAttribute("username");
          comment.setIdComment(sys_guid());
        //  comment.setIdNews(sys_guid());
-         comment.setUserComment(sys_guid());
+         comment.setUserComment(username);
          comment.setIpComment("127.0.0.2");
          comment.setDateComment(new Date());
          commentService.addCommentNews(comment);

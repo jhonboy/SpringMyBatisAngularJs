@@ -23,7 +23,7 @@
 		<id column="idComment" property="idNews"  typeHandler="UUIDTypeHandler" />
 		<result column="idNews" property="idNews"   typeHandler="UUIDTypeHandler" />
 		<result column="comment" property="comment" jdbcType="VARCHAR" />
-                <result column="userComment" property="userComment" typeHandler="UUIDTypeHandler" />
+                <result column="userComment" property="userComment" typeHandler="VARCHAR" />
                 <result column="dateComment" property="dateComment" jdbcType="DATE" />
                 <result column="ipComment" property="ipComment" jdbcType="VARCHAR" />
 
@@ -45,7 +45,7 @@
                         #{idComment,typeHandler=UUIDTypeHandler},
                         #{idNews,typeHandler=UUIDTypeHandler},
                         #{comment,jdbcType=VARCHAR},
-                        #{userComment,typeHandler=UUIDTypeHandler},
+                        #{userComment,typeHandler=VARCHAR},
                         #{dateComment,jdbcType=DATE},
                         #{ipComment,jdbcType=VARCHAR}
 		)
