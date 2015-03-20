@@ -42,9 +42,6 @@
 		insert into comments (
 			<include refid="insertCommentsColumns" />
 		) values (
-<!--			#{id, jdbcType=INTEGER},
-			#{firstName, jdbcType=VARCHAR},
-			#{lastName, jdbcType=VARCHAR}-->
                         #{idComment,typeHandler=UUIDTypeHandler},
                         #{idNews,typeHandler=UUIDTypeHandler},
                         #{comment,jdbcType=VARCHAR},

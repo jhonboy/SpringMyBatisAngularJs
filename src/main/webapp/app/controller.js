@@ -36,11 +36,14 @@
  
         };
         
-        $scope.userDetail = function () {
-            $rootScope.user = $scope.username;
-            $location.url('/userDetail/'+ $rootScope.user);
+        $scope.addMoment = function () {
+             var actionUrl='action/user/addMoment/'; 
+                $http.post(actionUrl,$scope.moment).success(function (data) {
+                     
+             });
             
         };
+        
 
     });
 as.controller('UserDetailController', function ($scope, $http, $routeParams) {
