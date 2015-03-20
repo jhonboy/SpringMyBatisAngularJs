@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.horas.mapper.moment">
+
+	<sql id="momentColumns">
+         id_moment,username,moment,photo,friendlist,place,create_date,update_date,ip_create,ip_update
+	</sql>
+
+	<sql id="insertMomentColumns">
+         id_moment,username,moment,photo,friendlist,place,create_date,update_date,ip_create,ip_update
+	</sql>
+<!--	<resultMap type="com.horas.dto.News" id="newsResult">
+		<id column="idNews" property="idNews"  typeHandler="UUIDTypeHandler" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="author" property="author" jdbcType="VARCHAR" />
+                <result column="cat" property="cat" jdbcType="VARCHAR" />
+                <result column="news" property="news" jdbcType="VARCHAR" />
+                <result column="source" property="source" jdbcType="VARCHAR" />
+                <result column="images" property="images" jdbcType="VARCHAR" />
+                <result column="createDate" property="createDate" jdbcType="DATE" />
+                <result column="updateDate" property="updateDate" jdbcType="DATE" />
+                <result column="fileAttach" property="fileAttach" jdbcType="VARCHAR" />
+                <result column="ipCreate" property="ipCreate" jdbcType="VARCHAR" />
+                <result column="ipUpdate" property="ipUpdate" jdbcType="VARCHAR" />
+	</resultMap>-->
+
+<!--	<select id="getAllNews" resultMap="newsResult">
+		select
+			<include refid="newsColumns" />
+		from news
+	</select>-->
+        
+<!--        <select id="getNewsById" resultMap="newsResult">
+		select
+			<include refid="newsColumns" />
+		from news 
+                         where idNews =#{id}
+                        
+	</select>-->
+        
+        
+
+ 	<insert id="insertMoment" parameterType="com.horas.dto.Moment">
+		insert into mst_moment (
+			<include refid="insertMomentColumns" />
+		) values (
+			#{idMoment,typeHandler=UUIDTypeHandler},
+                        #{username,jdbcType=VARCHAR},
+                        #{moment,jdbcType=VARCHAR},
+                        #{photo,jdbcType=VARCHAR},
+                        #{friendlist,jdbcType=VARCHAR},
+                        #{place,jdbcType=VARCHAR},
+                        #{createDate,jdbcType=DATE},
+                        #{updateDate,jdbcType=DATE},
+                        #{ipCreate,jdbcType=VARCHAR},
+                        #{ipUpdate,jdbcType=VARCHAR}
+		)
+	</insert>
+</mapper>
