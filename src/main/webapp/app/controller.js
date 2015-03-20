@@ -78,7 +78,7 @@ as.controller('MomentController', function ($scope, $http) {
          $http({
                 method: 'POST',
                 url: uploadUrl,
-                headers: {'Content-Type': undefine},
+                headers: {'Content-Type': 'multipart/form-data'},
                 data: formData,
                 transformRequest: function(data, headersGetterFunction) {
                                 return data;
