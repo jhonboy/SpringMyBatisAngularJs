@@ -9,26 +9,25 @@
 	<sql id="insertMomentColumns">
          id_moment,username,moment,photo,friendlist,place,create_date,update_date,ip_create,ip_update
 	</sql>
-<!--	<resultMap type="com.horas.dto.News" id="newsResult">
-		<id column="idNews" property="idNews"  typeHandler="UUIDTypeHandler" />
-		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="author" property="author" jdbcType="VARCHAR" />
-                <result column="cat" property="cat" jdbcType="VARCHAR" />
-                <result column="news" property="news" jdbcType="VARCHAR" />
-                <result column="source" property="source" jdbcType="VARCHAR" />
-                <result column="images" property="images" jdbcType="VARCHAR" />
-                <result column="createDate" property="createDate" jdbcType="DATE" />
-                <result column="updateDate" property="updateDate" jdbcType="DATE" />
-                <result column="fileAttach" property="fileAttach" jdbcType="VARCHAR" />
-                <result column="ipCreate" property="ipCreate" jdbcType="VARCHAR" />
-                <result column="ipUpdate" property="ipUpdate" jdbcType="VARCHAR" />
-	</resultMap>-->
+        
+ 	<resultMap type="com.horas.dto.Moment" id="momentResult">
+		<id column="id_moment" property="idMoment"  typeHandler="UUIDTypeHandler" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="moment" property="moment" jdbcType="VARCHAR" />
+                <result column="photo" property="photo" jdbcType="VARCHAR" />
+                <result column="friendlist" property="friendlist" jdbcType="VARCHAR" />
+                <result column="place" property="place" jdbcType="VARCHAR" />
+                <result column="create_date" property="createDate" jdbcType="DATE" />
+                <result column="update_date" property="updateDate" jdbcType="DATE" />
+                <result column="ip_create" property="ipCreate" jdbcType="VARCHAR" />
+                <result column="ip_update" property="ipUpdate" jdbcType="VARCHAR" />
+	</resultMap> 
 
-<!--	<select id="getAllNews" resultMap="newsResult">
+ 	<select id="getMoment" resultMap="momentResult">
 		select
-			<include refid="newsColumns" />
-		from news
-	</select>-->
+			<include refid="momentColumns" />
+		from mst_moment
+	</select>
         
 <!--        <select id="getNewsById" resultMap="newsResult">
 		select

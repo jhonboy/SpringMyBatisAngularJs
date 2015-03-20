@@ -5,6 +5,7 @@
 package com.horas.dao;
 
 import com.horas.dto.Moment;
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,6 +35,11 @@ public class MomentDAOImpl implements MomentDAO{
     
     public void insertMoment(Moment moment) {
         getSqlSession().insert("com.horas.mapper.moment.insertMoment", moment);
+        
+    }
+
+    public List<Moment> getMoment() {
+        return getSqlSession().selectList("com.horas.mapper.moment.getMoment");
         
     }
     

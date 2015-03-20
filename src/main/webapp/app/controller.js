@@ -2,6 +2,8 @@
     var as = angular.module('yambas');
 
     as.controller('MainController', function ($scope, $rootScope, $http, i18n, $location) {
+        
+        
         $scope.language = function () {
             return i18n.language;
         };
@@ -36,16 +38,91 @@
  
         };
         
+        
+        
+
+    });
+    
+as.controller('MomentController', function ($scope, $http) {
+    var actionUrl = 'action/moments/',
+        load = function () {
+                $http.get(actionUrl).success(function (data) {
+                    $scope.moments = data;
+                });
+            };
+
+        load();
         $scope.addMoment = function () {
-             var actionUrl='action/user/addMoment/'; 
-                $http.post(actionUrl,$scope.moment).success(function (data) {
-                     
+                $http.post(actionUrl,$scope.moment).success(function () {
+                load(); 
              });
             
         };
         
+        $scope.document = {};
 
-    });
+        $scope.setTitle = function(fileInput) {
+            var file=fileInput.value;
+            var filename = file.replace(/^.*[\\\/]/, '');
+            var title = filename.substr(0, filename.lastIndexOf('.'));
+            $("#title").val(title);
+            $("#title").focus();
+            $scope.document.title=title;
+        };
+
+
+        $scope.uploadFile=function (){
+        var uploadUrl="action/upload";
+        var formData=new FormData();
+        formData.append("file",file.files[0]);
+         $http({
+                method: 'POST',
+                url: uploadUrl,
+                headers: {'Content-Type': undefine},
+                data: formData,
+                transformRequest: function(data, headersGetterFunction) {
+                                return data;
+                 }
+             })
+            .success(function(data, status) {   
+                            alert("success");
+             });
+
+        };
+
+
+//     $scope.uploadFile=function(){
+//             var formData=new FormData();
+//         formData.append("file",file.files[0]);
+//                   $http({
+//                        method: 'POST',
+//                        url: '/serverApp/rest/newDocument',
+//                        headers: { 'Content-Type': 'multipart/form-data'},
+//                        data:  formData
+//                      })
+//                        .success(function(data, status) {                       
+//                            alert("Success ... " + status);
+//                        })
+//                        .error(function(data, status) {
+//                            alert("Error ... " + status);
+//                        });
+//                        $http({
+//                            method: 'POST',
+//                            url: 'action/upload',
+//                            headers: {'Content-Type': 'multipart/form-data'},
+//                            data: formData,
+//                            transformRequest: function(data, headersGetterFunction) {
+//                                return data; // do nothing! FormData is very good!
+//                            }
+//                        }).success(function(data, status) {
+//
+//                        }).error(function(data, status) {
+//
+//                        });
+//
+//      };
+});
+
 as.controller('UserDetailController', function ($scope, $http, $routeParams) {
         var actionUrl = 'action/userDetail/'+$routeParams.username;
             load = function () {
