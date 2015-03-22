@@ -20,10 +20,10 @@
         ipComment
 	</sql>
 	<resultMap type="com.horas.dto.Comment" id="commentsResult">
-		<id column="idComment" property="idNews"  typeHandler="UUIDTypeHandler" />
+		<id column="idComment" property="idComment"  typeHandler="UUIDTypeHandler" />
 		<result column="idNews" property="idNews"   typeHandler="UUIDTypeHandler" />
 		<result column="comment" property="comment" jdbcType="VARCHAR" />
-                <result column="userComment" property="userComment" typeHandler="VARCHAR" />
+                <result column="userComment" property="userComment" jdbcType="VARCHAR" />
                 <result column="dateComment" property="dateComment" jdbcType="DATE" />
                 <result column="ipComment" property="ipComment" jdbcType="VARCHAR" />
 

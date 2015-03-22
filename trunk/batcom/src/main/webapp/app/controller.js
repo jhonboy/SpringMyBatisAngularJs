@@ -72,7 +72,7 @@ as.controller('MomentController', function ($scope, $http) {
 
 
         $scope.uploadFile=function (){
-        var uploadUrl="action/upload";
+        var uploadUrl="action/savefiles";
         var formData=new FormData();
         formData.append("file",file.files[0]);
          $http({
