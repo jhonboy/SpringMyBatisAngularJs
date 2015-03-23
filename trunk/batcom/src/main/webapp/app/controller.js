@@ -72,55 +72,21 @@ as.controller('MomentController', function ($scope, $http) {
 
 
         $scope.uploadFile=function (){
-        var uploadUrl="action/savefiles";
+            
         var formData=new FormData();
         formData.append("file",file.files[0]);
-         $http({
-                method: 'POST',
-                url: uploadUrl,
-                headers: {'Content-Type': 'multipart/form-data'},
-                data: formData,
-                transformRequest: function(data, headersGetterFunction) {
-                                return data;
-                 }
-             })
-            .success(function(data, status) {   
-                            alert("success");
-             });
+        $http.post('action/upload/', formData, {
+            transformRequest: function(data, headersGetterFunction) {
+                return data;
+            },
+            headers: { 'Content-Type': undefined }
+            }).success(function(data, status) {                       
+                console.log("Success ... " + status);
+            }).error(function(data, status) {
+                console.log("Error ... " + status);
+            });
+            };
 
-        };
-
-
-//     $scope.uploadFile=function(){
-//             var formData=new FormData();
-//         formData.append("file",file.files[0]);
-//                   $http({
-//                        method: 'POST',
-//                        url: '/serverApp/rest/newDocument',
-//                        headers: { 'Content-Type': 'multipart/form-data'},
-//                        data:  formData
-//                      })
-//                        .success(function(data, status) {                       
-//                            alert("Success ... " + status);
-//                        })
-//                        .error(function(data, status) {
-//                            alert("Error ... " + status);
-//                        });
-//                        $http({
-//                            method: 'POST',
-//                            url: 'action/upload',
-//                            headers: {'Content-Type': 'multipart/form-data'},
-//                            data: formData,
-//                            transformRequest: function(data, headersGetterFunction) {
-//                                return data; // do nothing! FormData is very good!
-//                            }
-//                        }).success(function(data, status) {
-//
-//                        }).error(function(data, status) {
-//
-//                        });
-//
-//      };
 });
 
 as.controller('UserDetailController', function ($scope, $http, $routeParams) {
