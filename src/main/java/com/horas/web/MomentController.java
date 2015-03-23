@@ -39,6 +39,7 @@ public class MomentController extends RandomUUID{
  
     @Inject
     private MomentService momentService;
+    private String fileName;
    
     
      @RequestMapping(value="/moments",method=RequestMethod.GET)
@@ -76,9 +77,10 @@ public class MomentController extends RandomUUID{
         //Attachment attachment=new Attachment();
         Iterator<String> itr=request.getFileNames();
         MultipartFile file=request.getFile(itr.next());
-        String fileName=file.getOriginalFilename();
+         fileName=file.getOriginalFilename();
       //  attachment.setName(fileName);
-        File dir = new File("/Users/jhon/kerja/kuliah/");
+       // File dir = new File("/Users/jhon/kerja/kuliah/");
+        File dir= new File("D:/jhon/");
          if (dir.isDirectory())
          {
             File serverFile = new File(dir,fileName);

@@ -6,11 +6,9 @@
                 <div class="chat-form">
                         <textarea ng-model="moment.moment"></textarea>
                         <form ng-submit="uploadFile()" class="form-horizontal" enctype="multipart/form-data">
-                        <input type="file" name="file" ng-model="document.fileInput" id="file" onchange="angular.element(this).scope().setTitle(this)" />
-                        <input type="text" class="col-sm-4" ng-model="document.title" id="title" />
-                        <button class="btn btn-primary" type="submit">
-                              Submit
-                         </button>
+                        <input type="file" name="file" ng-model="moment.fileInput" id="file" onchange="angular.element(this).scope().setTitle(this)" />
+                        <input type="text" class="col-sm-4" ng-model="moment.photo" id="title" />
+                        
                         </form>
                         
                         <button class="btn btn-info" ng-click="addMoment()">Send Moment</button>
