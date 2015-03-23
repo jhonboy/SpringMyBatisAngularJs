@@ -54,20 +54,22 @@ as.controller('MomentController', function ($scope, $http) {
         load();
         $scope.addMoment = function () {
                 $http.post(actionUrl,$scope.moment).success(function () {
+                $scope.photo=$scope.moment.photo;
                 load(); 
+                $scope.uploadFile();
              });
             
         };
         
-        $scope.document = {};
+        $scope.moment = {};
 
         $scope.setTitle = function(fileInput) {
-            var file=fileInput.value;
-            var filename = file.replace(/^.*[\\\/]/, '');
-            var title = filename.substr(0, filename.lastIndexOf('.'));
-            $("#title").val(title);
-            $("#title").focus();
-            $scope.document.title=title;
+                var file=fileInput.value;
+                var filename = file.replace(/^.*[\\\/]/, '');
+                var photo = filename.substr(0, filename.lastIndexOf('.'));
+                $("#title").val(photo);
+                $("#title").focus();
+                $scope.moment.photo=photo;
         };
 
 
