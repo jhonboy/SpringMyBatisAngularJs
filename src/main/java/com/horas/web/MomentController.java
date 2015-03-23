@@ -8,7 +8,9 @@ import com.horas.dto.Moment;
 import com.horas.dto.ResponseMessage;
 import com.horas.service.MomentService;
 import com.horas.util.RandomUUID;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,52 +67,30 @@ public class MomentController extends RandomUUID{
         return new ResponseMessage(ResponseMessage.Type.success, "commentAdded");
     }
     
-   @RequestMapping(value="/upload", headers = "'Content-Type': 'multipart/form-data'", method = RequestMethod.POST) 
-   public ResponseMessage documentUploadController(HttpServletRequest request, HttpServletResponse response) {
-     MultipartHttpServletRequest mRequest;
-        try {
-            mRequest = (MultipartHttpServletRequest) request;
-            mRequest.getParameterMap();
 
-            Iterator<String> itr = mRequest.getFileNames();
-            while (itr.hasNext()) {
-                MultipartFile mFile = mRequest.getFile(itr.next());
-                String fileName = mFile.getOriginalFilename();
-                System.out.println(fileName);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseMessage(ResponseMessage.Type.success,"Berhasil upload");
-    }
-   @RequestMapping(value = "/upload", method = RequestMethod.GET)
-    public String crunchifyDisplayForm() {
-        return "uploadfile";
-    }
- 
-    @RequestMapping(value = "/savefiles",headers = "'Content-Type': 'multipart/form-data'", method = RequestMethod.POST)
-    public String crunchifySave(
-    @ModelAttribute("uploadForm") FileUpload uploadForm,Model map) throws IllegalStateException, IOException {
-        String saveDirectory = "c:/crunchify/";
- 
-        List<MultipartFile> crunchifyFiles = uploadForm.getFiles();
- 
-        List<String> fileNames = new ArrayList<String>();
- 
-        if (null != crunchifyFiles && crunchifyFiles.size() > 0) {
-            for (MultipartFile multipartFile : crunchifyFiles) {
- 
-                String fileName = multipartFile.getOriginalFilename();
-                if (!"".equalsIgnoreCase(fileName)) {
-                    // Handle file content - multipartFile.getInputStream()
-                    multipartFile
-                            .transferTo(new File(saveDirectory + fileName));
-                    fileNames.add(fileName);
-                }
-            }
-        }
- 
-        map.addAttribute("files", fileNames);
-        return "uploadfilesuccess";
-    }
+    
+    @RequestMapping(value="/upload", method = RequestMethod.POST)
+    public void UploadFile(MultipartHttpServletRequest request,
+   HttpServletResponse response) throws IOException {
+
+        //Attachment attachment=new Attachment();
+        Iterator<String> itr=request.getFileNames();
+        MultipartFile file=request.getFile(itr.next());
+        String fileName=file.getOriginalFilename();
+      //  attachment.setName(fileName);
+        File dir = new File("/Users/jhon/kerja/kuliah/");
+         if (dir.isDirectory())
+         {
+            File serverFile = new File(dir,fileName);
+           BufferedOutputStream stream = new BufferedOutputStream(
+                 new FileOutputStream(serverFile));
+           stream.write(file.getBytes());
+           stream.close();
+       }else {
+        System.out.println("not");
+      }
+
+ }
+    
+    
 }

@@ -45,7 +45,7 @@
                         #{idComment,typeHandler=UUIDTypeHandler},
                         #{idNews,typeHandler=UUIDTypeHandler},
                         #{comment,jdbcType=VARCHAR},
-                        #{userComment,typeHandler=VARCHAR},
+                        #{userComment,jdbcType=VARCHAR},
                         #{dateComment,jdbcType=DATE},
                         #{ipComment,jdbcType=VARCHAR}
 		)
