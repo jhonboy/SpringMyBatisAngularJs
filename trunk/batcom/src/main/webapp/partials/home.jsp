@@ -1,7 +1,5 @@
 <div class="row-fluid" ng-controller="MomentController">
-    <div class="box span9" onTablet="span9" onDesktop="span9">
- 
-    
+    <div class="span9" onTablet="span9" onDesktop="span9"> 
         <div class="box-content">
                 <div class="chat-form">
                         <textarea ng-model="moment.moment"></textarea>
