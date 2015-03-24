@@ -18,7 +18,12 @@
                                 <img class="avatar" alt="{{item.username}}" src="img/avatar.jpg">
                                 <span class="message"><span class="arrow"></span>
                                         <span class="from">{{item.username}}</span>
-                                        <span class="time">{{item.createDate}}</span>
+                                        <span class="date">{{item.createDate  | date:"MM/dd/yyyy 'at' h:mma" }}</span>
+                                        <div id="image-5" class="masonry-thumb">
+                                            <a style="background:url(http://localhost:8080/images/{{item.photo}}.jpg)" title="tet" href="http://localhost:8080/images/{{item.photo}}.jpg">
+                                                <img class="grayscale" src="http://localhost:8080/images/{{item.photo}}.jpg" alt="Sample Image 5">
+                                            </a>
+					</div>
                                         <span class="text">
                                                 {{item.moment}}
                                         </span>

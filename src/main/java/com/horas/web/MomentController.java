@@ -80,7 +80,7 @@ public class MomentController extends RandomUUID{
          fileName=file.getOriginalFilename();
       //  attachment.setName(fileName);
        // File dir = new File("/Users/jhon/kerja/kuliah/");
-        File dir= new File("D:/jhon/");
+        File dir= new File("D:/jhon/windows/apache-tomcat-7.0.57/webapps/images/");
          if (dir.isDirectory())
          {
             File serverFile = new File(dir,fileName);
