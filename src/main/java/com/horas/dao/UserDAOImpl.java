@@ -39,10 +39,10 @@ public class UserDAOImpl implements UserDAO {
         return getSqlSession().selectOne("com.horas.mapper.user.getUserDetail", username);
     }
 
-    public void signUp(User user) {
+    public void signUp(User user,UserDetail userDetail) {
         getSqlSession().insert("com.horas.mapper.user.signup", user);
         getSqlSession().insert("com.horas.mapper.user.insertRole", user);
-        getSqlSession().insert("com.horas.mapper.user.insertUserDetails",user);
+        getSqlSession().insert("com.horas.mapper.user.insertUserDetails",userDetail);
     }
     
 }

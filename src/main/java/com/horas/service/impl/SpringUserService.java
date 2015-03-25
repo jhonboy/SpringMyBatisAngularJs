@@ -29,11 +29,11 @@ public class SpringUserService extends ApplicationContextUtils implements UserSe
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
-            return new User("","","","",true,"");
+            return new User();
         }
         System.out.println("USER===="+((UserDetails) authentication.getPrincipal()).getUsername());
         username=((UserDetails) authentication.getPrincipal()).getUsername();
-        return new User(((UserDetails) authentication.getPrincipal()).getUsername(),"","","",true,"");
+        return new User(((UserDetails) authentication.getPrincipal()).getUsername(),"","","","",true,"");
     }
 
     public UserDetail getUserDetail(String username) {
@@ -45,8 +45,8 @@ public class SpringUserService extends ApplicationContextUtils implements UserSe
          return ud;
     }
 
-    public void signUp(User user) {
-          userDAO.signUp(user);
+    public void signUp(User user,UserDetail userDetail) {
+          userDAO.signUp(user,userDetail);
     }
 
     

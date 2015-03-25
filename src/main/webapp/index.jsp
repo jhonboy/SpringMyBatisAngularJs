@@ -6,9 +6,9 @@
 	<!-- start: Meta -->
 	<meta charset="utf-8">
 	<title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
-	<meta name="description" content="Bootstrap Metro Dashboard">
-	<meta name="author" content="Dennis Ji">
-	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<meta name="description" content="BatCom">
+	<meta name="author" content="Jhons">
+	<meta name="keyword" content="">
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->
@@ -45,124 +45,122 @@
 
 <body ng-controller="MainController">
 		<!-- start: Header -->
-	<div class="navbar">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="index2.html"><span>Yambas</span></a>
-								
-				<!-- start: Header Menu -->
-				<div class="nav-no-collapse header-nav">
-					<ul class="nav pull-right">	
-					<!-- start: User Dropdown -->
-                                        <%
-                                          String username = (String)session.getAttribute("username"); 
-                                        %>
-                                        <c:set var="user" scope="session" value="<%=username%>"/>
-										
-                                                <c:choose>
-                                                          <c:when test="${user==null}">
-                                                                                <li>
-                                                                                <a href="" ng-click='login()' >Login</a>
-                                                                                </li>
-                                                          </c:when>
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="index2.html"><span>Yambas</span></a>
+                  <!-- start: Header Menu -->
+            <div class="nav-no-collapse header-nav">
+                    <ul class="nav pull-right">	
+                    <!-- start: User Dropdown -->
+                    <%
+                      String username = (String)session.getAttribute("username"); 
+                    %>
+                    <c:set var="user" scope="session" value="<%=username%>"/>
 
-                                                          <c:otherwise>
+                            <c:choose>
+                                      <c:when test="${user==null}">
+                                            <li>
+                                            <a href="" ng-click='login()' >Login</a>
+                                            </li>
+                                      </c:when>
 
-                                                                <!-- start: User Dropdown -->
-                                                                <li class="dropdown">
-                                                                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                                                                <i class="halflings-icon white user"></i><%=username%>
-                                                                                <span class="caret"></span>
-                                                                        </a>
+                                      <c:otherwise>
+                                            <!-- start: User Dropdown -->
+                                            <li class="dropdown">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                                            <i class="halflings-icon white user"></i><%=username%>
+                                                            <span class="caret"></span>
+                                                    </a>
 
-                                                                        <ul class="dropdown-menu">
-                                                                                <li class="dropdown-menu-title">
-                                                                                        <span>Account Settings</span>
-                                                                                </li>
-                                                                                <li>  <a href="#/userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
-                                                                                <li>  <a href="" ng-click='logout()'><i class="halflings-icon off"></i> Logout</a></li>
-                                                                        </ul>
-                                                                </li>
-                <!-- end: User Dropdown -->
+                                                    <ul class="dropdown-menu">
+                                                            <li class="dropdown-menu-title">
+                                                                    <span>Account Settings</span>
+                                                            </li>
+                                                            <li>  <a href="#/userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
+                                                            <li>  <a href="" ng-click='logout()'><i class="halflings-icon off"></i> Logout</a></li>
+                                                    </ul>
+                                            </li>
+                                            <!-- end: User Dropdown -->
 
-                                                          </c:otherwise>
-                                                </c:choose>           
-						 
-					</ul>
+                                      </c:otherwise>
+                            </c:choose>           
+
+                    </ul>
                     <ul class="nav nav-pills pull-right">
-                          <li ng-class="activeWhen(language()=='in')">
-                              <a ng-click="setLanguage('in')">Indonesia</a>
-                          </li>
-                          <li ng-class="activeWhen(language()=='en')">
-                              <a ng-click="setLanguage('en')">English</a>
-                          </li>
-                   </ul>
+                      <li ng-class="activeWhen(language()=='in')">
+                          <a ng-click="setLanguage('in')">Indonesia</a>
+                      </li>
+                      <li ng-class="activeWhen(language()=='en')">
+                          <a ng-click="setLanguage('en')">English</a>
+                      </li>
+                    </ul>
             </div>
-				<!-- end: Header Menu -->
-				
-			</div>
-		</div>
-	</div>
-	<!-- start: Header -->
-	
-		<div class="container-fluid-full">
-		<div class="row-fluid">
-				
-			<!-- start: Main Menu -->
-			<div id="sidebar-left" class="span2">
-				<div class="nav-collapse sidebar-nav">
-					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li><a href="index2.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-						<li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
-						<li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>
-						<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
-						<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>
-						<li>
-							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span class="label label-important"> 3 </span></a>
-							<ul>
-								<li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 1</span></a></li>
-								<li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 2</span></a></li>
-								<li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 3</span></a></li>
-							</ul>	
-						</li>
-						<li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
-						<li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
-						<li><a href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
-						<li><a href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
-						<li><a href="table.html"><i class="icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
-						<li><a href="calendar.html"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
-						<li><a href="file-manager.html"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
-						<li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
-						<li><a href="login.html"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- end: Main Menu -->
-			
-			<noscript>
-				<div class="alert alert-block span10">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
-				</div>
-			</noscript>
-			
-			<!-- start: Content -->
-			<div id="content" class="span10">
-			 
-                      
-			<ul class="breadcrumb">
-				<li>
-					<i class="icon-home"></i>
-					<a href="index2.html">Home</a> 
-					<i class="icon-angle-right"></i>
-				</li>
-				<li><a href="#">Dashboard</a></li>
-			</ul>
+                            <!-- end: Header Menu -->
+
+         </div>
+    </div>
+</div>
+    <!-- start: Header -->
+
+            <div class="container-fluid-full">
+            <div class="row-fluid">
+
+                    <!-- start: Main Menu -->
+                    <div id="sidebar-left" class="span2">
+                            <div class="nav-collapse sidebar-nav">
+                                    <ul class="nav nav-tabs nav-stacked main-menu">
+                                            <li><a href="index2.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
+                                            <li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
+                                            <li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>
+                                            <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
+                                            <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>
+                                            <li>
+                                                    <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span class="label label-important"> 3 </span></a>
+                                                    <ul>
+                                                            <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 1</span></a></li>
+                                                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 2</span></a></li>
+                                                            <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 3</span></a></li>
+                                                    </ul>	
+                                            </li>
+                                            <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
+                                            <li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
+                                            <li><a href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
+                                            <li><a href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
+                                            <li><a href="table.html"><i class="icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
+                                            <li><a href="calendar.html"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
+                                            <li><a href="file-manager.html"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
+                                            <li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
+                                            <li><a href="login.html"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
+                                    </ul>
+                            </div>
+                    </div>
+                    <!-- end: Main Menu -->
+
+                    <noscript>
+                            <div class="alert alert-block span10">
+                                    <h4 class="alert-heading">Warning!</h4>
+                                    <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+                            </div>
+                    </noscript>
+
+                    <!-- start: Content -->
+                    <div id="content" class="span10">
+
+
+                    <ul class="breadcrumb">
+                            <li>
+                                    <i class="icon-home"></i>
+                                    <a href="index2.html">Home</a> 
+                                    <i class="icon-angle-right"></i>
+                            </li>
+                            <li><a href="#">Dashboard</a></li>
+                    </ul>
 
      <div ng-class="'alert alert-'+message().type" ng-show="message().show">
         <button type="button" class="close" ng-click="message().show=false">×</button>
@@ -195,7 +193,7 @@
                 </div>
             </div>
         </div>
-         <a ng-href="#/signup" class="btn btn-primary">Belum  punya akun? sign up</a>
+         <a ng-click="signup()" class="btn btn-primary">Belum  punya akun? sign up</a>
         <div class="modal-footer">
             <a ng-click="login()" class="btn btn-primary">Login</a>
             <a data-dismiss="modal" class="btn">Cancel</a>
@@ -207,33 +205,11 @@
        
 
 	</div><!--/.fluid-container-->
-	
-			<!-- end: Content -->
-		</div><!--/#content.span10-->
-		</div><!--/fluid-row-->
-		
-	<div class="modal hide fade" id="myModal">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body">
-			<p>Here settings can be configured...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-			<a href="#" class="btn btn-primary">Save changes</a>
-		</div>
-	</div>
-	
-	<div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-content">
-			<ul class="list-inline item-details">
-				<li><a href="http://themifycloud.com">Admin templates</a></li>
-				<li><a href="http://themescloud.org">Bootstrap themes</a></li>
-			</ul>
-		</div>
-	</div>
+		<!-- end: Content -->
+    </div><!--/#content.span10-->
+</div><!--/fluid-row-->
+	 
+	 
 	
 	<div class="clearfix"></div>
 	
