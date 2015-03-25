@@ -14,5 +14,5 @@ import com.horas.dto.UserDetail;
  */
 public interface UserDAO {
     public UserDetail getUserDetails(String username);
-    public void signUp(User user);
+    public void signUp(User user,UserDetail userDetail);
 }

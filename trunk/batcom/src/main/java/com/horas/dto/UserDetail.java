@@ -10,56 +10,56 @@ package com.horas.dto;
  * @author ardodonk
  */
 public class UserDetail {
-    private String userName;
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private String username;
+    private String firstname;
+    private String middlename;
+    private String lastname;
     private String marga;
     private String alamat;
     private char status;
     private char gender;
     
     public UserDetail(){}
-    public UserDetail(String userName,String firstName,String middleName,String lastName,String marga, String alamat, char gender,char status){
-        this.userName=userName;
-        this.firstName=firstName;
-        this.middleName=middleName;
-        this.lastName=lastName;
+    public UserDetail(String username,String firstname,String middlename,String lastname,String marga, String alamat, char gender,char status){
+        this.username=username;
+        this.firstname=firstname;
+        this.middlename=middlename;
+        this.lastname=lastname;
         this.marga=marga;
         this.alamat=alamat;
         this.gender=gender;
         this.status=status;
     }
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getMiddlename() {
+        return middlename;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setMiddleName(String middlename) {
+        this.middlename = middlename;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getMarga() {

@@ -18,12 +18,11 @@
 		ROLE
 	</sql>
 	 
-	<resultMap type="com.horas.dto.UserDetail" id="userDetailsResult">
-		 
-		<result column="username" property="userName" jdbcType="VARCHAR" />
-		 <result column="firstname" property="firstName" jdbcType="VARCHAR" />
-                 <result column="middlename" property="middleName" jdbcType="VARCHAR" />
-                 <result column="lastname" property="lastName" jdbcType="VARCHAR" />
+	<resultMap type="com.horas.dto.UserDetail" id="userDetailsResult">		 
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		 <result column="firstname" property="firstname" jdbcType="VARCHAR" />
+                 <result column="middlename" property="middlename" jdbcType="VARCHAR" />
+                 <result column="lastname" property="lastname" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="getUserDetail" resultMap="userDetailsResult">
@@ -36,7 +35,7 @@
 		insert into users (
 			<include refid="insertUserColumns" />
 		) values (
-			#{name, jdbcType=VARCHAR},
+			#{username, jdbcType=VARCHAR},
 			#{password, jdbcType=VARCHAR},
                         #{enabled,jdbcType=VARCHAR},
                         #{email,jdbcType=VARCHAR}
@@ -46,15 +45,14 @@
 		insert into role (
 			<include refid="insertRoleColumns" />
 		) values (
-			#{name, jdbcType=VARCHAR},
+			#{username, jdbcType=VARCHAR},
 			#{role, jdbcType=VARCHAR}
 		)
 	</insert>
         <insert id="insertUserDetails" parameterType="com.horas.dto.UserDetail">
-            insert into users (
+            insert into userdetails (
 			<include refid="userDetailsColumns" />
 		) values (
-                        username,firstname,middlename,lastname,marga,alamat,gender,status
 			#{username, jdbcType=VARCHAR},
 			#{firstname, jdbcType=VARCHAR},
                         #{middlename,jdbcType=VARCHAR},

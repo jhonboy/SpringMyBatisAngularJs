@@ -5,9 +5,10 @@ package com.horas.dto;
  */
 public class User {
     
-    private String name;
+    private String username;
     private String marga;
     private String password;
+    private String reTypePassword;
     private boolean enabled;
     private String email;
     private String role;
@@ -15,22 +16,22 @@ public class User {
 //    private UserDetail userDetail;
 //    
     public User(){}
-    public User(String name,String marga,String password,String email,boolean enabled,String role) {
-        this.name = name;
+    public User(String username,String marga,String password,String reTypePassword,String email,boolean enabled,String role) {
+        this.username = username;
         this.marga=marga;
         this.password=password;
-        
+        this.reTypePassword=reTypePassword;
         this.email=email;
         this.enabled=enabled;
         this.role=role;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 //    public UserDetail getUserDetail() {
@@ -80,5 +81,14 @@ public class User {
     public void setMarga(String marga) {
         this.marga = marga;
     }
+
+    public String getReTypePassword() {
+        return reTypePassword;
+    }
+
+    public void setReTypePassword(String reTypePassword) {
+        this.reTypePassword = reTypePassword;
+    }
+    
     
 }

@@ -6,6 +6,7 @@ import com.horas.dto.User;
 import com.horas.dto.UserDetail;
 
 import com.horas.service.UserService;
+import com.horas.util.ApplicationContextUtils;
 import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * Controller for user actions.
  */
 @Controller
-public class UserController {
+public class UserController extends ApplicationContextUtils{
     
     @Inject
     private UserService userService;
@@ -33,7 +34,7 @@ public class UserController {
     @ResponseBody
     public User getCurrentUser(HttpServletRequest request, HttpServletResponse response) { 
        HttpSession sess = request.getSession();
-       sess.setAttribute("username", userService.getCurrentUser().getName());
+       sess.setAttribute("username", userService.getCurrentUser().getUsername());
        return userService.getCurrentUser();
     }
     
@@ -47,13 +48,20 @@ public class UserController {
     @RequestMapping(value="/signup",method=RequestMethod.POST)
     @ResponseBody
     public ResponseMessage signup(@RequestBody User user){
-       if (user.getName().length() <= 3) {
+       UserDetail ud=(UserDetail) getApplicationContext().getBean("userDetail");
+       if (user.getUsername().length() <= 3 ) {
             throw new IllegalArgumentException("moreThan3Chars");
-        }
+       }
+       
+       if(!user.getPassword().equals(user.getReTypePassword())){
+           throw new IllegalArgumentException("passwordNotMatch");
+       }
         user.setEnabled(true);
         user.setRole("ROLE_USER");
         
-        userService.signUp(user);
+        ud.setUsername(user.getUsername());
+        ud.setMarga(user.getMarga());
+        userService.signUp(user,ud);
         return new ResponseMessage(ResponseMessage.Type.success, "signupSuccess");   
     }
     @RequestMapping(value = "/user/logout", method = RequestMethod.GET)
