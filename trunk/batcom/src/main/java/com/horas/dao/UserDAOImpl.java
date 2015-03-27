@@ -41,14 +41,14 @@ public class UserDAOImpl implements UserDAO {
         return getSqlSession().selectOne("com.horas.mapper.user.getUserDetail", username);
     }
 
-    public void signUp(User user,UserDetail userDetail) {
+    public void signUp(User user) {
         logger.debug("==== BEGIN ====");
         
-            getSqlSession().insert("com.horas.mapper.user.signup", user);
-            getSqlSession().insert("com.horas.mapper.user.insertRole", user);
-            getSqlSession().insert("com.horas.mapper.user.insertUserDetails",userDetail);
-            getSqlSession().commit();
-            logger.debug("=== END =====");
+        getSqlSession().insert("com.horas.mapper.user.signup", user);
+        getSqlSession().insert("com.horas.mapper.user.insertRole", user.getRole());
+        getSqlSession().insert("com.horas.mapper.user.insertUserDetails",user.getUserDetail());
+        //getSqlSession().commit();
+        logger.debug("=== END =====");
               
     }
 }
