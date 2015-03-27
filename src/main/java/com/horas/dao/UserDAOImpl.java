@@ -10,6 +10,7 @@ import com.horas.dto.UserDetail;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,8 +18,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository ("userDAO")
 public class UserDAOImpl implements UserDAO {
-
-     @Autowired
+    private Logger logger = Logger.getLogger(UserDAO.class);
+    
+    @Autowired
     private SqlSession sqlSession;
     /**
 	 * @return the sqlSession
@@ -40,9 +42,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public void signUp(User user,UserDetail userDetail) {
-        getSqlSession().insert("com.horas.mapper.user.signup", user);
-        getSqlSession().insert("com.horas.mapper.user.insertRole", user);
-        getSqlSession().insert("com.horas.mapper.user.insertUserDetails",userDetail);
+        logger.debug("==== BEGIN ====");
+        
+            getSqlSession().insert("com.horas.mapper.user.signup", user);
+            getSqlSession().insert("com.horas.mapper.user.insertRole", user);
+            getSqlSession().insert("com.horas.mapper.user.insertUserDetails",userDetail);
+            getSqlSession().commit();
+            logger.debug("=== END =====");
+              
     }
-    
 }
