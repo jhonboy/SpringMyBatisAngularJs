@@ -41,10 +41,10 @@ public class UserController extends ApplicationContextUtils{
        sess.setAttribute("username", userService.getCurrentUser().getUsername());
        ResponseMessage rsp;
        
-       if(userService.getCurrentUser().getUsername()==null || userService.getCurrentUser().getPassword()==null){
-            rsp=new ResponseMessage(ResponseMessage.Type.info, "failedLogin");
+       if(userService.getCurrentUser()!=null){
+            rsp=new ResponseMessage(ResponseMessage.Type.info, "suksesLogin");
        }else{
-           rsp=new ResponseMessage(ResponseMessage.Type.info, "suksesLogin");
+            rsp=new ResponseMessage(ResponseMessage.Type.warn, "failedLogin");
        }
           
            

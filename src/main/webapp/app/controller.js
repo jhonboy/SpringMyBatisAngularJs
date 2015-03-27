@@ -148,7 +148,11 @@ as.controller('UserDetailController', function ($scope, $http, $routeParams) {
     });
 
     as.controller('LoginController', function ($scope, $http) {
-        $http.get('action/user');
+         $scope.login = function () {
+            $scope.$emit('event:loginRequest', $scope.username, $scope.password);
+
+        };     
+         
     });
      as.controller('AdminController', function ($scope, $http) {
         $http.get('action/user');
