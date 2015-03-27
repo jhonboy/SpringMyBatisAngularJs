@@ -1,5 +1,5 @@
 <div class="row-fluid" ng-controller="MomentController">
-    <div class="span9" onTablet="span9" onDesktop="span9"> 
+    <div class="span7" onTablet="span7" onDesktop="span7"> 
         <div class="box-content">
                 <div class="chat-form">
                         <textarea ng-model="moment.moment"></textarea>
@@ -33,7 +33,18 @@
                 
         </div>
     </div><!--/span-->
-    <div class="box span3" onTablet="span6" onDesktop="span4">
+    <div class="box span4" onTablet="span6" onDesktop="span4" ng-controller="NewsController">
+       <div class="task high" ng-repeat="item in news" >
+            <div class="desc">
+                    <div class="title" >
+                        <a id="link-3" ng-href="#/news/{{item.idNews}}">{{item.title}}</a>
+                    </div>
+                <div class="time">
+                    <div class="date">{{item.createDate | date:"MM/dd/yyyy"}}</div> 
+            </div>
+                    <div>{{item.news}}</div>
+            </div>
+        </div>   
     </div>
 </div>
 
