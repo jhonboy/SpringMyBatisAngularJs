@@ -15,7 +15,7 @@
 	</sql>
          <sql id="insertRoleColumns">
 		username,
-		ROLE
+		role
 	</sql>
 	 
 	<resultMap type="com.horas.dto.UserDetail" id="userDetailsResult">		 
@@ -41,7 +41,7 @@
                         #{email,jdbcType=VARCHAR}
 		)
 	</insert>
-         <insert id="insertRole" parameterType="com.horas.dto.User">
+         <insert id="insertRole" parameterType="com.horas.dto.Role">
 		insert into role (
 			<include refid="insertRoleColumns" />
 		) values (

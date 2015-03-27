@@ -11,12 +11,12 @@ public class User {
     private String reTypePassword;
     private boolean enabled;
     private String email;
-    private String role;
     
-//    private UserDetail userDetail;
-//    
+    private UserDetail userDetail;
+    private Role role;
+    
     public User(){}
-    public User(String username,String marga,String password,String reTypePassword,String email,boolean enabled,String role) {
+    public User(String username,String marga,String password,String reTypePassword,String email,boolean enabled,Role role,UserDetail userDetail) {
         this.username = username;
         this.marga=marga;
         this.password=password;
@@ -24,6 +24,7 @@ public class User {
         this.email=email;
         this.enabled=enabled;
         this.role=role;
+        this.userDetail=userDetail;
     }
 
     public String getUsername() {
@@ -66,11 +67,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -88,6 +89,14 @@ public class User {
 
     public void setReTypePassword(String reTypePassword) {
         this.reTypePassword = reTypePassword;
+    }
+
+    public UserDetail getUserDetail() {
+        return userDetail;
+    }
+
+    public void setUserDetail(UserDetail userDetail) {
+        this.userDetail = userDetail;
     }
     
     

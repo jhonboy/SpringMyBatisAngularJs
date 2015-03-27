@@ -1,6 +1,5 @@
 package com.horas.service.impl;
 
-import com.horas.constant.Common.common;
 import com.horas.dao.UserDAO;
 import com.horas.dto.User;
 import com.horas.dto.UserDetail;
@@ -26,14 +25,17 @@ public class SpringUserService extends ApplicationContextUtils implements UserSe
     @Autowired
     private UserDAO userDAO;
     private String username;
+    
     public User getCurrentUser() {
+        User u= new User();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
             return new User();
         }
         System.out.println("USER===="+((UserDetails) authentication.getPrincipal()).getUsername());
         username=((UserDetails) authentication.getPrincipal()).getUsername();
-        return new User(((UserDetails) authentication.getPrincipal()).getUsername(),"","","","",true,"");
+        u.setUsername(username);
+        return u;
     }
 
     public UserDetail getUserDetail(String username) {
@@ -45,8 +47,8 @@ public class SpringUserService extends ApplicationContextUtils implements UserSe
          return ud;
     }
 
-    public void signUp(User user,UserDetail userDetail) {
-          userDAO.signUp(user,userDetail);
+    public void signUp(User user) {
+          userDAO.signUp(user);
     }
 
     

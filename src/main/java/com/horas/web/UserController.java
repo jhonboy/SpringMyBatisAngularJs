@@ -2,8 +2,11 @@ package com.horas.web;
 
 
 import com.horas.dto.ResponseMessage;
+import com.horas.dto.Role;
 import com.horas.dto.User;
 import com.horas.dto.UserDetail;
+import com.horas.constant.Common;
+import com.horas.constant.Common.GENERAL;
 
 import com.horas.service.UserService;
 import com.horas.util.ApplicationContextUtils;
@@ -32,10 +35,21 @@ public class UserController extends ApplicationContextUtils{
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     @ResponseBody
-    public User getCurrentUser(HttpServletRequest request, HttpServletResponse response) { 
+    public ResponseMessage getCurrentUser(HttpServletRequest request, HttpServletResponse response) { 
+       
        HttpSession sess = request.getSession();
        sess.setAttribute("username", userService.getCurrentUser().getUsername());
-       return userService.getCurrentUser();
+       ResponseMessage rsp;
+       
+       if(userService.getCurrentUser().getUsername()==null || userService.getCurrentUser().getPassword()==null){
+            rsp=new ResponseMessage(ResponseMessage.Type.info, "failedLogin");
+       }else{
+           rsp=new ResponseMessage(ResponseMessage.Type.info, "suksesLogin");
+       }
+          
+           
+     
+        return rsp;
     }
     
     @RequestMapping(value = "/userDetail/{username}", method = RequestMethod.GET)
@@ -49,6 +63,7 @@ public class UserController extends ApplicationContextUtils{
     @ResponseBody
     public ResponseMessage signup(@RequestBody User user){
        UserDetail ud=(UserDetail) getApplicationContext().getBean("userDetail");
+       Role role=(Role)getApplicationContext().getBean("role");
        if (user.getUsername().length() <= 3 ) {
             throw new IllegalArgumentException("moreThan3Chars");
        }
@@ -56,12 +71,17 @@ public class UserController extends ApplicationContextUtils{
        if(!user.getPassword().equals(user.getReTypePassword())){
            throw new IllegalArgumentException("passwordNotMatch");
        }
+        role.setUsername(user.getUsername());
+        role.setRole(GENERAL.ROLE_USER.getValue());
+        
         user.setEnabled(true);
-        user.setRole("ROLE_USER");
+        user.setRole(role);
         
         ud.setUsername(user.getUsername());
         ud.setMarga(user.getMarga());
-        userService.signUp(user,ud);
+        user.setUserDetail(ud);
+        
+        userService.signUp(user);
         return new ResponseMessage(ResponseMessage.Type.success, "signupSuccess");   
     }
     @RequestMapping(value = "/user/logout", method = RequestMethod.GET)

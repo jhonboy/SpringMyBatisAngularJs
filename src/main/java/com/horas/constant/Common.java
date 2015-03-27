@@ -9,16 +9,16 @@ package com.horas.constant;
  * @author jhon
  */
 public class Common {
-    public enum common {
+    public enum GENERAL {
             /**
              *
              */
-            MALE('M',"Pria"), FEMALE('F',"Perempuan"), MARRIED('M',"Menikah"),SINGLE('S',"Single");
+            MALE("M","Pria"), FEMALE("F","Perempuan"), MARRIED("M","Menikah"),SINGLE("S","Single"),ROLE_USER("ROLE_USER","Role User"),ROLE_ADMIN("ROLE_ADMIN","Role Admin");
 
-            private char value;
+            private String value;
             private String desc;
 
-        private common(char value,String desc) {
+        private GENERAL(String value,String desc) {
             this.value = value;
             this.desc=desc;
         }
@@ -26,14 +26,14 @@ public class Common {
             this.desc=desc;
         
         }
-        public void setValue(char value){
+        public void setValue(String value){
             this.value=value;
         }
         
         public String getDesc(){
             return desc;
         }
-        public char getValue(){
+        public String getValue(){
             return value;
         }
     }
