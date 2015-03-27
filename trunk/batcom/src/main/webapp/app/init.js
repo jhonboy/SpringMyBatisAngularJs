@@ -84,7 +84,7 @@
     });
 
 
-    as.run(function ($rootScope, $http, base64) {
+    as.run(function ($rootScope, $http, base64,$location) {
         //make current message accessible to root scope and therefore all scopes
         $rootScope.message = function () {
             return message;
@@ -96,7 +96,7 @@
         $rootScope.requests401 = [];
 
         $rootScope.$on('event:loginRequired', function () {
-            $('#login').modal('show');
+            $location.url('/login');
         });
 
         /**
