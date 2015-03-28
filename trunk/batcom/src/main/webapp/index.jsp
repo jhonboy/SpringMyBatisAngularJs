@@ -8,7 +8,7 @@
 	<title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
 	<meta name="description" content="BatCom">
 	<meta name="author" content="Jhons">
-	<meta name="keyword" content="">
+ 
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->
@@ -53,7 +53,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="index2.html"><span>Yambas</span></a>
+            <a class="brand" href="#/"><span>Yambas</span></a>
                   <!-- start: Header Menu -->
             <div class="nav-no-collapse header-nav">
                     <ul class="nav pull-right">	

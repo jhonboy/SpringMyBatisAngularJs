@@ -12,7 +12,7 @@
                         <button class="btn btn-info" ng-click="addMoment()">Send Moment</button>
                 </div>	
                 <ul class="chat">
-                        <li class="left" ng-repeat="item in moments">
+                        <li class="left" ng-repeat="item in moments" >
                                 <img class="avatar" alt="{{item.username}}" src="img/avatar.jpg">
                                 <span class="message"><span class="arrow"></span>
                                         <span class="from">{{item.username}}</span>
@@ -33,7 +33,7 @@
                 
         </div>
     </div><!--/span-->
-    <div class="box span4" onTablet="span6" onDesktop="span4" ng-controller="NewsController">
+    <div class="box span5" onTablet="span6" onDesktop="span5" ng-controller="NewsController">
        <div class="task high" ng-repeat="item in news" >
             <div class="desc">
                     <div class="title" >

@@ -1,9 +1,6 @@
 (function () {
     var as = angular.module('yambas');
-
-    as.controller('MainController', function ($scope, $rootScope, $http, i18n, $location) {
-        
-        
+    as.controller('MainController', function ($scope, $rootScope, $http, i18n, $location) {   
         $scope.language = function () {
             return i18n.language;
         };
@@ -34,19 +31,15 @@
             $location.url('/signup');
             $('#login').modal('hide');
         };
-        
-        
-        
-
     });
     
-as.controller('MomentController', function ($scope, $http) {
+as.controller('MomentController', function ($scope, $http,$interval) {
     var actionUrl = 'action/moments/',
-        load = function () {
+        load = $interval(function () {
                 $http.get(actionUrl).success(function (data) {
                     $scope.moments = data;
                 });
-            };
+            },100);
 
         load();
         $scope.addMoment = function () {
@@ -147,11 +140,13 @@ as.controller('UserDetailController', function ($scope, $http, $routeParams) {
         };
     });
 
-    as.controller('LoginController', function ($scope, $http) {
+    as.controller('LoginController', function ($scope, $location) {
          $scope.login = function () {
             $scope.$emit('event:loginRequest', $scope.username, $scope.password);
-
-        };     
+        };  
+         $scope.signup = function () {
+            $location.url('/signup');
+        };
          
     });
      as.controller('AdminController', function ($scope, $http) {
@@ -267,14 +262,14 @@ as.controller('NewsDetail', function ($scope, $http, $routeParams) {
             $http.get(url).success(httpSuccess).error(function() {
                 alert('Unable to get back informations :( ');
             });
-        }
+        };
         httpSuccess = function(response) {
             $scope.datas = angular.fromJson(response);
            
             $scope.data = $scope.datas.filter(function(item){
 				return item.idNews===$routeParams.idNews; // example with id 1, or routeParams.id
             });
-        }
+        };
 
 
         $scope.search();
@@ -293,14 +288,14 @@ as.controller('NewsDetail', function ($scope, $http, $routeParams) {
             $http.get(url).success(httpSuccess).error(function() {
                 alert('Unable to get back informations :( ');
             });
-        }
+        };
         httpSuccess = function(response) {
             $scope.datas = angular.fromJson(response);
            
             $scope.data = $scope.datas.filter(function(item){
 				return item.idNews===$routeParams.idNews; // example with id 1, or routeParams.id
             });
-        }
+        };
 
 
         $scope.load();
@@ -311,8 +306,8 @@ as.controller('NewsDetail', function ($scope, $http, $routeParams) {
                 $scope.load();
             });
         };
-		$scope.login=function () {
-             $http.get('action/user');
+            $scope.login=function () {
+            $http.get('action/user');
                      
         };
 		

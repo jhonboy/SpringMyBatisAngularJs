@@ -43,8 +43,10 @@ public class UserController extends ApplicationContextUtils{
        
        if(userService.getCurrentUser()!=null){
             rsp=new ResponseMessage(ResponseMessage.Type.info, "suksesLogin");
+            System.out.println("Username success"+userService.getCurrentUser().getUsername());
        }else{
             rsp=new ResponseMessage(ResponseMessage.Type.warn, "failedLogin");
+            System.out.println("Username gagal"+userService.getCurrentUser().getUsername());
        }
           
            

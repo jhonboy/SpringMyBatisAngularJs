@@ -68,7 +68,7 @@ String username = (String)session.getAttribute("username");
                      
                       <tr>
                         <td>Nama:</td>
-                        <td>{{userDetails.firstName}} {{userDetails.middleName}} {{userDetails.lastName}}</td>
+                        <td>{{userDetails.firstname}} {{userDetails.middlename}} {{userDetails.lastname}}</td>
                       </tr>
                       <tr>
                         <td>Marga:</td>
@@ -84,10 +84,7 @@ String username = (String)session.getAttribute("username");
                         <td>Gender</td>
                         <td>Male</td>
                       </tr>
-                        <tr>
-                        <td>Home Address</td>
-                        <td>Metro Manila,Philippines</td>
-                      </tr>
+                         
                       <tr>
                         <td>Email</td>
                         <td><a href="mailto:info@support.com">userDetails@emai.com</a></td>

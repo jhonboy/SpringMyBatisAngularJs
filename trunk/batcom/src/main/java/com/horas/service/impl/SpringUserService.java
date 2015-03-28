@@ -7,7 +7,7 @@ import com.horas.service.PersonService;
 import com.horas.service.UserService;
 import com.horas.util.ApplicationContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,14 +27,15 @@ public class SpringUserService extends ApplicationContextUtils implements UserSe
     private String username;
     
     public User getCurrentUser() {
-        User u= new User();
+        DaoAuthenticationProvider daa;
+        User u = new User();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
-            return new User();
+        if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails) || !authentication.isAuthenticated()) {
+            u= new User();
+        }else{
+            username=((UserDetails) authentication.getPrincipal()).getUsername();
+            u.setUsername(username);
         }
-        System.out.println("USER===="+((UserDetails) authentication.getPrincipal()).getUsername());
-        username=((UserDetails) authentication.getPrincipal()).getUsername();
-        u.setUsername(username);
         return u;
     }
 
