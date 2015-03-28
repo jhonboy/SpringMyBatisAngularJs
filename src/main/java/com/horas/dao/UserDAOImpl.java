@@ -44,10 +44,10 @@ public class UserDAOImpl implements UserDAO {
     public void signUp(User user) {
         logger.debug("==== BEGIN ====");
         
-        getSqlSession().insert("com.horas.mapper.user.signup", user);
-        getSqlSession().insert("com.horas.mapper.user.insertRole", user.getRole());
-        getSqlSession().insert("com.horas.mapper.user.insertUserDetails",user.getUserDetail());
-        //getSqlSession().commit();
+        if(getSqlSession().insert("com.horas.mapper.user.signup", user)>0&&getSqlSession().insert("com.horas.mapper.user.insertRole", user.getRole())>0&&getSqlSession().insert("com.horas.mapper.user.insertUserDetails",user.getUserDetail())>0)
+            System.out.println("SUCCESS");
+        
+       
         logger.debug("=== END =====");
               
     }
