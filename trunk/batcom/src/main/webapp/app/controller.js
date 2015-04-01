@@ -1,4 +1,5 @@
-(function () {
+(function(angular) {
+  'use strict';
     var as = angular.module('yambas');
     as.controller('MainController', function ($scope, $rootScope, $http, i18n, $location) {   
         $scope.language = function () {
