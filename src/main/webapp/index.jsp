@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en" ng-app="yambas">
+<html lang="en">
 <head>
-	
+	 <base href="/coba-1.0/#/">
 	<!-- start: Meta -->
 	<meta charset="utf-8">
 	<title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
@@ -21,29 +21,15 @@
 	<link id="base-style" href="css/style.css" rel="stylesheet">
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<link href='js/angular/css.css' rel='stylesheet' type='text/css'>
-	<!-- end: CSS -->
-	
-
-	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
-	<!--[if lt IE 9]>
-	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<link id="ie-style" href="css/ie.css" rel="stylesheet">
-	<![endif]-->
-	
-	<!--[if IE 9]>
-		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
-	<![endif]-->
-		
-	<!-- start: Favicon -->
+        <link href='css/animation.css' rel='stylesheet' type='text/css'>
 	<link rel="shortcut icon" href="img/favicon.ico">
-	<!-- end: Favicon -->
 	
 		
 		
 		
 </head>
 
-<body ng-controller="MainController">
+ <body ng-app="yambas">
 		<!-- start: Header -->
 <div class="navbar">
     <div class="navbar-inner">
@@ -82,7 +68,7 @@
                                                             <li class="dropdown-menu-title">
                                                                     <span>Account Settings</span>
                                                             </li>
-                                                            <li>  <a href="#/userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
+                                                            <li>  <a href="userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
                                                             <li>  <a href="" ng-click='logout()'><i class="halflings-icon off"></i> Logout</a></li>
                                                     </ul>
                                             </li>
@@ -119,22 +105,7 @@
                                             <li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
                                             <li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>
                                             <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
-                                            <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>
-                                            <li>
-                                                    <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span class="label label-important"> 3 </span></a>
-                                                    <ul>
-                                                            <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 1</span></a></li>
-                                                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 2</span></a></li>
-                                                            <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 3</span></a></li>
-                                                    </ul>	
-                                            </li>
-                                            <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
-                                            <li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
-                                            <li><a href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
-                                            <li><a href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
-                                            <li><a href="table.html"><i class="icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
-                                            <li><a href="calendar.html"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
-                                            <li><a href="file-manager.html"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
+                                            
                                             <li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
                                             <li><a href="login.html"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
                                     </ul>
@@ -200,7 +171,10 @@
         </div>
     </div>
      
-    <ng-view></ng-view>
+    <div class="view-animate-container1">
+        <div ng-view class="view-animate1"></div>
+    </div>
+  <hr />
 			
        
 
@@ -224,20 +198,27 @@
 	
 	<!-- start: JavaScript-->
         <!---AngularJS-->
-        <script type="text/javascript" src="js/angular/jquery-1.8.2.min.js"></script>
-<!--        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>-->
+<!--        <script type="text/javascript" src="js/angular/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script type="text/javascript" src="app/jquery.i18n.properties-min-1.0.9.js"></script>
-        <!--<script type="text/javascript" src="js/angular.js"></script>-->
+        <script type="text/javascript" src="js/angular.js"></script>
         <script type="text/javascript" src="js/angular/angular.js"></script>
-<!--         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>-->
+         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
         <script type="text/javascript" src="app/init.js"></script>
         <script type="text/javascript" src="app/controller.js"></script>
         <script type="text/javascript" src="js/angular/ui-bootstrap-tpls.min.js"></script>
 		 <script type="text/javascript" src="js/angular/angular-cookies.js"></script>
-<!--          <script type="text/javascript" src="https://cdnjs..com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>-->
+          <script type="text/javascript" src="https://cdnjs..com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
         <script type="text/javascript" src="app/i18n.js"></script>
         <script type="text/javascript" src="app/base64.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
+
+    <script type="text/javascript" src="angular/docs/components/jquery-2.1.1/jquery.min.js"></script>
+     <script type="text/javascript" src="angular/angular.js"></script>
+     <script type="text/javascript" src="angular/angular-animate.js"></script>
+    <script type="text/javascript" src="angular/angular-route.js"></script>
+    <script type="text/javascript" src="app/init.js"></script>
+     <script type="text/javascript" src="app/controller.js"></script>
         <!---AngularJS-->
  
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>
