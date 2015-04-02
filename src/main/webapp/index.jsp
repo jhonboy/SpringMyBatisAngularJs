@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="yambas">
 <head>
 	 <base href="/coba-1.0/#/">
 	<!-- start: Meta -->
@@ -29,7 +29,7 @@
 		
 </head>
 
- <body ng-app="yambas">
+ <body ng-controller="MainController">
 		<!-- start: Header -->
 <div class="navbar">
     <div class="navbar-inner">

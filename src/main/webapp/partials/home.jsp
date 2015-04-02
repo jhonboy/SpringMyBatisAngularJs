@@ -1,4 +1,4 @@
-<div class="row-fluid" ng-controller="MomentController">
+    <div class="row-fluid" ng-controller="MomentController">
     <div class="span7" onTablet="span7" onDesktop="span7"> 
         <div class="box-content">
                 <div class="chat-form">
