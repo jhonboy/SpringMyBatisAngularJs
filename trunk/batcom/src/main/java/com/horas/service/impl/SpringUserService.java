@@ -27,7 +27,7 @@ public class SpringUserService extends ApplicationContextUtils implements UserSe
     private String username;
     
     public User getCurrentUser() {
-        DaoAuthenticationProvider daa;
+       
         User u = new User();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails) || !authentication.isAuthenticated()) {
