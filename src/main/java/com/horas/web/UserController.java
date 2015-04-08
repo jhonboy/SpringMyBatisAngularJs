@@ -54,6 +54,27 @@ public class UserController extends ApplicationContextUtils{
         return rsp;
     }
     
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseMessage login(HttpServletRequest request, HttpServletResponse response) { 
+       
+       HttpSession sess = request.getSession();
+       sess.setAttribute("username", userService.getCurrentUser().getUsername());
+       ResponseMessage rsp;
+       
+       if(userService.getCurrentUser()!=null){
+            rsp=new ResponseMessage(ResponseMessage.Type.info, "suksesLogin");
+            System.out.println("Username success"+userService.getCurrentUser().getUsername());
+       }else{
+            rsp=new ResponseMessage(ResponseMessage.Type.warn, "failedLogin");
+            System.out.println("Username gagal"+userService.getCurrentUser().getUsername());
+       }
+          
+           
+     
+        return rsp;
+    }
+     
     @RequestMapping(value = "/userDetail/{username}", method = RequestMethod.GET)
     @ResponseBody
     public UserDetail getUserDetail (@PathVariable String username) {

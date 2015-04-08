@@ -221,6 +221,7 @@
     <script type="text/javascript" src="app/init.js"></script>
      <script type="text/javascript" src="app/controller.js"></script>
       <script type="text/javascript" src="app/factory.js"></script>
+       <script type="text/javascript" src="app/base64.js"></script>
         <!---AngularJS-->
  
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>

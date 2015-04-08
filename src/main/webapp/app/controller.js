@@ -4,48 +4,10 @@
   'use strict';
   
 angular.module('yambas')
-.controller('FetchController', ['$scope', '$http', '$templateCache',
-    function($scope, $http, $templateCache) {
-      $scope.method = 'GET';
-      $scope.url = 'http-hello.html';
-
-      $scope.fetch = function() {
-        $scope.code = null;
-        $scope.response = null;
-
-        $http({method: $scope.method, url: $scope.url, cache: $templateCache}).
-          success(function(data, status) {
-            $scope.status = status;
-            $scope.data = data;
-          }).
-          error(function(data, status) {
-            $scope.data = data || "Request failed";
-            $scope.status = status;
-        });
-      };
-
-      $scope.updateModel = function(method, url) {
-        $scope.method = method;
-        $scope.url = url;
-      };
-    }])
 .controller('MainController',['$scope','$http','$location', function ($scope, $http, $location) {   
-        $scope.language = function () {
-            return i18n.language;
-        };
-        $scope.setLanguage = function (lang) {
-            i18n.setLanguage(lang);
-        };
-        $scope.activeWhen = function (value) {
-            return value ? 'active' : '';
-        };
-
-        $scope.path = function () {
-            return $location.url();
-        };
-
+       
         $scope.login = function () {
-           // $scope.$emit('event:loginRequest', $scope.username, $scope.password);
+            $scope.$emit('event:loginRequest', $scope.username, $scope.password);
             $location.url('login');
           
         };     
@@ -250,7 +212,7 @@ angular.module('yambas')
     }
 })
     
-.controller('NewsController',['$scope','$http', function ($scope, $http, i18n) {
+.controller('NewsController',['$scope','$http', function ($scope, $http) {
     var actionUrl = 'action/news/',
         load = function () {
             $http.get(actionUrl).success(function (data) {

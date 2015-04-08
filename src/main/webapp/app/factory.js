@@ -133,6 +133,13 @@ angular.module('yambas')
             //    .success(function (response) {
             //        callback(response);
             //    });
+                /* Use this for real authentication
+             ----------------------------------------------*/
+            $http.post('action/login/', { username: username, password: password })
+                .success(function (response) {
+                    callback(response);
+                });
+     
  
         };
   
