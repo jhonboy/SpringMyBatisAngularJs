@@ -217,8 +217,10 @@
      <script type="text/javascript" src="angular/angular.js"></script>
      <script type="text/javascript" src="angular/angular-animate.js"></script>
     <script type="text/javascript" src="angular/angular-route.js"></script>
+     <script type="text/javascript" src="angular/angular-cookies.js"></script>
     <script type="text/javascript" src="app/init.js"></script>
      <script type="text/javascript" src="app/controller.js"></script>
+      <script type="text/javascript" src="app/factory.js"></script>
         <!---AngularJS-->
  
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>
