@@ -249,41 +249,55 @@ angular.module('yambas')
         }
     };
   })
-  // register the interceptor as a service
- .factory('myHttpInterceptor', function($q, dependency1, dependency2) {
-    return {
-      // optional method
-      'request': function(config) {
-        // do something on success
-        return config;
-      },
-
-      // optional method
-     'requestError': function(rejection) {
-        // do something on error
-        if (canRecover(rejection)) {
-          return responseOrNewPromise
-        }
-        return $q.reject(rejection);
-      },
-
-
-
-      // optional method
-      'response': function(response) {
-        // do something on success
-        return response;
-      },
-
-      // optional method
-     'responseError': function(rejection) {
-        // do something on error
-        if (canRecover(rejection)) {
-          return responseOrNewPromise
-        }
-        return $q.reject(rejection);
-      }
+ .factory('errorInterceptor', ['$q', '$rootScope', 'MessageService', '$location',
+    function ($q, $rootScope, MessageService, $location) {
+        return {
+            request: function (config) {
+                return config || $q.when(config);
+            },
+            requestError: function(request){
+                return $q.reject(request);
+            },
+            response: function (response) {
+                return response || $q.when(response);
+            },
+            responseError: function (response) {
+                if (response && response.status === 404) {
+                    MessageService.setError('Page not found');
+                }
+                if (response && response.status >= 500) {
+                    MessageService.setError('Error 500');
+                }
+                return $q.reject(response);
+            }
+        };
+         
+}])
+.service('MessageService', function () {
+    // angular strap alert directive supports multiple alerts. 
+    // Usually this is a distraction to user. 
+    //Let us limit the messages to one    
+    this.messages = [];
+    this.setError = function(msg) {
+        this.setMessage(msg, 'error', 'Error:');
     };
-  });
+    this.setSuccess = function(msg) {
+        this.setMessage(msg, 'success', 'Success:');
+    };
+    this.setInfo = function (msg) {
+        this.setMessage(msg, 'info', 'Info:');
+    };    
+    this.setMessage = function(content, type, title) {
+        message = {
+            type: type,
+            title: title,
+            content: content
+        };
+        this.messages[0] = message;
+    };
+    this.clear = function() {
+        this.messages = [];
+    };
+});
 })(window.angular);
 
