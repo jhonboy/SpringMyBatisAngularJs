@@ -30,10 +30,9 @@ angular.module('yambas')
     this.$routeParams = $routeParams;
 }])
 .controller('LoginController',
-    ['$scope', '$rootScope', '$location', 'AuthenticationService',
+    ['$scope', '$rootScope', '$location',
     function ($scope, $rootScope, $location, AuthenticationService) {
-        // reset login status
-        AuthenticationService.ClearCredentials();
+       
   
         $scope.login = function () {
              $scope.$emit('event:loginRequest', $scope.username, $scope.password);
@@ -287,19 +286,20 @@ angular.module('yambas')
     };
 }])
         
-.controller('SessionController',['$http','$http','$cookieStore', function ($scope, $http,$cookieStore) {
+.controller('SessionController',['$scope','$http','$cookieStore', function ($scope, $http,$cookieStore) {
    $scope.sess=$cookieStore.get("JSESSIONID");
 }])
-.controller('FamilyController',['$http','$http', function ($scope, $http) {
+.controller('FamilyController',['$scope','$http', function ($scope, $http) {
 
 }])
     
-.controller('SignUpController',['$http','$http', function ($scope, $http) {
+.controller('SignUpController',['$scope','$http', function ($scope, $http) {
     var actionUrl='action/signup/';
     $scope.processSignUp = function () {
         $http.post(actionUrl, $scope.user).success(function () {
-
+               
         });
+        
     };
  }])
 .controller('ChapterCtrl', ['$routeParams', function($routeParams) {

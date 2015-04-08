@@ -25,8 +25,6 @@
 	<link rel="shortcut icon" href="img/favicon.ico">
 	
 		
-		
-		
 </head>
 
  <body ng-controller="MainController">
@@ -78,14 +76,6 @@
                             </c:choose>           
 
                     </ul>
-                    <ul class="nav nav-pills pull-right">
-                      <li ng-class="activeWhen(language()=='in')">
-                          <a ng-click="setLanguage('in')">Indonesia</a>
-                      </li>
-                      <li ng-class="activeWhen(language()=='en')">
-                          <a ng-click="setLanguage('en')">English</a>
-                      </li>
-                    </ul>
             </div>
                             <!-- end: Header Menu -->
 
@@ -111,18 +101,10 @@
                                     </ul>
                             </div>
                     </div>
-                    <!-- end: Main Menu -->
-
-                    <noscript>
-                            <div class="alert alert-block span10">
-                                    <h4 class="alert-heading">Warning!</h4>
-                                    <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
-                            </div>
-                    </noscript>
+                   
 
                     <!-- start: Content -->
                     <div id="content" class="span10">
-
 
                     <ul class="breadcrumb">
                             <li>
@@ -138,38 +120,7 @@
         <msg key-expr="message().text"></msg>
     </div>
 
-    <div class="modal" style="display: none" id="login">
-        <div class="modal-header">
-            <a class="close" data-dismiss="modal">x</a>
-             <div ng-class="'alert alert-'+message().type" ng-show="message().show">
-                <button type="button" class="close" ng-click="message().show=false">×</button>
-                <msg key-expr="message().text"></msg>
-            </div>   
-            <h3>Login</h3>
-        </div>
-        <div class="modal-body">
-            <label>Login First</label>
-            <div class="control-group">
-                <label class="control-label" for="username">Username</label>
-
-                <div class="controls">
-                    <input id="username" ng-model="username"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="password">Password</label>
-
-                <div class="controls">
-                    <input type="password" id="password" ng-model="password"/>
-                </div>
-            </div>
-        </div>
-         <a ng-click="signup()" class="btn btn-primary">Belum  punya akun? sign up</a>
-        <div class="modal-footer">
-            <a ng-click="login()" class="btn btn-primary">Login</a>
-            <a data-dismiss="modal" class="btn">Cancel</a>
-        </div>
-    </div>
+  
      
     <div class="view-animate-container1">
         <div ng-view class="view-animate1"></div>
@@ -195,23 +146,6 @@
 		</p>
 
 	</footer>
-	
-	<!-- start: JavaScript-->
-        <!---AngularJS-->
-<!--        <script type="text/javascript" src="js/angular/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="app/jquery.i18n.properties-min-1.0.9.js"></script>
-        <script type="text/javascript" src="js/angular.js"></script>
-        <script type="text/javascript" src="js/angular/angular.js"></script>
-         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
-        <script type="text/javascript" src="app/init.js"></script>
-        <script type="text/javascript" src="app/controller.js"></script>
-        <script type="text/javascript" src="js/angular/ui-bootstrap-tpls.min.js"></script>
-		 <script type="text/javascript" src="js/angular/angular-cookies.js"></script>
-          <script type="text/javascript" src="https://cdnjs..com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
-        <script type="text/javascript" src="app/i18n.js"></script>
-        <script type="text/javascript" src="app/base64.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
 
     <script type="text/javascript" src="angular/docs/components/jquery-2.1.1/jquery.min.js"></script>
      <script type="text/javascript" src="angular/angular.js"></script>
