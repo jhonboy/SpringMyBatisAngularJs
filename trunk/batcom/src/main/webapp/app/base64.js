@@ -1,4 +1,4 @@
-angular.module('angularspring').service('base64', function () {
+angular.module('yambas').service('base64', function () {
     var keyStr = "ABCDEFGHIJKLMNOP" +
         "QRSTUVWXYZabcdef" +
         "ghijklmnopqrstuv" +

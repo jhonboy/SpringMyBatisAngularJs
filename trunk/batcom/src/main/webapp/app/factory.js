@@ -248,6 +248,42 @@ angular.module('yambas')
             return output;
         }
     };
+  })
+  // register the interceptor as a service
+ .factory('myHttpInterceptor', function($q, dependency1, dependency2) {
+    return {
+      // optional method
+      'request': function(config) {
+        // do something on success
+        return config;
+      },
+
+      // optional method
+     'requestError': function(rejection) {
+        // do something on error
+        if (canRecover(rejection)) {
+          return responseOrNewPromise
+        }
+        return $q.reject(rejection);
+      },
+
+
+
+      // optional method
+      'response': function(response) {
+        // do something on success
+        return response;
+      },
+
+      // optional method
+     'responseError': function(rejection) {
+        // do something on error
+        if (canRecover(rejection)) {
+          return responseOrNewPromise
+        }
+        return $q.reject(rejection);
+      }
+    };
   });
 })(window.angular);
 
