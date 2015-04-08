@@ -1,7 +1,35 @@
+
+
 (function(angular) {
   'use strict';
-    var as = angular.module('yambas');
-    as.controller('MainController', function ($scope, $rootScope, $http, i18n, $location) {   
+  
+angular.module('yambas')
+.controller('FetchController', ['$scope', '$http', '$templateCache',
+    function($scope, $http, $templateCache) {
+      $scope.method = 'GET';
+      $scope.url = 'http-hello.html';
+
+      $scope.fetch = function() {
+        $scope.code = null;
+        $scope.response = null;
+
+        $http({method: $scope.method, url: $scope.url, cache: $templateCache}).
+          success(function(data, status) {
+            $scope.status = status;
+            $scope.data = data;
+          }).
+          error(function(data, status) {
+            $scope.data = data || "Request failed";
+            $scope.status = status;
+        });
+      };
+
+      $scope.updateModel = function(method, url) {
+        $scope.method = method;
+        $scope.url = url;
+      };
+    }])
+.controller('MainController',['$scope','$http','$location', function ($scope, $http, $location) {   
         $scope.language = function () {
             return i18n.language;
         };
@@ -17,8 +45,8 @@
         };
 
         $scope.login = function () {
-            $scope.$emit('event:loginRequest', $scope.username, $scope.password);
-            $('#login').modal('hide');
+           // $scope.$emit('event:loginRequest', $scope.username, $scope.password);
+            $location.url('login');
           
         };     
          $scope.logout=function(){
@@ -32,15 +60,74 @@
             $location.url('/signup');
             $('#login').modal('hide');
         };
-    });
-    
-as.controller('MomentController', function ($scope, $http,$interval) {
+    }])
+.controller('MainCtrl', ['$route', '$routeParams', '$location',
+  function($route, $routeParams, $location) {
+    this.$route = $route;
+    this.$location = $location;
+    this.$routeParams = $routeParams;
+}])
+.controller('LoginController',
+    ['$scope', '$rootScope', '$location', 'AuthenticationService',
+    function ($scope, $rootScope, $location, AuthenticationService) {
+        // reset login status
+        AuthenticationService.ClearCredentials();
+  
+        $scope.login = function () {
+            $scope.dataLoading = true;
+            AuthenticationService.Login($scope.username, $scope.password, function(response) {
+                if(response.success) {
+                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    $location.path('/');
+                } else {
+                    $scope.error = response.message;
+                    $scope.dataLoading = false;
+                }
+            });
+        };
+         $scope.signup = function () {
+            $location.url('/signup');
+        };
+    }])
+.controller('PersonController', ['$scope','$http',function ($scope, $http) {
+        var actionUrl = 'action/person/',
+            load = function () {
+                $http.get(actionUrl).success(function (data) {
+                    $scope.persons = data;
+                });
+            };
+
+        load();
+
+        $scope.delete = function (person) {
+            $http.delete(actionUrl + person.id).success(function () {
+                load();
+            });
+        };
+
+        $scope.save = function () {
+            $http.post(actionUrl, $scope.person).success(function () {
+                load();
+            });
+        };
+
+        $scope.order = '+firstName';
+
+        $scope.orderBy = function (property) {
+            $scope.order = ($scope.order[0] === '+' ? '-' : '+') + property;
+        };
+
+        $scope.orderIcon = function (property) {
+            return property === $scope.order.substring(1) ? $scope.order[0] === '+' ? 'icon-chevron-up' : 'icon-chevron-down' : '';
+        };
+    }])
+.controller('MomentController',['$scope','$http' ,function ($scope, $http) {
     var actionUrl = 'action/moments/',
-        load = $interval(function () {
+        load = function () {
                 $http.get(actionUrl).success(function (data) {
                     $scope.moments = data;
                 });
-            },100);
+            };
 
         load();
         $scope.addMoment = function () {
@@ -80,9 +167,9 @@ as.controller('MomentController', function ($scope, $http,$interval) {
             });
             };
 
-});
+}])
 
-as.controller('UserDetailController', function ($scope, $http, $routeParams) {
+.controller('UserDetailController',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
         var actionUrl = 'action/userDetail/'+$routeParams.username;
             load = function () {
                 $http.get(actionUrl).success(function (data) {
@@ -93,171 +180,87 @@ as.controller('UserDetailController', function ($scope, $http, $routeParams) {
             };
         load();
         
+ }])
+        
+.controller('ProfilController',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
+    var actionUrl = 'action/userDetail/'+$routeParams.username;
+        load = function () {
+            $http.get(actionUrl).success(function (data) {
+
+                $scope.userDetails = data;
+
+            });
+        };
+    load();
+        
+}])
+        
+.controller('AdminController',['$scope','$http', function ($scope, $http) {
+   $http.get('action/user');
+}])
+
+.controller('PostController',['$scope','$http','itemService','postService', function ($scope, $http,itemService,postService) {
+
+    var actionUrl = 'action/post/';
+        load = function () {
+            $http.get(actionUrl).success(function (data) {
+
+                $scope.posts = data;
+
+            });
+        };
+    load();
+    var pagesShown = 1;
+    var pageSize = 5;
+    $scope.items = itemService.getAll();
+    $scope.postings=postService.getWeather();
+
+    $scope.panjang=Object.keys($scope.postings).length;
+    $scope.itemsLimit = function() {
+        return pageSize * pagesShown;
+    };
+    $scope.hasMoreItemsToShow = function() {
+        return pagesShown < ($scope.items.length / pageSize);
+    };
+    $scope.showMoreItems = function() {
+        pagesShown = pagesShown + 1;         
+    };
+
+    $scope.save = function () {
+        $http.post(actionUrl, $scope.post).success(function () {
+            load();
         });
-        
-        as.controller('ProfilController', function ($scope, $http, $routeParams) {
-        var actionUrl = 'action/userDetail/'+$routeParams.username;
-            load = function () {
-                $http.get(actionUrl).success(function (data) {
-                    
-                    $scope.userDetails = data;
-                  
-                });
-            };
-        load();
-        
-        });
-        
-    as.controller('PersonController', function ($scope, $http, i18n) {
-        var actionUrl = 'action/person/',
-            load = function () {
-                $http.get(actionUrl).success(function (data) {
-                    $scope.persons = data;
-                });
-            };
+    };
+}])
+    
 
-        load();
-
-        $scope.delete = function (person) {
-            $http.delete(actionUrl + person.id).success(function () {
-                load();
+.controller('slideCtrl', function ($scope) {
+    $scope.myInterval = 5000;
+    var slides = $scope.slides = [];
+    $scope.addSlide = function() {
+      var newWidth = 600 + slides.length + 1;
+      slides.push({
+        image: 'http://placekitten.com/g/' + newWidth + '/300',
+        text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
+          ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+      });
+    };
+    for (var i=0; i<4; i++) {
+      $scope.addSlide();
+    }
+})
+    
+.controller('NewsController',['$scope','$http', function ($scope, $http, i18n) {
+    var actionUrl = 'action/news/',
+        load = function () {
+            $http.get(actionUrl).success(function (data) {
+                $scope.news = data;
             });
         };
+    load();
+}])
 
-        $scope.save = function () {
-            $http.post(actionUrl, $scope.person).success(function () {
-                load();
-            });
-        };
-
-        $scope.order = '+firstName';
-
-        $scope.orderBy = function (property) {
-            $scope.order = ($scope.order[0] === '+' ? '-' : '+') + property;
-        };
-
-        $scope.orderIcon = function (property) {
-            return property === $scope.order.substring(1) ? $scope.order[0] === '+' ? 'icon-chevron-up' : 'icon-chevron-down' : '';
-        };
-    });
-
-    as.controller('LoginController', function ($scope, $location) {
-         $scope.login = function () {
-            $scope.$emit('event:loginRequest', $scope.username, $scope.password);
-        };  
-         $scope.signup = function () {
-            $location.url('/signup');
-        };
-         
-    });
-     as.controller('AdminController', function ($scope, $http) {
-        $http.get('action/user');
-    });
-    as.controller('PostController', function ($scope, $http,itemService,postService) {
-           
-        var actionUrl = 'action/post/';
-            load = function () {
-                $http.get(actionUrl).success(function (data) {
-                    
-                    $scope.posts = data;
-                  
-                });
-            };
-        load();
-        var pagesShown = 1;
-        var pageSize = 5;
-        $scope.items = itemService.getAll();
-        $scope.postings=postService.getWeather();
-       
-        $scope.panjang=Object.keys($scope.postings).length;
-        $scope.itemsLimit = function() {
-            return pageSize * pagesShown;
-        };
-        $scope.hasMoreItemsToShow = function() {
-            return pagesShown < ($scope.items.length / pageSize);
-        };
-        $scope.showMoreItems = function() {
-            pagesShown = pagesShown + 1;         
-        };
-        
-        $scope.save = function () {
-            $http.post(actionUrl, $scope.post).success(function () {
-                load();
-            });
-        };
-    });
-    
-   as.factory('itemService', function() {
-        return {
-            getAll : function() {
-                var items = [];
-                for (var i = 1; i < 100; i++) {
-                    items.push('Item ' + i);                       
-                }
-                return items;
-            }
-        };              
-    });
-    
-    
-    as.factory('postService', function ($http, $q) {
-	    return {
-	        getWeather: function() {
-	            // the $http API is based on the deferred/promise APIs exposed by the $q service
-	            // so it returns a promise for us by default
-	            return $http.get('action/post/')
-	                .then(function(response) {
-	                    if (typeof response.data === 'object') {
-	                        return response.data;
-	                    } else {
-	                        // invalid response
-	                        return $q.reject(response.data);
-	                    }
-
-	                }, function(response) {
-	                    // something went wrong
-	                    return $q.reject(response.data);
-	            	});
-	        }
-	    };
-	});
-        
-        as.controller('slideCtrl', function ($scope) {
-            $scope.myInterval = 5000;
-            var slides = $scope.slides = [];
-            $scope.addSlide = function() {
-              var newWidth = 600 + slides.length + 1;
-              slides.push({
-                image: 'http://placekitten.com/g/' + newWidth + '/300',
-                text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
-                  ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-              });
-            };
-            for (var i=0; i<4; i++) {
-              $scope.addSlide();
-            }
-    });
-    
-     as.controller('NewsController', function ($scope, $http, i18n) {
-        var actionUrl = 'action/news/',
-            load = function () {
-                $http.get(actionUrl).success(function (data) {
-                    $scope.news = data;
-                });
-            };
-        load();
-    });
-//   as.controller('NewsDetail', function ($scope, $http, $routeParams) {
-//       $scope.id = $routeParams.id;
-//       var actionUrl = 'action/news/'+$routeParams.idNews,
-//            load = function () {
-//                $http.get(acitionUrl).success(function (data) {
-//                    $scope.news = data;
-//                });    
-//            };
-//        load();
-//    });
-as.controller('NewsDetail', function ($scope, $http, $routeParams) {
+.controller('NewsDetail',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
         $scope.search = function() {
             var url = 'action/news/';
             $http.get(url).success(httpSuccess).error(function() {
@@ -271,17 +274,10 @@ as.controller('NewsDetail', function ($scope, $http, $routeParams) {
 				return item.idNews===$routeParams.idNews; // example with id 1, or routeParams.id
             });
         };
-
-
         $scope.search();
-      
-    
-		//$scope.idNews = $routeParams.idNews;
-		//$scope.data=serv.getNews().get($scope.idNews);
-		//$scope.data=serv.getNews($scope.idNews);
-    });
+    }])
  
- as.controller('commentController', function ($scope, $http, $routeParams) {
+ .controller('commentController',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
          var url = 'action/comments/';
          var urlComment = 'action/addcomments/';
 		$scope.load = function() {
@@ -315,89 +311,48 @@ as.controller('NewsDetail', function ($scope, $http, $routeParams) {
 		//$scope.idNews = $routeParams.idNews;
 		//$scope.data=serv.getNews().get($scope.idNews);
 		//$scope.data=serv.getNews($scope.idNews);
-    });
-as.factory('serv', function ($http, $q) {
-	    return {
-	        getNews: function() {
-	            // the $http API is based on the deferred/promise APIs exposed by the $q service
-	            // so it returns a promise for us by default
-	            return $http.get('action/news/')
-	                .then(function(response) {
-	                    if (typeof response.data === 'object') {
-	                        return response.data;
-	                    } else {
-	                        // invalid response
-	                        return $q.reject(response.data);
-	                    }
+    }])
+.factory('serv',['$http','$q', function ($http, $q) {
+    return {
+        getNews: function() {
+            // the $http API is based on the deferred/promise APIs exposed by the $q service
+            // so it returns a promise for us by default
+            return $http.get('action/news/')
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        return response.data;
+                    } else {
+                        // invalid response
+                        return $q.reject(response.data);
+                    }
 
-	                }, function(response) {
-	                    // something went wrong
-	                    return $q.reject(response.data);
-	            	});
-	        }
-	    };
-	});
+                }, function(response) {
+                    // something went wrong
+                    return $q.reject(response.data);
+                });
+        }
+    };
+}])
         
-        
-     as.factory('newsService', function ($http, $q) {
-	    return {
-	        getComment: function() {
-	            // the $http API is based on the deferred/promise APIs exposed by the $q service
-	            // so it returns a promise for us by default
-	            return $http.get('action/news/')
-	                .then(function(response) {
-	                    if (typeof response.data === 'object') {
-	                        return response.data;
-	                    } else {
-	                        // invalid response
-	                        return $q.reject(response.data);
-	                    }
+.controller('SessionController',['$http','$http','$cookieStore', function ($scope, $http,$cookieStore) {
+   $scope.sess=$cookieStore.get("JSESSIONID");
+}])
+.controller('FamilyController',['$http','$http', function ($scope, $http) {
 
-	                }, function(response) {
-	                    // something went wrong
-	                    return $q.reject(response.data);
-	            	});
-	        }
-	    };
-	});
-        
-         as.factory('commentService', function ($http, $q) {
-	    return {
-	        getComment: function() {
-	            // the $http API is based on the deferred/promise APIs exposed by the $q service
-	            // so it returns a promise for us by default
-	            return $http.get('action/comments/')
-	                .then(function(response) {
-	                    if (typeof response.data === 'object') {
-	                        return response.data;
-	                    } else {
-	                        // invalid response
-	                        return $q.reject(response.data);
-	                    }
-
-	                }, function(response) {
-	                    // something went wrong
-	                    return $q.reject(response.data);
-	            	});
-	        }
-	    };
-	});
-        
-     as.controller('SessionController', function ($scope, $http,$cookieStore) {
-        $scope.sess=$cookieStore.get("JSESSIONID");
-    });
-     as.controller('FamilyController', function ($scope, $http) {
-       
-    });
+}])
     
-     as.controller('SignUpController', function ($scope, $http) {
-        var actionUrl='action/signup/';
-        $scope.processSignUp = function () {
-            $http.post(actionUrl, $scope.user).success(function () {
-                
-            });
-        };
-    });
-    
-}());
+.controller('SignUpController',['$http','$http', function ($scope, $http) {
+    var actionUrl='action/signup/';
+    $scope.processSignUp = function () {
+        $http.post(actionUrl, $scope.user).success(function () {
+
+        });
+    };
+ }])
+.controller('ChapterCtrl', ['$routeParams', function($routeParams) {
+  this.name = "ChapterCtrl";
+  this.params = $routeParams;
+}]);
+
+})(window.angular);
 
