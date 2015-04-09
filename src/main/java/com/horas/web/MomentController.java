@@ -8,6 +8,8 @@ import com.horas.dto.Moment;
 import com.horas.dto.ResponseMessage;
 import com.horas.service.MomentService;
 import com.horas.util.RandomUUID;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,9 +74,7 @@ public class MomentController extends RandomUUID{
 
     
     @RequestMapping(value="/upload", method = RequestMethod.POST)
-    public void UploadFile(MultipartHttpServletRequest request,
-   HttpServletResponse response) throws IOException {
-
+    public void UploadFile(MultipartHttpServletRequest request,HttpServletResponse response) throws IOException {
         //Attachment attachment=new Attachment();
         Iterator<String> itr=request.getFileNames();
         MultipartFile file=request.getFile(itr.next());
@@ -87,7 +88,12 @@ public class MomentController extends RandomUUID{
            BufferedOutputStream stream = new BufferedOutputStream(
                  new FileOutputStream(serverFile));
            stream.write(file.getBytes());
-           stream.close();
+        //           BufferedImage img = ...
+        //File f = new File("MyFile.jpg");
+        //ImageIO.BufferedImage img = ...
+     
+        File f = new File("MyFile.png");
+        ImageIO.write((RenderedImage) stream, "PNG", f);
        }else {
         System.out.println("not");
       }
