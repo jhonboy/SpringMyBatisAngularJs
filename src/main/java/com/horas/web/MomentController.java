@@ -8,6 +8,7 @@ import com.horas.dto.Moment;
 import com.horas.dto.ResponseMessage;
 import com.horas.service.MomentService;
 import com.horas.util.RandomUUID;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.BufferedOutputStream;
@@ -43,7 +44,7 @@ public class MomentController extends RandomUUID{
     @Inject
     private MomentService momentService;
     private String fileName;
-   
+    BufferedImage bufferedImage;
     
      @RequestMapping(value="/moments",method=RequestMethod.GET)
      @ResponseBody
@@ -67,37 +68,38 @@ public class MomentController extends RandomUUID{
         moment.setUsername(username);
         moment.setIpCreate("127.0.1.1");
         moment.setCreateDate(new Date());
+        moment.setPhoto(fileName);
         momentService.insertMoment(moment);
+        
         return new ResponseMessage(ResponseMessage.Type.success, "commentAdded");
+        
     }
     
 
     
     @RequestMapping(value="/upload", method = RequestMethod.POST)
     public void UploadFile(MultipartHttpServletRequest request,HttpServletResponse response) throws IOException {
-        //Attachment attachment=new Attachment();
-        Iterator<String> itr=request.getFileNames();
-        MultipartFile file=request.getFile(itr.next());
-         fileName=file.getOriginalFilename();
-      //  attachment.setName(fileName);
-       // File dir = new File("/Users/jhon/kerja/kuliah/");
-        File dir= new File("D:/jhon/windows/apache-tomcat-7.0.57/webapps/images/");
-         if (dir.isDirectory())
-         {
-            File serverFile = new File(dir,fileName);
-           BufferedOutputStream stream = new BufferedOutputStream(
-                 new FileOutputStream(serverFile));
-           stream.write(file.getBytes());
-        //           BufferedImage img = ...
-        //File f = new File("MyFile.jpg");
-        //ImageIO.BufferedImage img = ...
-     
-        File f = new File("MyFile.png");
-        ImageIO.write((RenderedImage) stream, "PNG", f);
-       }else {
-        System.out.println("not");
-      }
+        try{
+            Iterator<String> itr=request.getFileNames();
+            MultipartFile file=request.getFile(itr.next());
+            fileName=file.getOriginalFilename();
 
+          
+            
+           // File dir= new File("D:/jhon/windows/apache-tomcat-7.0.57/webapps/images/");
+             File dir = new File("/Users/jhon/server/apache-tomcat-7.0.57/webapps/images/");
+             if (dir.isDirectory())
+             {
+                File serverFile = new File(dir,fileName);
+                
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                stream.write(file.getBytes());     
+             }else {
+                System.out.println("not");
+             }
+        }catch(Throwable th){
+            th.printStackTrace();
+        }
  }
     
     

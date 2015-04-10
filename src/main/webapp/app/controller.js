@@ -85,48 +85,38 @@ as.controller('MomentController',function ($scope, $http) {
         load = function () {
                 $http.get(actionUrl).success(function (data) {
                     $scope.moments = data;
+                     
                 });
             };
 
         load();
         $scope.addMoment = function () {
-                $http.post(actionUrl,$scope.moment).success(function () {
-                $scope.photo=$scope.moment.photo;
-                load(); 
-                $scope.uploadFile();
+               $scope.uploadFile();
+                $http.post(actionUrl,$scope.moment).success(function () {    
+                load();  
              });
             
         };
         
-        $scope.moment = {};
-
-        $scope.setTitle = function(fileInput) {
-                var file=fileInput.value;
-                var filename = file.replace(/^.*[\\\/]/, '');
-                var photo = filename.substr(0, filename.lastIndexOf('.'));
-                $("#title").val(photo);
-                $("#title").focus();
-                $scope.moment.photo=photo;
-        };
+        
 
 
-        $scope.uploadFile=function (){
-            
-        var formData=new FormData();
-        formData.append("file",file.files[0]);
-        $http.post('action/upload/', formData, {
-            transformRequest: function(data, headersGetterFunction) {
-                return data;
-            },
-            headers: { 'Content-Type': undefined }
-            }).success(function(data, status) {                       
-                console.log("Success ... " + status);
-            }).error(function(data, status) {
-                console.log("Error ... " + status);
-            });
-            };
+        $scope.uploadFile=function (){     
+            var formData=new FormData();
+            formData.append("file",file.files[0]);
+            $http.post('action/upload/', formData, {
+                transformRequest: function(data, headersGetterFunction) {
+                    return data;
+                },
+                headers: { 'Content-Type': undefined }
+                }).success(function(data, status) {                       
+                    console.log("Success ... " + status);
+                }).error(function(data, status) {
+                    console.log("Error ... " + status);
+                });
+                };
 
-});
+    });
 
 as.controller('UserDetailController', function ($scope, $http, $routeParams) {
         var actionUrl = 'action/userDetail/'+$routeParams.username;

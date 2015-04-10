@@ -1,12 +1,29 @@
-    <div class="row-fluid" ng-controller="MomentController">
+
+<script>  
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#file").change(function(){
+        readURL(this);
+    });
+    </script>
+<div class="row-fluid" ng-controller="MomentController">
     <div class="span7" onTablet="span7" onDesktop="span7"> 
         <div class="box-content">
                 <div class="chat-form">
                         <textarea ng-model="moment.moment"></textarea>
-                        <form ng-submit="uploadFile()" class="form-horizontal" enctype="multipart/form-data">
-                        <input type="file" name="file" ng-model="moment.fileInput" id="file" onchange="angular.element(this).scope().setTitle(this)" />
-                        <input type="text" class="col-sm-4" ng-model="moment.photo" id="title" />
-                        
+                        <form id="form1" ng-submit="uploadFile()" class="form-horizontal" enctype="multipart/form-data">
+                            <input type="file" name="file" ng-model="moment.fileInput" id="file"/>   
+                            <div id="img-prev" style="width:120px;height:150px;"><img id="blah" src="#" alt="" /> </div>
                         </form>
                         
                         <button class="btn btn-info" ng-click="addMoment()">Send Moment</button>
@@ -18,8 +35,8 @@
                                         <span class="from">{{item.username}}</span>
                                         <span class="date">{{item.createDate  | date:"MM/dd/yyyy 'at' h:mma" }}</span>
                                         <div id="image-5" class="masonry-thumb">
-                                            <a style="background:url(http://localhost:8080/images/{{item.photo}}.jpg)" title="tet" href="http://localhost:8080/images/{{item.photo}}.jpg">
-                                                <img class="grayscale" src="http://localhost:8080/images/{{item.photo}}.jpg" alt="Sample Image 5">
+                                            <a style="background:url(http://localhost:8184/images/{{item.photo}})" title="tet" href="http://localhost:8184/images/{{item.photo}}">
+                                                <img class="grayscale" src="http://localhost:8184/images/{{item.photo}}" alt="Sample Image 5">
                                             </a>
 					</div>
                                         <span class="text">
