@@ -85,7 +85,8 @@ as.controller('MomentController',function ($scope, $http) {
         load = function () {
                 $http.get(actionUrl).success(function (data) {
                     $scope.moments = data;
-                     
+                    $scope.moment.moment=null;
+                    $scope.moment.fileInput=null;
                 });
             };
 
@@ -93,7 +94,8 @@ as.controller('MomentController',function ($scope, $http) {
         $scope.addMoment = function () {
                $scope.uploadFile();
                 $http.post(actionUrl,$scope.moment).success(function () {    
-                load();  
+                load();
+                $location.load();
              });
             
         };
