@@ -149,7 +149,7 @@ as.config(
                 retry(requests[i]);
             }
             $rootScope.requests401 = [];
-            $location.reload();
+            $location.url('/');
         });
 
         /**
@@ -160,7 +160,7 @@ as.config(
             $http.get('action/user').success(function (data) {
                 $rootScope.user = data;
                 $rootScope.$broadcast('event:loginConfirmed');
-                $location.reload();
+                $location.url('/');
             });
         });
 
