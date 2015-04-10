@@ -32,13 +32,14 @@ function readURL(input) {
                         <li class="left" ng-repeat="item in moments" >
                                 <img class="avatar" alt="{{item.username}}" src="img/avatar.jpg">
                                 <span class="message"><span class="arrow"></span>
-                                        <span class="from">{{item.username}}</span>
+                                        <span class="from"><a href="userDetail/"{{item.username}}>{{item.username}}</a></span>
                                         <span class="date">{{item.createDate  | date:"MM/dd/yyyy 'at' h:mma" }}</span>
-                                        <div id="image-5" class="masonry-thumb">
+                                        <div id="image-5">
                                             <a style="background:url(http://localhost:8184/images/{{item.photo}})" title="tet" href="http://localhost:8184/images/{{item.photo}}">
                                                 <img class="grayscale" src="http://localhost:8184/images/{{item.photo}}" alt="Sample Image 5">
                                             </a>
 					</div>
+                                        <hr/>
                                         <span class="text">
                                                 {{item.moment}}
                                         </span>

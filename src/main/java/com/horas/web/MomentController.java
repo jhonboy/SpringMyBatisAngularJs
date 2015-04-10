@@ -83,9 +83,6 @@ public class MomentController extends RandomUUID{
             Iterator<String> itr=request.getFileNames();
             MultipartFile file=request.getFile(itr.next());
             fileName=file.getOriginalFilename();
-
-          
-            
            // File dir= new File("D:/jhon/windows/apache-tomcat-7.0.57/webapps/images/");
              File dir = new File("/Users/jhon/server/apache-tomcat-7.0.57/webapps/images/");
              if (dir.isDirectory())
@@ -100,7 +97,8 @@ public class MomentController extends RandomUUID{
         }catch(Throwable th){
             th.printStackTrace();
         }
- }
+    }
+    
     
     
 }
