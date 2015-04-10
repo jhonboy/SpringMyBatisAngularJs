@@ -1,16 +1,30 @@
 
 
-(function(angular) {
-  'use strict';
+(function() {
   
-angular.module('yambas')
-.controller('MainController',['$scope','$http','$location', function ($scope, $http, $location) {   
-       
+var as=angular.module('yambas');
+as.controller('MainController', function ($scope, $http, $location,i18n) {   
+       $scope.language = function () {
+            return i18n.language;
+        };
+        $scope.setLanguage = function (lang) {
+            i18n.setLanguage(lang);
+        };
+        $scope.activeWhen = function (value) {
+            return value ? 'active' : '';
+        };
+
+        $scope.path = function () {
+            return $location.url();
+        };
+
+
         $scope.login = function () {
            
             $location.url('/login');
           
         };     
+        
          $scope.logout=function(){
                 var actionUrl='action/user/logout/'; 
                 $http.get(actionUrl).success(function (data) {
@@ -22,16 +36,9 @@ angular.module('yambas')
             $location.url('/signup');
             $('#login').modal('hide');
         };
-    }])
-.controller('MainCtrl', ['$route', '$routeParams', '$location',
-  function($route, $routeParams, $location) {
-    this.$route = $route;
-    this.$location = $location;
-    this.$routeParams = $routeParams;
-}])
-.controller('LoginController',
-    ['$scope', '$rootScope', '$location',
-    function ($scope, $rootScope, $location, AuthenticationService) {
+    });
+as.controller('LoginController',
+    function ($scope, $rootScope, $location) {
        
   
         $scope.login = function () {
@@ -40,8 +47,8 @@ angular.module('yambas')
          $scope.signup = function () {
             $location.url('/signup');
         };
-    }])
-.controller('PersonController', ['$scope','$http',function ($scope, $http) {
+    });
+as.controller('PersonController',function ($scope, $http) {
         var actionUrl = 'action/person/',
             load = function () {
                 $http.get(actionUrl).success(function (data) {
@@ -72,8 +79,8 @@ angular.module('yambas')
         $scope.orderIcon = function (property) {
             return property === $scope.order.substring(1) ? $scope.order[0] === '+' ? 'icon-chevron-up' : 'icon-chevron-down' : '';
         };
-    }])
-.controller('MomentController',['$scope','$http' ,function ($scope, $http) {
+    });
+as.controller('MomentController',function ($scope, $http) {
     var actionUrl = 'action/moments/',
         load = function () {
                 $http.get(actionUrl).success(function (data) {
@@ -119,9 +126,9 @@ angular.module('yambas')
             });
             };
 
-}])
+});
 
-.controller('UserDetailController',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
+as.controller('UserDetailController', function ($scope, $http, $routeParams) {
         var actionUrl = 'action/userDetail/'+$routeParams.username;
             load = function () {
                 $http.get(actionUrl).success(function (data) {
@@ -132,9 +139,9 @@ angular.module('yambas')
             };
         load();
         
- }])
+ });
         
-.controller('ProfilController',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
+as.controller('ProfilController',function ($scope, $http, $routeParams) {
     var actionUrl = 'action/userDetail/'+$routeParams.username;
         load = function () {
             $http.get(actionUrl).success(function (data) {
@@ -145,13 +152,13 @@ angular.module('yambas')
         };
     load();
         
-}])
+});
         
-.controller('AdminController',['$scope','$http', function ($scope, $http) {
+as.controller('AdminController', function ($scope, $http) {
    $http.get('action/user');
-}])
+});
 
-.controller('PostController',['$scope','$http','itemService','postService', function ($scope, $http,itemService,postService) {
+as.controller('PostController', function ($scope, $http,itemService,postService) {
 
     var actionUrl = 'action/post/';
         load = function () {
@@ -183,10 +190,10 @@ angular.module('yambas')
             load();
         });
     };
-}])
+});
     
 
-.controller('slideCtrl', function ($scope) {
+as.controller('slideCtrl', function ($scope) {
     $scope.myInterval = 5000;
     var slides = $scope.slides = [];
     $scope.addSlide = function() {
@@ -200,9 +207,9 @@ angular.module('yambas')
     for (var i=0; i<4; i++) {
       $scope.addSlide();
     }
-})
+});
     
-.controller('NewsController',['$scope','$http', function ($scope, $http) {
+as.controller('NewsController', function ($scope, $http) {
     var actionUrl = 'action/news/',
         load = function () {
             $http.get(actionUrl).success(function (data) {
@@ -210,9 +217,9 @@ angular.module('yambas')
             });
         };
     load();
-}])
+});
 
-.controller('NewsDetail',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
+as.controller('NewsDetail',function ($scope, $http, $routeParams) {
         $scope.search = function() {
             var url = 'action/news/';
             $http.get(url).success(httpSuccess).error(function() {
@@ -227,9 +234,9 @@ angular.module('yambas')
             });
         };
         $scope.search();
-    }])
+    });
  
- .controller('commentController',['$scope','$http','$routeParams', function ($scope, $http, $routeParams) {
+ as.controller('commentController', function ($scope, $http, $routeParams) {
          var url = 'action/comments/';
          var urlComment = 'action/addcomments/';
 		$scope.load = function() {
@@ -263,37 +270,17 @@ angular.module('yambas')
 		//$scope.idNews = $routeParams.idNews;
 		//$scope.data=serv.getNews().get($scope.idNews);
 		//$scope.data=serv.getNews($scope.idNews);
-    }])
-.factory('serv',['$http','$q', function ($http, $q) {
-    return {
-        getNews: function() {
-            // the $http API is based on the deferred/promise APIs exposed by the $q service
-            // so it returns a promise for us by default
-            return $http.get('action/news/')
-                .then(function(response) {
-                    if (typeof response.data === 'object') {
-                        return response.data;
-                    } else {
-                        // invalid response
-                        return $q.reject(response.data);
-                    }
+    });
 
-                }, function(response) {
-                    // something went wrong
-                    return $q.reject(response.data);
-                });
-        }
-    };
-}])
         
-.controller('SessionController',['$scope','$http','$cookieStore', function ($scope, $http,$cookieStore) {
+as.controller('SessionController', function ($scope, $http,$cookieStore) {
    $scope.sess=$cookieStore.get("JSESSIONID");
-}])
-.controller('FamilyController',['$scope','$http', function ($scope, $http) {
+});
+as.controller('FamilyController', function ($scope, $http) {
 
-}])
+});
     
-.controller('SignUpController',['$scope','$http', function ($scope, $http) {
+as.controller('SignUpController', function ($scope, $http) {
     var actionUrl='action/signup/';
     $scope.processSignUp = function () {
         $http.post(actionUrl, $scope.user).success(function () {
@@ -301,11 +288,11 @@ angular.module('yambas')
         });
         
     };
- }])
-.controller('ChapterCtrl', ['$routeParams', function($routeParams) {
+ });
+as.controller('ChapterCtrl', function($routeParams) {
   this.name = "ChapterCtrl";
   this.params = $routeParams;
-}]);
+});
 
-})(window.angular);
+}());
 
