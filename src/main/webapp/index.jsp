@@ -76,6 +76,19 @@
                             </c:choose>           
 
                     </ul>
+                        <div class="navbar navbar-fixed">
+                            <div class="navbar-inner">
+                                <ul class="nav nav-pills pull-right">
+                                    <li ng-class="activeWhen(language()=='in')">
+                                        <a ng-click="setLanguage('in')">Indonesia</a>
+                                    </li>
+                                    <li ng-class="activeWhen(language()=='en')">
+                                        <a ng-click="setLanguage('en')">English</a>
+                                    </li>
+                                </ul>
+                              
+                            </div>
+                        </div>
             </div>
                             <!-- end: Header Menu -->
 
@@ -116,15 +129,13 @@
                     </ul>
 
      <div ng-class="'alert alert-'+message().type" ng-show="message().show">
-        <button type="button" class="close" ng-click="message().show=true">×</button>
+        <button type="button" class="close" ng-click="message().show=false">×</button>
         <msg key-expr="message().text"></msg>
     </div>
 
   
      
-    <div class="view-animate-container1">
-        <div ng-view class="view-animate1"></div>
-    </div>
+   <ng-view></ng-view>
   <hr />
 			
        
@@ -147,15 +158,18 @@
 
 	</footer>
 
-    <script type="text/javascript" src="angular/docs/components/jquery-2.1.1/jquery.min.js"></script>
-     <script type="text/javascript" src="angular/angular.js"></script>
-     <script type="text/javascript" src="angular/angular-animate.js"></script>
-    <script type="text/javascript" src="angular/angular-route.js"></script>
-     <script type="text/javascript" src="angular/angular-cookies.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="app/jquery.i18n.properties-min-1.0.9.js"></script>
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>-->
+<script type="text/javascript" src="js/angular/angular.js"></script>
+<script type="text/javascript" src="js/angular/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="js/angular/jquery.i18n.properties-min-1.0.9.js"></script>
+
     <script type="text/javascript" src="app/init.js"></script>
      <script type="text/javascript" src="app/controller.js"></script>
       <script type="text/javascript" src="app/factory.js"></script>
        <script type="text/javascript" src="app/base64.js"></script>
+       <script type="text/javascript" src="app/i18n.js"></script>
         <!---AngularJS-->
  
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>

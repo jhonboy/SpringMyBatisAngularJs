@@ -1,13 +1,12 @@
 
 
-(function(angular) {
-  'use strict';
+(function() {
   
-angular.module('yambas')
+var as=angular.module('yambas');
 
 
 
-.factory('itemService', function() {
+as.factory('itemService', function() {
     return {
         getAll : function() {
             var items = [];
@@ -17,10 +16,10 @@ angular.module('yambas')
             return items;
         }
     };              
-})
+});
     
     
-.factory('postService', function ($http, $q) {
+as.factory('postService', function ($http, $q) {
         return {
             getWeather: function() {
                 // the $http API is based on the deferred/promise APIs exposed by the $q service
@@ -40,9 +39,9 @@ angular.module('yambas')
                     });
             }
         };
-    })
+    });
 
-.factory('serv',['$http','$q', function ($http, $q) {
+as.factory('serv', function ($http, $q) {
     return {
         getNews: function() {
             // the $http API is based on the deferred/promise APIs exposed by the $q service
@@ -62,10 +61,10 @@ angular.module('yambas')
                 });
         }
     };
-}])
+});
         
         
- .factory('newsService',['$http','$q', function ($http, $q) {
+ as.factory('newsService',function ($http, $q) {
     return {
         getComment: function() {
             // the $http API is based on the deferred/promise APIs exposed by the $q service
@@ -85,9 +84,9 @@ angular.module('yambas')
                 });
         }
     };
-}])
+});
 
-.factory('commentService',['$http','$q', function ($http, $q) {
+as.factory('commentService', function ($http, $q) {
    return {
        getComment: function() {
            // the $http API is based on the deferred/promise APIs exposed by the $q service
@@ -107,20 +106,11 @@ angular.module('yambas')
                });
        }
    };
-}])
+});
        
- .factory('errorInterceptor', ['$q', '$rootScope', 'MessageService', '$location',
-    function ($q, $rootScope, MessageService, $location) {
-        return {
-            request: function (config) {
-                return config || $q.when(config);
-            },
-            requestError: function(request){
-                return $q.reject(request);
-            },
-            response: function (response) {
-                return response || $q.when(response);
-                var setMessage = function (response) {
+ as.factory('errorInterceptor',
+    function ($q) {
+        var setMessage = function (response) {
                 //if the response has a text and a type property, it is a message to be shown
                 if (response.data.text && response.data.type) {
                     message = {
@@ -130,44 +120,43 @@ angular.module('yambas')
                     };
                 }
             };
-            },
-            responseError: function (response) {
-                if (response && response.status === 404) {
-                    MessageService.setError('Page not found');
-                }
-                if (response && response.status >= 500) {
-                    MessageService.setError('Error 500');
-                }
-                return $q.reject(response);
-            }
-        };
+            return function (promise) {
+                return promise.then(
+                    //this is called after each successful server request
+                    function (response) {
+                        setMessage(response);
+                        return response;
+                    },
+                    //this is called after each unsuccessful server request
+                    function (response) {
+                        setMessage(response);
+                        return $q.reject(response);
+                    }
+                );
+            };
          
-}])
-.service('MessageService', function () {
-    // angular strap alert directive supports multiple alerts. 
-    // Usually this is a distraction to user. 
-    //Let us limit the messages to one    
-    this.messages = [];
-    this.setError = function(msg) {
-        this.setMessage(msg, 'error', 'Error:');
-    };
-    this.setSuccess = function(msg) {
-        this.setMessage(msg, 'success', 'Success:');
-    };
-    this.setInfo = function (msg) {
-        this.setMessage(msg, 'info', 'Info:');
-    };    
-    this.setMessage = function(text, type, show) {
-        message = {
-            text: response.data.text,
-            type: response.data.type,
-            show: true
-        };
-        this.messages[0] = message;
-    };
-    this.clear = function() {
-        this.messages = [];
+});
+
+as.factory('serv', function ($http, $q) {
+    return {
+        getNews: function() {
+            // the $http API is based on the deferred/promise APIs exposed by the $q service
+            // so it returns a promise for us by default
+            return $http.get('action/news/')
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        return response.data;
+                    } else {
+                        // invalid response
+                        return $q.reject(response.data);
+                    }
+
+                }, function(response) {
+                    // something went wrong
+                    return $q.reject(response.data);
+                });
+        }
     };
 });
-})(window.angular);
+})();
 
