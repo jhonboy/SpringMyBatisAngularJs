@@ -27,10 +27,12 @@ public class FamilyServiceImpl implements FamilyService {
     private FamilyDAO familyDAO;
    
     
-    public List<Family> getFamily() {
-        
-        
+    public List<Family> getFamily() {  
         return familyDAO.getFamily();
+    }
+
+    public void addFamily(Family family) {
+        familyDAO.addFamily(family);
     }
     
      

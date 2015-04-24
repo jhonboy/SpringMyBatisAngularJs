@@ -1,4 +1,12 @@
-
+<script>
+function addChild(id) {
+   
+  $('#addChildren').modal('show');
+    document.getElementById("parentId").value=id;
+   
+  
+}
+</script>
 <style>
   #test{
 	width:100%;
@@ -110,10 +118,31 @@ right connector from last child*/
 }
 
     </style>
+     
+ <div class="modal" style="display: none" id="addChildren">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">x</a>
 
-    
-<div id="test">
-    <div class="tree">
-         <collection collection='family'></collection>    
+            <h3>Tambah Anak</h3>
+        </div>
+        <div class="modal-body">
+            <label>Tambah anak</label>
+            <div class="control-group">
+                <label class="control-label" for="name">Nama</label>
+                <div class="controls">
+                    <input type="hidden" id="parentId" ng-model="family.parentId"/>
+                    <input id="name" ng-model="family.name"/>
+                </div>
+            </div>
+      
+        </div>
+        <div class="modal-footer">
+            <a ng-click="addChild()" class="btn btn-primary">Submit</a>
+            <a data-dismiss="modal" class="btn">Cancel</a>
+        </div>
     </div>
+<div id="test">
+<div class="tree">
+     <collection collection='family'></collection>    
+</div>
 </div>

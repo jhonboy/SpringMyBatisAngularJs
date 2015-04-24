@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface FamilyDAO {
     public List<Family> getFamily();
+    public void addFamily(Family family);
 }

@@ -73,6 +73,7 @@
     <bean id="userDetail" class="com.horas.dto.UserDetail"/>
     <bean id="momentDAO" class="com.horas.dao.MomentDAOImpl"/>
     <bean id="moment" class="com.horas.dto.Moment"/>
+    <bean id="user" class="com.horas.dto.User"/>
     <bean id="role" class="com.horas.dto.Role"/>
 <!--   <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider>

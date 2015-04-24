@@ -222,7 +222,7 @@ as.controller('NewsDetail',function ($scope, $http, $routeParams) {
             $scope.datas = angular.fromJson(response);
            
             $scope.data = $scope.datas.filter(function(item){
-				return item.idNews===$routeParams.idNews; // example with id 1, or routeParams.id
+                return item.idNews===$routeParams.idNews; // example with id 1, or routeParams.id
             });
         };
         $scope.search();
@@ -265,7 +265,7 @@ as.controller('NewsDetail',function ($scope, $http, $routeParams) {
 as.controller('SessionController', function ($scope,$cookieStore) {
    $scope.sess=$cookieStore.get("JSESSIONID");
 });
-as.controller('FamilyController', function ($scope,$http) {
+as.controller('FamilyController', function ($scope,$http,$routeParams) {
          
         var actionUrl = 'action/family/',
             load = function () {
@@ -291,7 +291,16 @@ as.controller('FamilyController', function ($scope,$http) {
                 });
             };  
            load();
-       
+        
+     $scope.addChild = function () {
+               
+                $http.post(actionUrl,$scope.family).success(function () {    
+                load();
+                 
+             });
+            
+        };
+         
        });
 as.directive('collection', function () {
 	return {
@@ -305,13 +314,16 @@ as.directive('collection', function () {
 });
 
 as.directive('member', function ($compile) {
+     
+        
+
 	return {
 		restrict: "E",
 		replace: true,
 		scope: {
 			member: '='
 		},
-		template: "<li><a href='{{member.name}}'><img src='http://localhost:8184/images/person.jpg' width='50px' height='40px'/></br>{{member.name}}</a></li>",
+		template: "<li><a href='{{member.name}}'><img src='http://localhost:8184/images/person.jpg' width='50px' height='40px'/></br>{{member.name}}<br></a><br/> <a onclick='addChild({{member.id}})'>tambah</a></li>",
 		link: function (scope, element, attrs) {
 			if (angular.isArray(scope.member.children)) {
 				element.append("<collection collection='member.children'></collection>"); 
@@ -319,6 +331,7 @@ as.directive('member', function ($compile) {
 			}
 		}
 	};
+         
 });
     
 as.controller('SignUpController', function ($scope, $http) {
