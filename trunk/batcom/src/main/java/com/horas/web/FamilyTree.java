@@ -53,6 +53,7 @@ public class FamilyTree<T> implements Iterable<FamilyTree<T>> {
     
 
     public static void main (String[] args){
+           
             FamilyTree<String> root=new FamilyTree<String>("root");
             List<FamilyTree<String>> test=new ArrayList<FamilyTree<String>>();
             
@@ -63,7 +64,7 @@ public class FamilyTree<T> implements Iterable<FamilyTree<T>> {
             test.add(test.get(0).addChild("hahah"));
             test.add(test.get(1).addChild("heheh"));
             
-            root.addChild("test");
+            //root.addChild("test");
             
             System.out.println("children"+root.children.get(0).data);
             System.out.println("anak si horas "+test.get(0).children.get(0).data);

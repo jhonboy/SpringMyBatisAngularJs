@@ -10,30 +10,30 @@ package com.horas.dto;
  * @author ardodonk
  */
 public class Family {
-    private String id;
-    private String parent_id;
+    private int id;
+    private int parent_id;
     private String name;
     public Family(){}
     
-    public Family(String id,String parent_id,String name){
+    public Family(int id,int parent_id,String name){
         this.id=id;
         this.parent_id=parent_id;
         this.name=name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getParent_id() {
+    public int getParent_id() {
         return parent_id;
     }
 
-    public void setParent_id(String parent_id) {
+    public void setParent_id(int parent_id) {
         this.parent_id = parent_id;
     }
 
