@@ -4,6 +4,7 @@
  */
 package com.horas.util;
 
+import com.horas.constant.GlobalSession;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -12,7 +13,7 @@ import org.springframework.context.ApplicationContextAware;
  *
  * @author jhon
  */
-public class ApplicationContextUtils implements ApplicationContextAware {
+public class ApplicationContextUtils extends GlobalSession implements ApplicationContextAware  {
 
 	private static ApplicationContext ctx;
 

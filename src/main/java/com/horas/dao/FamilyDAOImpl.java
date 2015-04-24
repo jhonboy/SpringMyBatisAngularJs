@@ -39,5 +39,9 @@ public class FamilyDAOImpl implements FamilyDAO{
     public List<Family> getFamily() {
        return getSqlSession().selectList("com.horas.mapper.family.getFamily");
     }
+
+    public void addFamily(Family family) {
+        getSqlSession().insert("com.horas.mapper.family.addFamily", family);
+    }
     
 }

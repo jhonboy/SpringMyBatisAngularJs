@@ -19,4 +19,5 @@ import java.util.List;
 
 public interface FamilyService {
     List<Family> getFamily();
+    public void addFamily(Family family);
 }

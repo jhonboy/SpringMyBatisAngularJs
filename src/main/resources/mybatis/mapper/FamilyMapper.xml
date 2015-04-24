@@ -11,8 +11,6 @@
 		<id column="id" property="id" jdbcType="INTEGER"/>
 		<result column="parent_id" property="parent_id"   jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
-
-
 	</resultMap>
 
 	<select id="getFamily" resultMap="familyResult">
@@ -20,5 +18,15 @@
 			<include refid="familyColumns" />
 		from family
 	</select>
+        <insert id="addFamily" parameterType="com.horas.dto.Family">
+		insert into family (
+			<include refid="familyColumns" />
+		) values (
+			#{id,typeHandler=UUIDTypeHandler},
+                        #{parent_id,typeHandler=UUIDTypeHandler},
+                        #{name,jdbcType=VARCHAR}
+                       
+		)
+	</insert>
  
 </mapper>
