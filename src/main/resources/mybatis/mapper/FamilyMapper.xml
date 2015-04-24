@@ -8,8 +8,8 @@
 
 	
 	<resultMap type="com.horas.dto.Family" id="familyResult">
-		<id column="id" property="id" jdbcType="VARCHAR"/>
-		<result column="parent_id" property="parent_id"   jdbcType="VARCHAR" />
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="parent_id" property="parent_id"   jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 
 
