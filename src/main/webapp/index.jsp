@@ -22,6 +22,7 @@
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<link href='js/angular/css.css' rel='stylesheet' type='text/css'>
         <link href='css/animation.css' rel='stylesheet' type='text/css'>
+        <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/favicon.ico">
 	
 		
@@ -171,7 +172,7 @@
        <script type="text/javascript" src="app/base64.js"></script>
        <script type="text/javascript" src="app/i18n.js"></script>
         <!---AngularJS-->
- 
+ <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>
 	
 		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>

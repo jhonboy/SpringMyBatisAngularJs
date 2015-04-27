@@ -5,8 +5,11 @@
  */
 package com.horas.util;
 
+
 import java.util.UUID;
 import static java.util.UUID.randomUUID;
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  *
@@ -14,8 +17,14 @@ import static java.util.UUID.randomUUID;
  */
 public class RandomUUID {
     private UUID id;
-    
+     private HttpServletRequest request;
+     String username;
+        
     public UUID sys_guid(){
-        return randomUUID();
+        
+        
+            return randomUUID();
+         
+        
     }
 }
