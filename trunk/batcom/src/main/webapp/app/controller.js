@@ -85,14 +85,14 @@ as.controller('MomentController',function ($scope, $http) {
         load = function () {
                 $http.get(actionUrl).success(function (data) {
                     $scope.moments = data;
-                    $scope.moment.moment=null;
-                    $scope.moment.fileInput=null;
+                    
                 });
             };
 
         load();
         $scope.addMoment = function () {
-               $scope.uploadFile();
+               //$scope.uploadFile();
+                $scope.moment.fileInput=$(".ajax-file-upload-filename").val();
                 $http.post(actionUrl,$scope.moment).success(function () {    
                 load();
                 $location.load();

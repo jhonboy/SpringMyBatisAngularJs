@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.horas.mapper.Album">
+
+	<sql id="albumColumns">
+        id,idMoment,photo,extension
+        </sql>
+        
+
+	<insert id="addAlbum" parameterType="com.horas.dto.Album">
+		insert into album (
+			<include refid="albumColumns" />
+		) values (
+                        #{id,typeHandler=UUIDTypeHandler},
+                        #{idMoment,typeHandler=UUIDTypeHandler},
+                        #{photo,jdbcType=VARCHAR},
+                        #{extension,jdbcType=VARCHAR}
+                        
+		)
+	</insert>
+</mapper>
