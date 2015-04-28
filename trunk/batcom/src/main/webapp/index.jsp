@@ -5,7 +5,7 @@
 	 <base href="/coba-1.0/#/">
 	<!-- start: Meta -->
 	<meta charset="utf-8">
-	<title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
+	<title>Coba</title>
 	<meta name="description" content="BatCom">
 	<meta name="author" content="Jhons">
  

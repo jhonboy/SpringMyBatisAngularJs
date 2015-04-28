@@ -4,6 +4,7 @@
  */
 package com.horas.dao;
 
+import com.horas.dto.Album;
 import com.horas.dto.Moment;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -41,6 +42,10 @@ public class MomentDAOImpl implements MomentDAO{
     public List<Moment> getMoment() {
         return getSqlSession().selectList("com.horas.mapper.moment.getMoment");
         
+    }
+
+    public Moment getMomentByAlbum(Album album) {
+       return getSqlSession().selectOne("com.horas.mapper.moment.getMomentByAlbum", album.getId());
     }
     
 }

@@ -10,10 +10,7 @@ import com.horas.dto.ResponseMessage;
 import com.horas.service.AlbumService;
 import com.horas.service.MomentService;
 import com.horas.util.ApplicationContextUtils;
-import com.horas.util.RandomUUID;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,15 +20,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,9 +46,11 @@ public class MomentController extends ApplicationContextUtils{
     private AlbumService albumService;
     
     private String fileName;
-    private UUID id;
+    List<Album> listPhoto= new ArrayList<Album>();
     
     BufferedImage bufferedImage;
+    
+    
     
      @RequestMapping(value="/moments",method=RequestMethod.GET)
      @ResponseBody
@@ -69,13 +65,26 @@ public class MomentController extends ApplicationContextUtils{
      */
     @RequestMapping(value="/moments",method=RequestMethod.POST)
     @ResponseBody
-    public ResponseMessage addCommentNews(@RequestBody Moment moment, HttpServletRequest req){
+    public ResponseMessage addMoments(@RequestBody Moment moment, HttpServletRequest req){
+        HttpSession sess=req.getSession();
+        List <Album> album= (List<Album>) sess.getAttribute("album");
+        
         moment.setIdMoment(sys_guid());
-        moment.setUsername(getUsername());
+        
+            
+        moment.setIdAlbum(null);
+        moment.setUsername(getUsername(req));
         moment.setIpCreate("127.0.1.1");
-        moment.setCreateDate(new Date());
-        moment.setPhoto(fileName);
+        moment.setCreateDate(new Date()); 
         momentService.insertMoment(moment);
+        
+        for(Album alb: album){
+            alb.setIdMoment(moment.getIdMoment());
+            
+        }
+        if(albumService.insertAllPhoto(album)){
+            sess.removeAttribute("album");
+        }
         
         return new ResponseMessage(ResponseMessage.Type.success, "commentAdded");
         
@@ -86,30 +95,29 @@ public class MomentController extends ApplicationContextUtils{
     @RequestMapping(value="/upload", method = RequestMethod.POST)
     public void UploadFile(MultipartHttpServletRequest request,HttpServletResponse response) throws IOException {
         try{
-            Album album= new Album();
-            Moment moment= new Moment();
+            UUID momentId;
+            HttpSession sess=request.getSession();
+            sess.setAttribute("momentId", sys_guid());
+            momentId= (UUID) sess.getAttribute("momentId");
+                      
+            Album album=new Album();
             String extension;
             String newPhoto;
             Iterator<String> itr=request.getFileNames();
             MultipartFile file=request.getFile(itr.next());
             fileName=file.getOriginalFilename();
             File serverFile = null;
-            id=sys_guid();
             extension=fileName.substring(fileName.length()-3, fileName.length()); 
             
             album.setId(sys_guid());
-            album.setIdMoment(id);
+            album.setIdMoment(momentId);
             album.setPhoto(fileName);
             album.setExtension(extension);
-            newPhoto=album.getId().toString()+"."+extension;
-            albumService.addAlbum(album);  
-            moment.setIdMoment(id);
-            moment.setUsername(getUsername());
-            moment.setPhoto(album.getId().toString());
-            moment.setIpCreate("ipCreate");
-            moment.setCreateDate(new Date());
-            momentService.insertMoment(moment);
+            album.setUsername(getUsername(request));
             
+            newPhoto=album.getId().toString()+"."+extension;
+            listPhoto.add(album);
+            sess.setAttribute("album", listPhoto);
             
            // File dir= new File("D:/jhon/windows/apache-tomcat-7.0.57/webapps/images/");
              File dir = new File("/Users/jhon/server/apache-tomcat-7.0.57/webapps/images/");
@@ -129,8 +137,5 @@ public class MomentController extends ApplicationContextUtils{
         }catch(Throwable th){
             th.printStackTrace();
         }
-    }
-    
-    
-    
+    }   
 }

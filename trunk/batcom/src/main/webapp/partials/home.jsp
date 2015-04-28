@@ -15,42 +15,42 @@ function readURL(input) {
     $("#file").change(function(){
         readURL(this);
     });
-    
+   
     $(document).ready(function()
-{
+    {
+        var settings = {
+                url: "action/upload/",
+                method: "POST",
+                allowedTypes:"jpg,png",
+                fileName: "myfile",
+                multiple: true,
+                onSuccess:function(files,data,xhr)
+                {
+                        $("#status").html("<img src='http://localhost:8184/images/'"+files+"'>");
+                        $("#status").html("<font color='green'>Upload is success</font>");
 
-var settings = {
-	url: "action/upload/",
-	method: "POST",
-	allowedTypes:"jpg,png",
-	fileName: "myfile",
-	multiple: true,
-	onSuccess:function(files,data,xhr)
-	{
-		$("#status").html("<font color='green'>Upload is success</font>");
-		
-	},
-	onError: function(files,status,errMsg)
-	{		
-		$("#status").html("<font color='red'>Upload is Failed</font>");
-	}
-}
-$("#mulitplefileuploader").uploadFile(settings);
+                },
+                onError: function(files,status,errMsg)
+                {		
+                        $("#status").html("<font color='red'>Upload is Failed</font>");
+                }
+        }
+        $("#mulitplefileuploader").uploadFile(settings);
 
-});
+    });
+     
     </script>
 <div class="row-fluid" ng-controller="MomentController">
     <div class="span7" onTablet="span7" onDesktop="span7"> 
         <div class="box-content">
                 <div class="chat-form">
                         <textarea ng-model="moment.moment"></textarea>
-<!--                        <form id="form1" ng-submit="uploadFile()" class="form-horizontal" enctype="multipart/form-data">
-                            <input type="file" name="file" ng-model="moment.fileInput" id="file"/>   
-                            <div id="img-prev" style="width:120px;height:150px;"><img id="blah" src="#" alt="" /> </div>
-                        </form>-->
-                        <div id="mulitplefileuploader">Upload</div>
-
+                        <div id="mulitplefileuploader">Add Photo</div>
+                         
                         <div id="status"></div>
+                       
+
+
                         <button class="btn btn-info" ng-click="addMoment()">Send Moment</button>
                 </div>	
                 <ul class="chat">
@@ -60,11 +60,11 @@ $("#mulitplefileuploader").uploadFile(settings);
                                         <span class="from"><a href="userDetail/"{{item.username}}>{{item.username}}</a></span>
                                         <c:set var="mine" value="{{item.username}}"/> 
                                         <span class="date">{{item.createDate  | date:"MM/dd/yyyy 'at' h:mma" }}</span>
-                                        <div id="image-5">
-                                            <a style="background:url(http://localhost:8184/images/{{item.photo}})" title="tet" href="http://localhost:8184/images/{{item.photo}}">
-                                                <img class="grayscale" src="http://localhost:8184/images/{{item.photo}}" alt="Sample Image 5">
+<!--                                        <div id="image-5">
+                                            <a style="background:url(http://localhost:8184/images/{{item.idAlbum}})" title="tet" href="http://localhost:8184/images/{{item.idAlbum}}">
+                                                <img class="grayscale" src="http://localhost:8184/images/{{item.idAlbum}}" alt="Sample Image 5">
                                             </a>
-					</div>
+					</div>-->
                                         <hr/>
                                         <span class="text">
                                                 {{item.moment}}

@@ -3,18 +3,18 @@
 <mapper namespace="com.horas.mapper.moment">
 
 	<sql id="momentColumns">
-         id_moment,username,moment,photo,friendlist,place,create_date,update_date,ip_create,ip_update
+         id_moment,username,moment,idAlbum,friendlist,place,create_date,update_date,ip_create,ip_update
 	</sql>
 
 	<sql id="insertMomentColumns">
-         id_moment,username,moment,photo,friendlist,place,create_date,update_date,ip_create,ip_update
+         id_moment,username,moment,idAlbum,friendlist,place,create_date,update_date,ip_create,ip_update
 	</sql>
         
  	<resultMap type="com.horas.dto.Moment" id="momentResult">
 		<id column="id_moment" property="idMoment"  typeHandler="UUIDTypeHandler" />
 		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="moment" property="moment" jdbcType="VARCHAR" />
-                <result column="photo" property="photo" jdbcType="VARCHAR" />
+                <result column="idAlbum" property="idAlbum"  jdbcType="VARCHAR" />
                 <result column="friendlist" property="friendlist" jdbcType="VARCHAR" />
                 <result column="place" property="place" jdbcType="VARCHAR" />
                 <result column="create_date" property="createDate" jdbcType="DATE" />
@@ -27,6 +27,12 @@
 		select
 			<include refid="momentColumns" />
 		from mst_moment
+	</select>
+        
+    <select id="getMomentByAlbum" resultMap="momentResult">
+		select
+			<include refid="momentColumns" />
+		from mst_moment where idAlbum = #{idAlbum}
 	</select>
         
 <!--        <select id="getNewsById" resultMap="newsResult">
@@ -46,7 +52,7 @@
 			#{idMoment,typeHandler=UUIDTypeHandler},
                         #{username,jdbcType=VARCHAR},
                         #{moment,jdbcType=VARCHAR},
-                        #{photo,jdbcType=VARCHAR},
+                        #{idAlbum,jdbcType=VARCHAR},
                         #{friendlist,jdbcType=VARCHAR},
                         #{place,jdbcType=VARCHAR},
                         #{createDate,jdbcType=DATE},

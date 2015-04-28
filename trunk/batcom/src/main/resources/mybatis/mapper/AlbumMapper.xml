@@ -3,7 +3,7 @@
 <mapper namespace="com.horas.mapper.Album">
 
 	<sql id="albumColumns">
-        id,idMoment,photo,extension
+        id,idMoment,photo,extension,username
         </sql>
         
 
@@ -14,8 +14,16 @@
                         #{id,typeHandler=UUIDTypeHandler},
                         #{idMoment,typeHandler=UUIDTypeHandler},
                         #{photo,jdbcType=VARCHAR},
-                        #{extension,jdbcType=VARCHAR}
+                        #{extension,jdbcType=VARCHAR},
+                        #{username,jdbcType=VARCHAR}
                         
 		)
 	</insert>
+        
+        <insert id="insertAllPhoto" parameterType="java.util.List">
+            INSERT INTO album (<include refid="albumColumns" />)  VALUES 
+            <foreach collection="list" item="element" index="index" separator="," >
+             (#{element.id,typeHandler=UUIDTypeHandler},#{element.idMoment,typeHandler=UUIDTypeHandler},#{element.photo,jdbcType=VARCHAR},#{element.extension,jdbcType=VARCHAR},#{element.username,jdbcType=VARCHAR})
+            </foreach>
+        </insert>
 </mapper>
