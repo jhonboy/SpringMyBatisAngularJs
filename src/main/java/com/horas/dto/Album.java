@@ -15,12 +15,15 @@ public class Album {
     private UUID idMoment;
     private String photo;
     private String extension;
+    private String username;
     
     public Album(){}
-    public Album(UUID id,UUID idMoment,String photo,String extension){
+    public Album(UUID id,UUID idMoment,String photo,String extension,String username){
         this.id=id;
         this.idMoment=idMoment;
         this.photo=photo;
+        this.extension=extension;
+        this.username=username;
     }
     public UUID getId() {
         return id;
@@ -52,6 +55,14 @@ public class Album {
 
     public void setExtension(String extension) {
         this.extension = extension;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
     
     

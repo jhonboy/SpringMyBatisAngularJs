@@ -16,27 +16,29 @@ public class Moment {
     private UUID idMoment;
     private String username;
     private String moment;
-    private String photo;
+    private String idAlbum;
     private String friendlist;
     private String place;
     private Date createDate;
     private Date updateDate;
     private String ipCreate;
     private String ipUpdate;
+    private Album album;
     
     public Moment(){}
     
-    public Moment(UUID idMoment,String username,String moment,String photo,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate){
+    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,Album album){
         this.idMoment=idMoment;
         this.username=username;
         this.moment=moment;
-        this.photo=photo;
+        this.idAlbum=idAlbum;
         this.friendlist=friendlist;
         this.place=place;
         this.createDate=createDate;
         this.updateDate=updateDate;
         this.ipCreate=ipCreate;
         this.ipUpdate=ipUpdate;
+        this.album=album;
     
     }
 
@@ -64,13 +66,14 @@ public class Moment {
         this.moment = moment;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getIdAlbum() {
+        return idAlbum;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setIdAlbum(String idAlbum) {
+        this.idAlbum = idAlbum;
     }
+
 
     public String getFriendlist() {
         return friendlist;
@@ -118,6 +121,14 @@ public class Moment {
 
     public void setIpUpdate(String ipUpdate) {
         this.ipUpdate = ipUpdate;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
     
     

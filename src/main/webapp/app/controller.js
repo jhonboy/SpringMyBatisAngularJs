@@ -90,33 +90,14 @@ as.controller('MomentController',function ($scope, $http) {
             };
 
         load();
-        $scope.addMoment = function () {
-               //$scope.uploadFile();
-                $scope.moment.fileInput=$(".ajax-file-upload-filename").val();
+        $scope.addMoment = function () { 
                 $http.post(actionUrl,$scope.moment).success(function () {    
                 load();
-                $location.load();
              });
             
         };
         
-        
-
-
-        $scope.uploadFile=function (){     
-            var formData=new FormData();
-            formData.append("file",file.files[0]);
-            $http.post('action/upload/', formData, {
-                transformRequest: function(data, headersGetterFunction) {
-                    return data;
-                },
-                headers: { 'Content-Type': undefined }
-                }).success(function(data, status) {                       
-                    console.log("Success ... " + status);
-                }).error(function(data, status) {
-                    console.log("Error ... " + status);
-                });
-                };
+      
 
     });
 

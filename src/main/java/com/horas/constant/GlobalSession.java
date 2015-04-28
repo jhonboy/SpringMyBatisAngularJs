@@ -14,13 +14,11 @@ import javax.servlet.http.HttpSession;
  */
 public class GlobalSession extends RandomUUID{
     private String username;
-    private HttpServletRequest request;
-    public String getUsername(){
+
+    public String getUsername(HttpServletRequest request){
         HttpSession sess=request.getSession();
         username= (String) sess.getAttribute("username");
-        if(username==null || username.equals("")){
-            throw new IllegalArgumentException("harusLogin");
-        }
+        
         return username;
     }
 }

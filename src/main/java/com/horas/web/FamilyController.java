@@ -14,6 +14,7 @@ import com.horas.service.UserService;
 import com.horas.util.ApplicationContextUtils;
 import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,10 +34,10 @@ public class FamilyController extends ApplicationContextUtils{
 
     @RequestMapping(value = "/family", method = RequestMethod.GET)
     @ResponseBody
-    public List<Family> getFamily() {
+    public List<Family> getFamily(HttpServletRequest req) {
         List<Family> lstFm= familyService.getFamily();
         UserDetail userDetail=(UserDetail)getApplicationContext().getBean("userDetail");
-        userDetail=userService.getUserDetail(getUsername());
+        userDetail=userService.getUserDetail(getUsername(req));
         
         Family fm= new Family();
         fm.setName(userDetail.getUsername());

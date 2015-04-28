@@ -5,6 +5,7 @@
 package com.horas.service.impl;
 
 import com.horas.dao.MomentDAO;
+import com.horas.dto.Album;
 import com.horas.dto.Moment;
 import com.horas.service.MomentService;
 import java.util.List;
@@ -31,5 +32,11 @@ public class MomentServiceImpl implements MomentService{
        return momentDAO.getMoment();
        
     }
+
+    public Moment getMomentByAlbum(Album album) {
+        return momentDAO.getMomentByAlbum(album);
+    }
+
+   
     
 }
