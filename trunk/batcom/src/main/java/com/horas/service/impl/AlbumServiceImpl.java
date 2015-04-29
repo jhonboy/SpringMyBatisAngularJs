@@ -6,6 +6,7 @@ package com.horas.service.impl;
 
 import com.horas.dao.AlbumDAO;
 import com.horas.dto.Album;
+import com.horas.dto.Moment;
 import com.horas.service.AlbumService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class AlbumServiceImpl implements AlbumService{
            status=true;
        }
        return status;
+    }
+
+    public List<Album> getAllPhotoByMoment(Moment moment) {
+        return albumDAO.getAllPhotoByMoment(moment);
     }
     
 }

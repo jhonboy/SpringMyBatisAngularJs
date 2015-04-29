@@ -49,31 +49,31 @@
                     <c:set var="user" scope="session" value="<%=username%>"/>
 
                             <c:choose>
-                                      <c:when test="${user==null}">
-                                            <li>
-                                            <a href="" ng-click='login()' >Login</a>
-                                            </li>
-                                      </c:when>
+                                <c:when test="${user==null}">
+                                      <li>
+                                      <a href="" ng-click='login()' >Login</a>
+                                      </li>
+                                </c:when>
 
-                                      <c:otherwise>
-                                            <!-- start: User Dropdown -->
-                                            <li class="dropdown">
-                                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                                            <i class="halflings-icon white user"></i><%=username%>
-                                                            <span class="caret"></span>
-                                                    </a>
+                                <c:otherwise>
+                                      <!-- start: User Dropdown -->
+                                      <li class="dropdown">
+                                              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                                      <i class="halflings-icon white user"></i><%=username%>
+                                                      <span class="caret"></span>
+                                              </a>
 
-                                                    <ul class="dropdown-menu">
-                                                            <li class="dropdown-menu-title">
-                                                                    <span>Account Settings</span>
-                                                            </li>
-                                                            <li>  <a href="userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
-                                                            <li>  <a href="" ng-click='logout()'><i class="halflings-icon off"></i> Logout</a></li>
-                                                    </ul>
-                                            </li>
-                                            <!-- end: User Dropdown -->
+                                              <ul class="dropdown-menu">
+                                                <li class="dropdown-menu-title">
+                                                        <span>Account Settings</span>
+                                                </li>
+                                                <li>  <a href="#/userDetail/<%=username%>"><i class="halflings-icon user"></i> Profile</a></li>
+                                                <li>  <a href="#" ng-click='logout()'><i class="halflings-icon off"></i> Logout</a></li>
+                                              </ul>
+                                      </li>
+                                      <!-- end: User Dropdown -->
 
-                                      </c:otherwise>
+                                </c:otherwise>
                             </c:choose>           
 
                     </ul>
@@ -172,7 +172,7 @@
        <script type="text/javascript" src="app/base64.js"></script>
        <script type="text/javascript" src="app/i18n.js"></script>
         <!---AngularJS-->
- <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
+ <script src="js/jquery.uploadfile.js"></script>
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>
 	
 		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>

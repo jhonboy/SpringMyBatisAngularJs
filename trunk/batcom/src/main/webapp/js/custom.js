@@ -201,7 +201,7 @@ function init_masonry(){
     var $container = $('.masonry-gallery');
 
     var gutter = 6;
-    var min_width = 250;
+    var min_width = 150;
     $container.imagesLoaded( function(){
         $container.masonry({
             itemSelector : '.masonry-thumb',

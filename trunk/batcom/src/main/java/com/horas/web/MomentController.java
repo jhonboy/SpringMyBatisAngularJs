@@ -57,7 +57,8 @@ public class MomentController extends ApplicationContextUtils{
      public List<Moment> getMoments(){
          return momentService.getMoment();
      }
-    
+     
+     
     /**
      *
      * @param moment
@@ -86,7 +87,7 @@ public class MomentController extends ApplicationContextUtils{
             sess.removeAttribute("album");
         }
         
-        return new ResponseMessage(ResponseMessage.Type.success, "commentAdded");
+        return new ResponseMessage(ResponseMessage.Type.success, "momentAdded");
         
     }
     
@@ -138,4 +139,15 @@ public class MomentController extends ApplicationContextUtils{
             th.printStackTrace();
         }
     }   
+    @RequestMapping(value="/upload", method = RequestMethod.GET)
+    public List<Album> getFileAfterUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        List <Album> album= new ArrayList<Album>();
+        try{
+             HttpSession sess=request.getSession();
+             album= (List<Album>) sess.getAttribute("album");
+        }catch(Throwable th){
+            th.printStackTrace();
+        }
+        return album;
+    }
 }
