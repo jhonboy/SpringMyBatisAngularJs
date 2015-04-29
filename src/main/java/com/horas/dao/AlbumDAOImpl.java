@@ -5,6 +5,7 @@
 package com.horas.dao;
 
 import com.horas.dto.Album;
+import com.horas.dto.Moment;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class AlbumDAOImpl implements AlbumDAO{
        if(getSqlSession().insert("com.horas.mapper.Album.insertAllPhoto", album)>1)
            status=true;
        return status;
+    }
+
+    public List<Album> getAllPhotoByMoment(Moment moment) {
+      return getSqlSession().selectList("com.horas.mapper.Album.getAllPhotoByMoment", moment.getIdMoment());
     }
     
 }

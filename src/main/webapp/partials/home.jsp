@@ -15,7 +15,7 @@ function readURL(input) {
     $("#file").change(function(){
         readURL(this);
     });
-   
+  
     $(document).ready(function()
     {
         var settings = {
@@ -26,8 +26,7 @@ function readURL(input) {
                 multiple: true,
                 onSuccess:function(files,data,xhr)
                 {
-                        $("#status").html("<img src='http://localhost:8184/images/'"+files+"'>");
-                        $("#status").html("<font color='green'>Upload is success</font>");
+                       $("#status").html("<font color='green'>Upload is success</font>");
 
                 },
                 onError: function(files,status,errMsg)
@@ -40,48 +39,52 @@ function readURL(input) {
     });
      
     </script>
+ 
 <div class="row-fluid" ng-controller="MomentController">
     <div class="span7" onTablet="span7" onDesktop="span7"> 
         <div class="box-content">
-                <div class="chat-form">
-                        <textarea ng-model="moment.moment"></textarea>
-                        <div id="mulitplefileuploader">Add Photo</div>
-                         
-                        <div id="status"></div>
-                       
+<%
+    String username = (String)session.getAttribute("username"); 
+%>
+<c:set var="user" scope="session" value="<%=username%>"/>
 
+<c:choose>
+<c:when test="${user!=null}">
 
-                        <button class="btn btn-info" ng-click="addMoment()">Send Moment</button>
-                </div>	
+<div class="chat-form">
+    <textarea ng-model="moment.moment"></textarea>
+    <div id="mulitplefileuploader">Add Photo</div>
+
+    <div id="status"></div>
+    <button class="btn btn-info" ng-click="addMoment()">Send Moment</button>
+</div>
+</c:when>
+</c:choose>
+                
                 <ul class="chat">
+                       
                         <li class="left" ng-repeat="item in moments" id= "moment"[{{$index + 1}}] >
                                 <img class="avatar" alt="{{item.username}}" src="img/avatar.jpg">
                                 <span class="message"><span class="arrow"></span>
-                                        <span class="from"><a href="userDetail/"{{item.username}}>{{item.username}}</a></span>
+                                        <span class="from"><a href='#/userDetail/{{item.username}}'>{{item.username}}</a></span>
                                         <c:set var="mine" value="{{item.username}}"/> 
                                         <span class="date">{{item.createDate  | date:"MM/dd/yyyy 'at' h:mma" }}</span>
-<!--                                        <div id="image-5">
-                                            <a style="background:url(http://localhost:8184/images/{{item.idAlbum}})" title="tet" href="http://localhost:8184/images/{{item.idAlbum}}">
-                                                <img class="grayscale" src="http://localhost:8184/images/{{item.idAlbum}}" alt="Sample Image 5">
-                                            </a>
-					</div>-->
+                                        
                                         <hr/>
+                                         <div ng-repeat="test in item.album">
+                                         <div class="album-gallery">
+                                            <div id="image" class="photo-gallery">
+                                                <a  href="http://localhost:8184/images/{{test.id}}.{{test.extension}}">
+                                                        <img class="grayscale" src="http://localhost:8184/images/{{test.id}}.{{test.extension}}" alt="img">
+                                                </a>
+                                            </div>
+                                             
+                                          </div>  
+                                        </div>    
                                         <span class="text">
                                                 {{item.moment}}
                                         </span>
-                                        <%
-                                             String username = (String)session.getAttribute("username"); 
-                                            // String mine={{item.username}};
-                                             
-                                         %>
-                                    <c:set var="user" scope="session" value="<%=username%>"/>
-                                    <input type="text" value="${user}">
-                                    <c:choose>
-                                              <c:when test="${user==mine}">  
-                                                    <a href="#delete" alt="delete"><i class="icon-trash" ></i></a>
-                                              </c:when>
-                                                
-                                    </c:choose>
+                                         
                                 </span>	                                  
                         </li>
                         

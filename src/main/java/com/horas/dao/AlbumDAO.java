@@ -5,6 +5,7 @@
 package com.horas.dao;
 
 import com.horas.dto.Album;
+import com.horas.dto.Moment;
 import java.util.List;
 
 /**
@@ -14,4 +15,5 @@ import java.util.List;
 public interface AlbumDAO {
     public void setAlbum(Album album);
     public boolean insertAllPhoto(List<Album> album);
+    public List<Album> getAllPhotoByMoment(Moment moment);
 }

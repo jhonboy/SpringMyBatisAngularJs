@@ -5,6 +5,7 @@
 package com.horas.service;
 
 import com.horas.dto.Album;
+import com.horas.dto.Moment;
 import java.util.List;
 
 /**
@@ -14,4 +15,5 @@ import java.util.List;
 public interface AlbumService {
     public void addAlbum(Album album);
     public boolean insertAllPhoto(List<Album> album);
+    public List<Album> getAllPhotoByMoment(Moment moment);
 }

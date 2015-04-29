@@ -149,7 +149,8 @@ as.config(
                 retry(requests[i]);
             }
             $rootScope.requests401 = [];
-           location.href = "#/";
+            location.href = "#/";
+            location.reload();
               
         });
 

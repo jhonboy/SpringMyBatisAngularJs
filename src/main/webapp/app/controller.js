@@ -85,7 +85,7 @@ as.controller('MomentController',function ($scope, $http) {
         load = function () {
                 $http.get(actionUrl).success(function (data) {
                     $scope.moments = data;
-                    
+
                 });
             };
 
@@ -93,12 +93,11 @@ as.controller('MomentController',function ($scope, $http) {
         $scope.addMoment = function () { 
                 $http.post(actionUrl,$scope.moment).success(function () {    
                 load();
+                location.load();
              });
             
         };
         
-      
-
     });
 
 as.controller('UserDetailController', function ($scope, $http, $routeParams) {

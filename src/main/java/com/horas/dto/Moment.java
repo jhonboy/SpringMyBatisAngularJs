@@ -5,6 +5,7 @@
 package com.horas.dto;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,11 +24,11 @@ public class Moment {
     private Date updateDate;
     private String ipCreate;
     private String ipUpdate;
-    private Album album;
+    private List<Album> album;
     
     public Moment(){}
     
-    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,Album album){
+    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,List<Album> album){
         this.idMoment=idMoment;
         this.username=username;
         this.moment=moment;
@@ -123,14 +124,13 @@ public class Moment {
         this.ipUpdate = ipUpdate;
     }
 
-    public Album getAlbum() {
+    public List<Album> getAlbum() {
         return album;
     }
 
-    public void setAlbum(Album album) {
+    public void setAlbum(List<Album> album) {
         this.album = album;
     }
-    
-    
+ 
     
 }
