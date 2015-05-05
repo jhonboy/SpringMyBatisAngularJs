@@ -11,8 +11,8 @@
 		insert into album (
 			<include refid="albumColumns" />
 		) values (
-                        #{id,typeHandler=UUIDTypeHandler},
-                        #{idMoment,typeHandler=UUIDTypeHandler},
+                        #{id,jdbcType=VARCHAR},
+                        #{idMoment,jdbcType=VARCHAR},
                         #{photo,jdbcType=VARCHAR},
                         #{extension,jdbcType=VARCHAR},
                         #{username,jdbcType=VARCHAR}
@@ -21,9 +21,17 @@
 	</insert>
         
         <insert id="insertAllPhoto" parameterType="java.util.List">
-            INSERT INTO album (<include refid="albumColumns" />)  VALUES 
+            INSERT INTO album 
+            (
+                <include refid="albumColumns" />
+            )  
+            VALUES 
             <foreach collection="list" item="element" index="index" separator="," >
-             (#{element.id,typeHandler=UUIDTypeHandler},#{element.idMoment,typeHandler=UUIDTypeHandler},#{element.photo,jdbcType=VARCHAR},#{element.extension,jdbcType=VARCHAR},#{element.username,jdbcType=VARCHAR})
+             (
+              #{element.id,jdbcType=VARCHAR},#{element.idMoment,jdbcType=VARCHAR},
+              #{element.photo,jdbcType=VARCHAR},#{element.extension,jdbcType=VARCHAR},
+              #{element.username,jdbcType=VARCHAR}
+             )
             </foreach>
         </insert>
 </mapper>

@@ -76,6 +76,7 @@
     <bean id="moment" class="com.horas.dto.Moment"/>
     <bean id="user" class="com.horas.dto.User"/>
     <bean id="role" class="com.horas.dto.Role"/>
+    <bean id="album" class="com.horas.dto.Album"/>
 <!--   <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider>
             <sec:user-service>

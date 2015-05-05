@@ -69,24 +69,28 @@ public class MomentController extends ApplicationContextUtils{
     public ResponseMessage addMoments(@RequestBody Moment moment, HttpServletRequest req){
         HttpSession sess=req.getSession();
         List <Album> album= (List<Album>) sess.getAttribute("album");
-        
-        moment.setIdMoment(sys_guid());
-        
+        ResponseMessage rsp;
+        try{
             
-        moment.setIdAlbum(null);
-        moment.setUsername(getUsername(req));
-        moment.setIpCreate("127.0.1.1");
-        moment.setCreateDate(new Date()); 
-        momentService.insertMoment(moment);
-        
-        for(Album alb: album){
-            alb.setIdMoment(moment.getIdMoment());
+            moment.setIdMoment(sys_guid());
+            moment.setIdAlbum(null);
+            moment.setUsername(getUsername(req));
+            moment.setIpCreate("127.0.1.1");
+            moment.setCreateDate(new Date()); 
+            momentService.insertMoment(moment); 
+            for(Album alb: album){
+                    alb.setIdMoment(moment.getIdMoment().toString());
+                }
             
-        }
-        if(albumService.insertAllPhoto(album)){
-            sess.removeAttribute("album");
-        }
-        
+            albumService.insertAllPhoto(album) ;
+            
+            
+           
+        }catch(Throwable th){
+            th.printStackTrace();
+        }   
+        sess.removeAttribute("album");
+       
         return new ResponseMessage(ResponseMessage.Type.success, "momentAdded");
         
     }
@@ -95,30 +99,25 @@ public class MomentController extends ApplicationContextUtils{
     
     @RequestMapping(value="/upload", method = RequestMethod.POST)
     public void UploadFile(MultipartHttpServletRequest request,HttpServletResponse response) throws IOException {
-        try{
-            UUID momentId;
-            HttpSession sess=request.getSession();
-            sess.setAttribute("momentId", sys_guid());
-            momentId= (UUID) sess.getAttribute("momentId");
-                      
-            Album album=new Album();
-            String extension;
-            String newPhoto;
+        String extension,newPhoto;
+        Album album=new Album();
+        HttpSession sess=request.getSession();       
+        try{         
             Iterator<String> itr=request.getFileNames();
             MultipartFile file=request.getFile(itr.next());
             fileName=file.getOriginalFilename();
             File serverFile = null;
             extension=fileName.substring(fileName.length()-3, fileName.length()); 
             
-            album.setId(sys_guid());
-            album.setIdMoment(momentId);
+            album.setId(sys_guid().toString());
+            album.setIdMoment(sys_guid().toString());
             album.setPhoto(fileName);
             album.setExtension(extension);
             album.setUsername(getUsername(request));
             
             newPhoto=album.getId().toString()+"."+extension;
             listPhoto.add(album);
-            sess.setAttribute("album", listPhoto);
+            
             
            // File dir= new File("D:/jhon/windows/apache-tomcat-7.0.57/webapps/images/");
              File dir = new File("/Users/jhon/server/apache-tomcat-7.0.57/webapps/images/");
@@ -134,11 +133,14 @@ public class MomentController extends ApplicationContextUtils{
              }else {
                 System.out.println("not");
              }
+              
               serverFile.delete();
         }catch(Throwable th){
             th.printStackTrace();
         }
-    }   
+        sess.setAttribute("album", listPhoto);
+    }  
+    
     @RequestMapping(value="/upload", method = RequestMethod.GET)
     public List<Album> getFileAfterUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
         List <Album> album= new ArrayList<Album>();

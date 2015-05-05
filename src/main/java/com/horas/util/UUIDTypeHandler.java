@@ -40,6 +40,6 @@ public class UUIDTypeHandler extends BaseTypeHandler {
 
     @Override
     public Object getNullableResult(ResultSet rs, int i) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return UUID.fromString((rs.getString(i)));
     }
 }

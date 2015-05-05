@@ -85,7 +85,7 @@ as.controller('MomentController',function ($scope, $http) {
         load = function () {
                 $http.get(actionUrl).success(function (data) {
                     $scope.moments = data;
-
+                    $scope.moment.moment="";
                 });
             };
 
@@ -93,7 +93,7 @@ as.controller('MomentController',function ($scope, $http) {
         $scope.addMoment = function () { 
                 $http.post(actionUrl,$scope.moment).success(function () {    
                 load();
-                location.load();
+                location.reload();
              });
             
         };

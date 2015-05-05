@@ -21,22 +21,22 @@
                 <result column="update_date" property="updateDate" jdbcType="DATE" />
                 <result column="ip_create" property="ipCreate" jdbcType="VARCHAR" />
                 <result column="ip_update" property="ipUpdate" jdbcType="VARCHAR" />
-                <collection property="album" column="idMoment" javaType="ArrayList" ofType="com.horas.dto.Album" resultMap="albumResult"/>
-               
+                
+                <collection property="albums"  ofType="com.horas.dto.Album"
+                            javaType="ArrayList" resultMap="albumResult" columnPrefix="album_" notNullColumn="id"/>
 	</resultMap> 
         
         <resultMap type="com.horas.dto.Album" id="albumResult">
-                <result column="id" property="id" typeHandler="UUIDTypeHandler"/>
-                <result column="idMoment" property="idMoment" typeHandler="UUIDTypeHandler"/>
+                <result column="id" property="id" jdbcType="VARCHAR"/>
                 <result column="photo" property="photo" jdbcType="VARCHAR"/>
                 <result column="extension" property="extension" jdbcType="VARCHAR"/>
-                 <result column="username" property="username" jdbcType="VARCHAR"/>
         </resultMap> 
         
  	<select id="getMoment" resultMap="momentResult">
-		select a.id_moment,a.username,a.moment,a.idAlbum,a.friendlist,a.place,a.create_date,a.update_date,a.ip_create,a.ip_update,b.id,b.extension  
-		from mst_moment a
-                left outer join album b on a.id_moment=b.idMoment
+		  select a.id_moment,a.username,a.moment,a.idAlbum,a.friendlist,a.place,
+                  a.create_date,a.update_date,a.ip_create,a.ip_update,b.id as album_id,b.photo as album_photo,
+                  b.extension as album_extension   
+                  from mst_moment a left outer join album b on a.id_moment=b.idMoment
 	</select>
         
     <select id="getMomentByAlbum" resultMap="momentResult">
