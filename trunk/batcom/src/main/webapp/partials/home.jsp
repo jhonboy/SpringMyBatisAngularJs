@@ -71,7 +71,7 @@ function readURL(input) {
                                         <span class="date">{{item.createDate  | date:"MM/dd/yyyy 'at' h:mma" }}</span>
                                         
                                         <hr/>
-                                         <div ng-repeat="test in item.album">
+                                         <div ng-repeat="test in item.albums">
                                          <div class="album-gallery">
                                             <div id="image" class="photo-gallery">
                                                 <a  href="http://localhost:8184/images/{{test.id}}.{{test.extension}}">

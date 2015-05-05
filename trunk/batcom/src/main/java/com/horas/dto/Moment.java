@@ -24,11 +24,11 @@ public class Moment {
     private Date updateDate;
     private String ipCreate;
     private String ipUpdate;
-    private List<Album> album;
+    private List<Album> albums;
     
     public Moment(){}
     
-    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,List<Album> album){
+    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,List<Album> albums){
         this.idMoment=idMoment;
         this.username=username;
         this.moment=moment;
@@ -39,7 +39,7 @@ public class Moment {
         this.updateDate=updateDate;
         this.ipCreate=ipCreate;
         this.ipUpdate=ipUpdate;
-        this.album=album;
+        this.albums=albums;
     
     }
 
@@ -124,12 +124,12 @@ public class Moment {
         this.ipUpdate = ipUpdate;
     }
 
-    public List<Album> getAlbum() {
-        return album;
+    public List<Album> getAlbums() {
+        return albums;
     }
 
-    public void setAlbum(List<Album> album) {
-        this.album = album;
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
  
     
