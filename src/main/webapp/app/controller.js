@@ -86,6 +86,9 @@ as.controller('MomentController',function ($scope, $http) {
                 $http.get(actionUrl).success(function (data) {
                     
                     $scope.moments = data;
+                    $scope.moment.moment=null;
+                    $(".ajax-file-upload-statusbar").remove();
+                    $("#status").remove();
                      
                 });
             };
@@ -94,7 +97,7 @@ as.controller('MomentController',function ($scope, $http) {
         $scope.addMoment = function () { 
                 $http.post(actionUrl,$scope.moment).success(function () {    
                 load();
-                location.reload();
+               // location.reload();
              });
             
         };
