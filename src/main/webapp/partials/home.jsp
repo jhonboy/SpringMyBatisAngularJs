@@ -141,8 +141,18 @@ function readURL(input) {
                                         <section id="responsive-images-columns">
                                              <div class="container">
                                                  <div  ng-repeat="test in item.albums">
-                                                    <a  href="" ng-click='prevImage(test.id,test.extension)'>
-                                                     <img class="two-columns" src="http://192.168.100.76:8184/images/{{test.id}}.{{test.extension}}"  />
+                                                   
+                                                      <div ng-show="item.albums.length == 1">
+                                                            <a  href="" ng-click='prevImage(test.id,test.extension)'>
+                                                                <img class="1" src="http://192.168.100.76:8184/images/{{test.id}}.{{test.extension}}"  />
+                                                            </a>
+                                                       </div>
+                                                       <div ng-show="item.albums.length > 1">
+                                                            <a  href="" ng-click='prevImage(test.id,test.extension)'>
+                                                                <img class="two-columns" src="http://192.168.100.76:8184/images/{{test.id}}.{{test.extension}}"  />
+                                                            </a>
+                                                        </div>
+                                                    
                                                     </a>
                                                  </div>
                                              </div> 
