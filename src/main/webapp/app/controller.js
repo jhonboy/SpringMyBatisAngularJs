@@ -84,8 +84,9 @@ as.controller('MomentController',function ($scope, $http) {
     var actionUrl = 'action/moments/',
         load = function () {
                 $http.get(actionUrl).success(function (data) {
+                    
                     $scope.moments = data;
-                    $scope.moment.moment="";
+                     
                 });
             };
 
@@ -96,6 +97,11 @@ as.controller('MomentController',function ($scope, $http) {
                 location.reload();
              });
             
+        };
+        $scope.prevImage=function(id,extension){
+           $('#prevImage').modal('show');  
+           $('.modal-body').html("<img src='http://localhost:8184/images/"+id+"."+extension+"'>");
+             
         };
         
     });

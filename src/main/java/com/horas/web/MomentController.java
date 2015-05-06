@@ -15,6 +15,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -46,16 +47,21 @@ public class MomentController extends ApplicationContextUtils{
     private AlbumService albumService;
     
     private String fileName;
-    List<Album> listPhoto= new ArrayList<Album>();
-    
-    BufferedImage bufferedImage;
-    
-    
+    private List<Album> listPhoto= new ArrayList<Album>();
     
      @RequestMapping(value="/moments",method=RequestMethod.GET)
      @ResponseBody
-     public List<Moment> getMoments(){
-         return momentService.getMoment();
+     public List<Moment> getMoments(HttpServletRequest req){
+        
+         List<Moment> mom= momentService.getMoment();
+         
+         for(Moment moment:mom){
+             if (moment.getUsername().equals(getUsername(req))){
+                 moment.setYours(true);
+             }
+         }
+         
+         return mom;
      }
      
      
@@ -77,21 +83,18 @@ public class MomentController extends ApplicationContextUtils{
             moment.setUsername(getUsername(req));
             moment.setIpCreate("127.0.1.1");
             moment.setCreateDate(new Date()); 
+            
             momentService.insertMoment(moment); 
             for(Album alb: album){
                     alb.setIdMoment(moment.getIdMoment().toString());
-                }
-            
-            albumService.insertAllPhoto(album) ;
-            
-            
-           
+                } 
+            albumService.insertAllPhoto(album) ; 
         }catch(Throwable th){
             th.printStackTrace();
         }   
         sess.removeAttribute("album");
-       
-        return new ResponseMessage(ResponseMessage.Type.success, "momentAdded");
+        listPhoto=new ArrayList<Album>();
+        return new ResponseMessage(ResponseMessage.Type.success, album.get(0).getPhoto());
         
     }
     
@@ -101,7 +104,8 @@ public class MomentController extends ApplicationContextUtils{
     public void UploadFile(MultipartHttpServletRequest request,HttpServletResponse response) throws IOException {
         String extension,newPhoto;
         Album album=new Album();
-        HttpSession sess=request.getSession();       
+        HttpSession sess=request.getSession();   
+        
         try{         
             Iterator<String> itr=request.getFileNames();
             MultipartFile file=request.getFile(itr.next());
@@ -117,7 +121,7 @@ public class MomentController extends ApplicationContextUtils{
             
             newPhoto=album.getId().toString()+"."+extension;
             listPhoto.add(album);
-            
+            sess.setAttribute("album", listPhoto);
             
            // File dir= new File("D:/jhon/windows/apache-tomcat-7.0.57/webapps/images/");
              File dir = new File("/Users/jhon/server/apache-tomcat-7.0.57/webapps/images/");
@@ -138,7 +142,7 @@ public class MomentController extends ApplicationContextUtils{
         }catch(Throwable th){
             th.printStackTrace();
         }
-        sess.setAttribute("album", listPhoto);
+        
     }  
     
     @RequestMapping(value="/upload", method = RequestMethod.GET)
