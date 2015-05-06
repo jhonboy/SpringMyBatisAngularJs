@@ -22,7 +22,7 @@
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<link href='js/angular/css.css' rel='stylesheet' type='text/css'>
         <link href='css/animation.css' rel='stylesheet' type='text/css'>
-        <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
+        <link href="css/uploadfile.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/favicon.ico">
 	
 		
@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#/"><span>Yambas</span></a>
+            <a class="brand" href="#/"><span>Coba</span></a>
                   <!-- start: Header Menu -->
             <div class="nav-no-collapse header-nav">
                     <ul class="nav pull-right">	
@@ -169,7 +169,7 @@
             <a data-dismiss="modal" class="btn">Cancel</a>
         </div>
     </div>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="app/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="app/jquery.i18n.properties-min-1.0.9.js"></script>
 <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>-->
 <script type="text/javascript" src="js/angular/angular.js"></script>
@@ -182,7 +182,7 @@
        <script type="text/javascript" src="app/base64.js"></script>
        <script type="text/javascript" src="app/i18n.js"></script>
         <!---AngularJS-->
- <script src="js/jquery.uploadfile.js"></script>
+                <script src="js/jquery.uploadfile.js"></script>
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>
 	
 		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
