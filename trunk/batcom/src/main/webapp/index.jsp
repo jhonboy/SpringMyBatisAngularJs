@@ -77,19 +77,7 @@
                             </c:choose>           
 
                     </ul>
-                        <div class="navbar navbar-fixed">
-                            <div class="navbar-inner">
-                                <ul class="nav nav-pills pull-right">
-                                    <li ng-class="activeWhen(language()=='in')">
-                                        <a ng-click="setLanguage('in')">Indonesia</a>
-                                    </li>
-                                    <li ng-class="activeWhen(language()=='en')">
-                                        <a ng-click="setLanguage('en')">English</a>
-                                    </li>
-                                </ul>
-                              
-                            </div>
-                        </div>
+                       
             </div>
                             <!-- end: Header Menu -->
 
@@ -100,26 +88,21 @@
 
             <div class="container-fluid-full">
             <div class="row-fluid">
-
                     <!-- start: Main Menu -->
                     <div id="sidebar-left" class="span2">
-                            <div class="nav-collapse sidebar-nav">
-                                    <ul class="nav nav-tabs nav-stacked main-menu">
-                                            <li><a href="index2.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-                                            <li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
-                                            <li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>
-                                            <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
-                                            
-                                            <li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
-                                            <li><a href="login.html"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
-                                    </ul>
-                            </div>
-                    </div>
-                   
+                        <div class="nav-collapse sidebar-nav">
+                            <ul class="nav nav-tabs nav-stacked main-menu">	
+                                <li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
+                                <li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>
+                                <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
 
+                                <li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
+                                <li><a href="login.html"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
+                            </ul>
+                        </div>
+                    </div>                 
                     <!-- start: Content -->
                     <div id="content" class="span10">
-
                     <ul class="breadcrumb">
                             <li>
                                     <i class="icon-home"></i>
@@ -153,12 +136,39 @@
 	<footer>
 
 		<p>
-			<span style="text-align:left;float:left">&copy; 2013 <a href="http://themifycloud.com/downloads/janux-free-responsive-admin-dashboard-template/" alt="Bootstrap_Metro_Dashboard">JANUX Responsive Dashboard</a></span>
+			<span style="text-align:left;float:left">&copy; 2015  
+                           <div class="navbar navbar-fixed">
+                            <div class="navbar-inner">
+                                <ul class="nav nav-pills pull-right">
+                                    <li ng-class="activeWhen(language()=='in')">
+                                        <a ng-click="setLanguage('in')">Indonesia</a>
+                                    </li>
+                                    <li ng-class="activeWhen(language()=='en')">
+                                        <a ng-click="setLanguage('en')">English</a>
+                                    </li>
+                                </ul>
+                              
+                            </div>
+                        </div>
+                        </span>
 			
 		</p>
 
 	</footer>
+    <div class="modal" style="display: none" id="prevImage">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">x</a>
 
+            <h3>Image Preview</h3>
+        </div>
+        <div class="modal-body">
+            <label>Preview Image</label>
+            
+        </div>
+        <div class="modal-footer">     
+            <a data-dismiss="modal" class="btn">Cancel</a>
+        </div>
+    </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="app/jquery.i18n.properties-min-1.0.9.js"></script>
 <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>-->

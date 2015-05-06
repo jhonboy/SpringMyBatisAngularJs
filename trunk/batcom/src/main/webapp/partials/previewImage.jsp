@@ -141,7 +141,7 @@ function readURL(input) {
                                         <section id="responsive-images-columns">
                                              <div class="container">
                                                  <div  ng-repeat="test in item.albums">
-                                                    <a  href="" ng-click='prevImage(test.id,test.extension)'>
+                                                    <a  href="http://localhost:8184/images/{{test.id}}.{{test.extension}}">
                                                      <img class="two-columns" src="http://localhost:8184/images/{{test.id}}.{{test.extension}}"  />
                                                     </a>
                                                  </div>

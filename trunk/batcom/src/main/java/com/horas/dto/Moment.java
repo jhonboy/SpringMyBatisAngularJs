@@ -24,11 +24,12 @@ public class Moment {
     private Date updateDate;
     private String ipCreate;
     private String ipUpdate;
+    private boolean yours;
     private List<Album> albums;
     
     public Moment(){}
     
-    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,List<Album> albums){
+    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,List<Album> albums,boolean  yours){
         this.idMoment=idMoment;
         this.username=username;
         this.moment=moment;
@@ -40,6 +41,7 @@ public class Moment {
         this.ipCreate=ipCreate;
         this.ipUpdate=ipUpdate;
         this.albums=albums;
+        this.yours=yours;
     
     }
 
@@ -130,6 +132,14 @@ public class Moment {
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
+    }
+
+    public boolean getYours() {
+        return yours;
+    }
+
+    public void setYours(boolean yours) {
+        this.yours = yours;
     }
  
     
