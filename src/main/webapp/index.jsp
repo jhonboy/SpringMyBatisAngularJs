@@ -22,6 +22,8 @@
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<link href='js/angular/css.css' rel='stylesheet' type='text/css'>
         <link href='css/animation.css' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/demo.css">
+        <link rel="stylesheet" href="css/fakeLoader.css">
         <link href="css/uploadfile.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/favicon.ico">
 	
@@ -122,7 +124,41 @@
    <ng-view></ng-view>
   <hr />
 			
-       
+        <div style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(52, 152, 219); z-index: 999; display: none;" class="fakeloader"><div style="position: absolute; left: 570px; top: 430px;" class="fl spinner4"></div></div>
+
+        <section id="section-navigation">
+
+            <div class="container text-center">
+                <a href="http://joaopereirawd.github.io/fakeLoader.js"><button class="btn-default btn-goback">? Article &amp; Download</button></a>
+            </div>
+            
+            <div class="container text-center">
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo1.html"><button class="btn-default btn-white">Spinner1</button></a>
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo2.html"><button class="btn-default btn-white">Spinner2</button></a>
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo3.html"><button class="btn-default btn-white btn-active">Spinner3</button></a>
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo4.html"><button class="btn-default btn-white">Spinner4</button></a>
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo5.html"><button class="btn-default btn-white">Spinner5</button></a>
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo6.html"><button class="btn-default btn-white">Spinner6</button></a>
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo7.html"><button class="btn-default btn-white">Spinner7</button></a>
+                <a href="http://joaopereirawd.github.io/fakeLoader.js/demo/demo8.html"><button class="btn-default btn-white">Costum Image</button></a>
+            </div>
+        </section>
+
+        <div class="container text-center">
+            <h1 style="margin-top:250px">DOM was loaded</h1>
+        </div>
+        
+         
+        <script>
+            $(document).ready(function(){
+                $(".fakeloader").fakeLoader({
+                    timeToHide:1200,
+                    bgColor:"#3498db",
+                    spinner:"spinner4"
+                });
+            });
+        </script>
+
 
 	</div><!--/.fluid-container-->
 		<!-- end: Content -->
@@ -182,6 +218,7 @@
        <script type="text/javascript" src="app/base64.js"></script>
        <script type="text/javascript" src="app/i18n.js"></script>
         <!---AngularJS-->
+                <script src="js/fakeLoader.js"></script>
                 <script src="js/jquery.uploadfile.js"></script>
 		<script src="js/jquery-migrate-1.0.0.min.js"></script>
 	
