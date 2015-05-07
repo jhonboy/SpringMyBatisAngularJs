@@ -304,8 +304,6 @@ as.directive('collection', function () {
 
 as.directive('member', function ($compile) {
      
-        
-
 	return {
 		restrict: "E",
 		replace: true,
