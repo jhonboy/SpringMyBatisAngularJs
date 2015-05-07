@@ -52,10 +52,6 @@ as.config(
             controller: 'PostController', 
             templateUrl: 'partials/post.html'
         })
-        .when('/post', { 
-            controller: 'MomentController', 
-            templateUrl: 'partials/home.jsp'
-        })
         .when('/',{
             controller:'MainController',
             templateUrl:'partials/home.jsp'

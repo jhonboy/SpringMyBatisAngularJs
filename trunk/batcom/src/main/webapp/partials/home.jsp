@@ -41,7 +41,6 @@ img {
   max-width: 960px;
   margin: 0 auto;
   text-align: center;
-  border: 1px solid green;
 }
 section {
   margin: 1px auto;
@@ -144,12 +143,12 @@ function readURL(input) {
                                                    
                                                       <div ng-show="item.albums.length == 1">
                                                             <a  href="" ng-click='prevImage(test.id,test.extension)'>
-                                                                <img class="1" src="http://192.168.100.76:8184/images/{{test.id}}.{{test.extension}}"  />
+                                                                <img class="1" src="http://192.168.100.81:8184/images/{{test.id}}.{{test.extension}}"  />
                                                             </a>
                                                        </div>
                                                        <div ng-show="item.albums.length > 1">
                                                             <a  href="" ng-click='prevImage(test.id,test.extension)'>
-                                                                <img class="two-columns" src="http://192.168.100.76:8184/images/{{test.id}}.{{test.extension}}"  />
+                                                                <img class="two-columns" src="http://192.168.100.81:8184/images/{{test.id}}.{{test.extension}}"  />
                                                             </a>
                                                         </div>
                                                     
