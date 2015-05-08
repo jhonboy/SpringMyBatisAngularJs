@@ -158,7 +158,7 @@ function readURL(input) {
                                         </section> 
                                         <span class="text">
                                                 {{item.moment}}
-                                                {{item.yours}}
+                                               
                                         </span>   
                                 </span>	
                                       
