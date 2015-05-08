@@ -20,7 +20,7 @@ public class Moment {
     private String idAlbum;
     private String friendlist;
     private String place;
-    private Date createDate;
+    private String createDate;
     private Date updateDate;
     private String ipCreate;
     private String ipUpdate;
@@ -29,7 +29,7 @@ public class Moment {
     
     public Moment(){}
     
-    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,Date createDate,Date updateDate,String ipCreate,String ipUpdate,List<Album> albums,boolean  yours){
+    public Moment(UUID idMoment,String username,String moment,String idAlbum,String friendlist,String place,String createDate,Date updateDate,String ipCreate,String ipUpdate,List<Album> albums,boolean  yours){
         this.idMoment=idMoment;
         this.username=username;
         this.moment=moment;
@@ -94,11 +94,11 @@ public class Moment {
         this.place = place;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 

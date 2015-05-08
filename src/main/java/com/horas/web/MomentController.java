@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import com.horas.util.CommonUtils;
+import java.util.Calendar;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -76,13 +78,14 @@ public class MomentController extends ApplicationContextUtils{
         HttpSession sess=req.getSession();
         List <Album> album= (List<Album>) sess.getAttribute("album");
         ResponseMessage rsp;
+        Date today = Calendar.getInstance().getTime();  
         try{
             
             moment.setIdMoment(sys_guid());
             moment.setIdAlbum(null);
             moment.setUsername(getUsername(req));
             moment.setIpCreate("127.0.1.1");
-            moment.setCreateDate(new Date()); 
+            moment.setCreateDate(CommonUtils.dateFormat(today, "MM/dd/yyyy HH:mm:ss")); 
             
             momentService.insertMoment(moment); 
             for(Album alb: album){

@@ -142,12 +142,12 @@ function readURL(input) {
                                                  <div  ng-repeat="test in item.albums">
                                                       <div ng-show="item.albums.length == 1">
                                                             <a  href="" ng-click='prevImage(test.id,test.extension)'>
-                                                                <img class="one-column" src="http://192.168.100.81:8184/images/{{test.id}}.{{test.extension}}"  />
+                                                                <img class="one-column" src="http://192.168.100.60:8184/images/{{test.id}}.{{test.extension}}"  />
                                                             </a>
                                                        </div>
                                                        <div ng-show="item.albums.length > 1">
                                                             <a  href="" ng-click='prevImage(test.id,test.extension)'>
-                                                                <img class="two-columns" src="http://192.168.100.81:8184/images/{{test.id}}.{{test.extension}}"  />
+                                                                <img class="two-columns" src="http://192.168.100.60:8184/images/{{test.id}}.{{test.extension}}"  />
                                                             </a>
                                                         </div>
                                                     
