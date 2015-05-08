@@ -7,7 +7,7 @@ as.config(
     function($routeProvider, $locationProvider,$httpProvider) {
       $routeProvider
         .when('/login', {
-          templateUrl: 'partials/login.html',
+          templateUrl: 'partials/login.jsp',
           controller: 'LoginController',
           controllerAs: 'LoginController'
         })
@@ -34,7 +34,7 @@ as.config(
         })
         .when('/signup',{
             controller:'SignUpController',
-            templateUrl:'partials/signup.html'
+            templateUrl:'partials/signup.jsp'
         })
         .when('/person', { 
             controller: 'PersonController', 

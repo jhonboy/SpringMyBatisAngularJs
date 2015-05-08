@@ -1,4 +1,12 @@
-		<div class="container-fluid-full">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    String username = (String)session.getAttribute("username"); 
+%>
+<c:set var="user" scope="session" value="<%=username%>"/>
+
+<c:choose>
+<c:when test="${user==null}">
+    <div class="container-fluid-full">
 		<div class="row-fluid">
 					
 			<div class="row-fluid">
@@ -44,3 +52,11 @@
 			</div><!--/row-->
 	</div><!--/.fluid-container-->
 </div><!--/fluid-row-->
+
+</c:when>
+<c:when test="${user!=null}">
+    <script language="javascript">
+            location.href="#/";
+        </script>
+</c:when>
+</c:choose>
