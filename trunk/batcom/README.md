@@ -1,12 +1,9 @@
-AngularJS-SpringMVC-example
-===========================
+BatCom: MVVC
+Developed with J2EE,Spring,MyBatis and AngularJS
 
-Ein Beispielprojekt für das Zusammenspiel von AngularJS und Spring-MVC.
 
-Folgende Features werden gezeigt:
-- Basiskonfiguration Spring MVC / AngularJS
-- Einfache CRUD Funktionalität
-- Generische Behandlung von (Fehler-)Meldungen
-- Clientseitige I18N
-- Security
-- Javascript ohne globale Variablen
+features:
+
+1. CRUD
+2. upload Multiple Image
+3. View with AngularJS
