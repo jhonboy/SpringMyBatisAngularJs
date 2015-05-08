@@ -238,14 +238,13 @@ as.controller('NewsDetail',function ($scope, $http, $routeParams) {
         $scope.load();
         $scope.idNews=$routeParams.idNews;
         $scope.sendComment = function () {
-			$scope.comment.idNews=$routeParams.idNews;
+            $scope.comment.idNews=$routeParams.idNews;
             $http.post(urlComment, $scope.comment).success(function () {
-                $scope.load();
+            $scope.load();
             });
         };
             $scope.login=function () {
-            $http.get('action/user');
-                     
+                $http.get('action/user');           
         };
 	
     });

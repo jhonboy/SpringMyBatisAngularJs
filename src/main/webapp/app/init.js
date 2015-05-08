@@ -145,7 +145,8 @@ as.config(
                 retry(requests[i]);
             }
             $rootScope.requests401 = [];
-            location.href = "#/";
+            //location.href = "#/";
+            window.history.go(-1);
             location.reload();
               
         });
