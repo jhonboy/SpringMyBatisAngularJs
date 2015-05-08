@@ -103,7 +103,7 @@ as.controller('MomentController',function ($scope, $http) {
         };
         $scope.prevImage=function(id,extension){
            $('#prevImage').modal('show');  
-           $('.modal-body').html("<img src='http://192.168.100.81:8184/images/"+id+"."+extension+"'>");
+           $('.modal-body').html("<img src='http://192.168.100.60:8184/images/"+id+"."+extension+"'>");
              
         };
         

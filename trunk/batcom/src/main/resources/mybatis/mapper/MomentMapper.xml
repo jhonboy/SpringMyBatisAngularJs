@@ -17,7 +17,7 @@
                 <result column="idAlbum" property="idAlbum"  jdbcType="VARCHAR" />
                 <result column="friendlist" property="friendlist" jdbcType="VARCHAR" />
                 <result column="place" property="place" jdbcType="VARCHAR" />
-                <result column="create_date" property="createDate" jdbcType="DATE" />
+                <result column="create_date" property="createDate" jdbcType="VARCHAR" />
                 <result column="update_date" property="updateDate" jdbcType="DATE" />
                 <result column="ip_create" property="ipCreate" jdbcType="VARCHAR" />
                 <result column="ip_update" property="ipUpdate" jdbcType="VARCHAR" />
@@ -65,7 +65,7 @@
                         #{idAlbum,jdbcType=VARCHAR},
                         #{friendlist,jdbcType=VARCHAR},
                         #{place,jdbcType=VARCHAR},
-                        #{createDate,jdbcType=DATE},
+                        #{createDate,jdbcType=VARCHAR},
                         #{updateDate,jdbcType=DATE},
                         #{ipCreate,jdbcType=VARCHAR},
                         #{ipUpdate,jdbcType=VARCHAR}
